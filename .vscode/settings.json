@@ -1,0 +1,8 @@
+{
+  "eslint.workingDirectories": [
+    "./vite-ts",
+    "./next-ts",
+    "./starter-vite-ts",
+    "./starter-next-ts",
+  ]
+}
