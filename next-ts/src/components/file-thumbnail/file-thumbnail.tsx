@@ -1,5 +1,4 @@
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
 import Tooltip from '@mui/material/Tooltip';
 
 import { fileThumbnailClasses } from './classes';
@@ -18,6 +17,7 @@ export function FileThumbnail({
   imageView,
   slotProps,
   onDownload,
+  className,
   ...other
 }: FileThumbnailProps) {
   const previewUrl = typeof file === 'string' ? file : URL.createObjectURL(file);
@@ -51,9 +51,9 @@ export function FileThumbnail({
   );
 
   const renderContent = (
-    <Stack
+    <Box
       component="span"
-      className={fileThumbnailClasses.root}
+      className={fileThumbnailClasses.root.concat(className ? ` ${className}` : '')}
       sx={{
         width: 36,
         height: 36,
@@ -84,7 +84,7 @@ export function FileThumbnail({
           sx={slotProps?.downloadBtn}
         />
       )}
-    </Stack>
+    </Box>
   );
 
   if (tooltip) {

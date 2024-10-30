@@ -6,7 +6,7 @@ import { GridView } from 'src/sections/_examples/foundation/grid-view';
 
 // ----------------------------------------------------------------------
 
-const metadata = { title: `Grid | Foundations - ${CONFIG.site.name}` };
+const metadata = { title: `Grid | Foundations - ${CONFIG.appName}` };
 
 export default function Page() {
   return (

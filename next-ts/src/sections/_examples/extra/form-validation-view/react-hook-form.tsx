@@ -39,11 +39,6 @@ const OPTIONS = [
   { value: 'option 8', label: 'Option 8' },
 ];
 
-type OptionType = {
-  value: string;
-  label: string;
-};
-
 export const defaultValues = {
   age: 0,
   email: '',
@@ -210,7 +205,7 @@ export function ReactHookForm({ debug }: Props) {
                 name="autocomplete"
                 label="Autocomplete"
                 options={OPTIONS}
-                getOptionLabel={(option: OptionType | string) => (option as OptionType).label}
+                getOptionLabel={(option) => option.label}
                 isOptionEqualToValue={(option, value) => option.value === value.value}
                 renderOption={(props, option) => (
                   <li {...props} key={option.value}>

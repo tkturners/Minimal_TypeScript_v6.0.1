@@ -8,17 +8,17 @@ import { StyledControlPanel } from '../styles';
 // ----------------------------------------------------------------------
 
 type Props = {
+  selectTheme: string;
+  onChangeTheme: (theme: string) => void;
   themes: {
     [key: string]: string;
   };
-  selectTheme: string;
-  onChangeTheme: (theme: string) => void;
 };
 
 export function ControlPanel({ themes, selectTheme, onChangeTheme }: Props) {
   return (
     <StyledControlPanel>
-      <Typography gutterBottom variant="subtitle2" sx={{ color: 'common.white' }}>
+      <Typography variant="subtitle2" sx={{ mb: 1, color: 'common.white' }}>
         Select theme:
       </Typography>
 

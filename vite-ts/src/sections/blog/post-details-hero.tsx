@@ -16,8 +16,9 @@ import { fDate } from 'src/utils/format-time';
 
 import { _socials } from 'src/_mock';
 import { varAlpha, bgGradient } from 'src/theme/styles';
+import { TwitterIcon, FacebookIcon, LinkedinIcon, InstagramIcon } from 'src/assets/icons';
 
-import { Iconify, SocialIcon } from 'src/components/iconify';
+import { Iconify } from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
 
@@ -87,13 +88,24 @@ export function PostDetailsHero({ title, author, coverUrl, createdAt }: IPostHer
             ariaLabel="Share post"
             icon={<Iconify icon="solar:share-bold" />}
             FabProps={{ size: 'medium' }}
-            sx={{ position: 'absolute', bottom: { xs: 32, md: 64 }, right: { xs: 16, md: 24 } }}
+            sx={{
+              position: 'absolute',
+              bottom: { xs: 32, md: 64 },
+              right: { xs: 16, md: 24 },
+            }}
           >
-            {_socials.map((action) => (
+            {_socials.map((social) => (
               <SpeedDialAction
-                key={action.name}
-                icon={<SocialIcon icon={action.name} />}
-                tooltipTitle={action.name}
+                key={social.label}
+                icon={
+                  <>
+                    {social.value === 'facebook' && <FacebookIcon />}
+                    {social.value === 'instagram' && <InstagramIcon />}
+                    {social.value === 'linkedin' && <LinkedinIcon />}
+                    {social.value === 'twitter' && <TwitterIcon sx={{ color: 'text.primary' }} />}
+                  </>
+                }
+                tooltipTitle={social.label}
                 tooltipPlacement="top"
                 FabProps={{ color: 'default' }}
               />

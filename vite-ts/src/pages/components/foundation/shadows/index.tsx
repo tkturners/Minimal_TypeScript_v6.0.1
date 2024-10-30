@@ -6,7 +6,7 @@ import { ShadowsView } from 'src/sections/_examples/foundation/shadows-view';
 
 // ----------------------------------------------------------------------
 
-const metadata = { title: `Shadows | Foundations - ${CONFIG.site.name}` };
+const metadata = { title: `Shadows | Foundations - ${CONFIG.appName}` };
 
 export default function Page() {
   return (

@@ -11,7 +11,6 @@ import Slider from '@mui/material/Slider';
 import Dialog from '@mui/material/Dialog';
 import Tooltip from '@mui/material/Tooltip';
 import TextField from '@mui/material/TextField';
-import { useTheme } from '@mui/material/styles';
 import CardHeader from '@mui/material/CardHeader';
 import Typography from '@mui/material/Typography';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -31,9 +30,7 @@ import { Carousel, useCarousel, CarouselArrowFloatButtons } from 'src/components
 // ----------------------------------------------------------------------
 
 const STEP = 50;
-
 const MIN_AMOUNT = 0;
-
 const MAX_AMOUNT = 1000;
 
 // ----------------------------------------------------------------------
@@ -50,8 +47,6 @@ type Props = CardProps & {
 };
 
 export function BankingQuickTransfer({ title, subheader, list, sx, ...other }: Props) {
-  const theme = useTheme();
-
   const carousel = useCarousel({
     loop: true,
     dragFree: true,
@@ -101,24 +96,14 @@ export function BankingQuickTransfer({ title, subheader, list, sx, ...other }: P
         {...carousel.arrows}
         options={carousel.options}
         slotProps={{
-          prevBtn: {
-            svgSize: 14,
-            sx: {
-              p: 0.5,
-              borderRadius: '50%',
-              bgcolor: varAlpha(theme.vars.palette.text.primaryChannel, 0.48),
-              '&:hover': { bgcolor: theme.vars.palette.text.primary },
-            },
-          },
-          nextBtn: {
-            svgSize: 14,
-            sx: {
-              p: 0.5,
-              borderRadius: '50%',
-              bgcolor: varAlpha(theme.vars.palette.text.primaryChannel, 0.48),
-              '&:hover': { bgcolor: theme.vars.palette.text.primary },
-            },
-          },
+          prevBtn: { svgSize: 14 },
+          nextBtn: { svgSize: 14 },
+        }}
+        sx={{
+          p: 0.5,
+          borderRadius: '50%',
+          bgcolor: (theme) => varAlpha(theme.vars.palette.text.primaryChannel, 0.48),
+          '&:hover': { bgcolor: (theme) => theme.vars.palette.text.primary },
         }}
       />
 
@@ -128,7 +113,7 @@ export function BankingQuickTransfer({ title, subheader, list, sx, ...other }: P
             <Avatar
               src={contact.avatarUrl}
               onClick={() => carousel.dots.onClickDot(index)}
-              sx={{
+              sx={(theme) => ({
                 mx: 'auto',
                 opacity: 0.48,
                 cursor: 'pointer',
@@ -141,7 +126,7 @@ export function BankingQuickTransfer({ title, subheader, list, sx, ...other }: P
                     boxShadow: `-4px 12px 24px 0 ${varAlpha(theme.vars.palette.common.blackChannel, 0.24)}`,
                   },
                 }),
-              }}
+              })}
             />
           </Tooltip>
         ))}

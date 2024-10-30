@@ -32,6 +32,7 @@ export const Iconify = forwardRef<SVGElement, IconifyProps>(
     return (
       <NoSsr fallback={renderFallback}>
         <Box
+          ssr
           ref={ref}
           component={Icon}
           className={iconifyClasses.root.concat(className ? ` ${className}` : '')}

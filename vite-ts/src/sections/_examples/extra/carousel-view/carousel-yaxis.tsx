@@ -1,6 +1,5 @@
 import Box from '@mui/material/Box';
 
-import { Image } from 'src/components/image';
 import {
   Carousel,
   useCarousel,
@@ -83,7 +82,13 @@ function CarouselItem({ item, index }: CarouselItemProps) {
   return (
     <Box sx={{ position: 'relative', height: 1 }}>
       <IndexLabel index={index + 1} />
-      <Image visibleByDefault alt={item.title} src={item.coverUrl} sx={{ width: 1, height: 1 }} />
+
+      <Box
+        component="img"
+        alt={item.title}
+        src={item.coverUrl}
+        sx={{ width: 1, height: 1, objectFit: 'cover' }}
+      />
     </Box>
   );
 }

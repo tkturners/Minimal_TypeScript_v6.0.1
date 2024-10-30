@@ -1,13 +1,13 @@
 import { Helmet } from 'react-helmet-async';
 
-import { Typography } from '@mui/material';
 import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
 
 import { CONFIG } from 'src/config-global';
 
 // ----------------------------------------------------------------------
 
-const metadata = { title: `Blank - ${CONFIG.site.name}` };
+const metadata = { title: `Blank - ${CONFIG.appName}` };
 
 export default function Page() {
   return (

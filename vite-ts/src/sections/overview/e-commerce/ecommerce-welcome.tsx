@@ -24,7 +24,7 @@ export function EcommerceWelcome({ title, description, action, img, sx, ...other
       sx={{
         ...bgGradient({
           color: `to right, ${theme.vars.palette.grey[900]} 25%, ${varAlpha(theme.vars.palette.primary.darkerChannel, 0.88)}`,
-          imgUrl: `${CONFIG.site.basePath}/assets/background/background-6.webp`,
+          imgUrl: `${CONFIG.assetsDir}/assets/background/background-6.webp`,
         }),
         pt: 5,
         pb: 5,

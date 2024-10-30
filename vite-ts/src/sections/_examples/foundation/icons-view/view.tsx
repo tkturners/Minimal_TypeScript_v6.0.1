@@ -1,3 +1,4 @@
+import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Tooltip from '@mui/material/Tooltip';
 
@@ -5,10 +6,19 @@ import { paths } from 'src/routes/paths';
 
 import { CONFIG } from 'src/config-global';
 import { countries } from 'src/assets/data';
+import {
+  GithubIcon,
+  GoogleIcon,
+  TwitterIcon,
+  FacebookIcon,
+  LinkedinIcon,
+  InstagramIcon,
+} from 'src/assets/icons';
 
+import { Logo } from 'src/components/logo';
 import { SvgColor } from 'src/components/svg-color';
+import { Iconify, FlagIcon } from 'src/components/iconify';
 import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
-import { Iconify, FlagIcon, SocialIcon } from 'src/components/iconify';
 
 import { ComponentHero } from '../../component-hero';
 import { ComponentBlock, ComponentContainer } from '../../component-block';
@@ -30,6 +40,11 @@ export function IconsView() {
       </ComponentHero>
 
       <ComponentContainer>
+        <ComponentBlock title="Logo">
+          <Logo disableLink width={64} height={64} />
+          <Logo disableLink isSingle={false} width={180} height={64} />
+        </ComponentBlock>
+
         <ComponentBlock title="Material">
           <Link
             href="https://mui.com/components/icons/#main-content"
@@ -56,55 +71,70 @@ export function IconsView() {
 
         <ComponentBlock title="Local icon">
           <Tooltip title="SvgColor">
-            <SvgColor
-              src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-dashboard.svg`}
-              sx={{ width: 32, height: 32 }}
-            />
+            <SvgColor width={32} src={`${CONFIG.assetsDir}/assets/icons/navbar/ic-dashboard.svg`} />
           </Tooltip>
           <SvgColor
-            src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-dashboard.svg`}
-            sx={{ color: 'action.active', width: 32, height: 32 }}
+            width={32}
+            src={`${CONFIG.assetsDir}/assets/icons/navbar/ic-dashboard.svg`}
+            sx={{ color: 'action.active' }}
           />
           <SvgColor
-            src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-dashboard.svg`}
-            sx={{ color: 'action.disabled', width: 32, height: 32 }}
+            width={32}
+            src={`${CONFIG.assetsDir}/assets/icons/navbar/ic-dashboard.svg`}
+            sx={{ color: 'action.disabled' }}
           />
           <SvgColor
-            src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-dashboard.svg`}
-            sx={{ color: 'primary.main', width: 32, height: 32 }}
+            width={32}
+            src={`${CONFIG.assetsDir}/assets/icons/navbar/ic-dashboard.svg`}
+            sx={{ color: 'primary.main' }}
           />
           <SvgColor
-            src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-dashboard.svg`}
-            sx={{ color: 'secondary.main', width: 32, height: 32 }}
+            width={32}
+            src={`${CONFIG.assetsDir}/assets/icons/navbar/ic-dashboard.svg`}
+            sx={{ color: 'secondary.main' }}
           />
           <SvgColor
-            src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-dashboard.svg`}
-            sx={{ color: 'info.main', width: 32, height: 32 }}
+            width={32}
+            src={`${CONFIG.assetsDir}/assets/icons/navbar/ic-dashboard.svg`}
+            sx={{ color: 'info.main' }}
           />
           <SvgColor
-            src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-dashboard.svg`}
-            sx={{ color: 'success.main', width: 32, height: 32 }}
+            width={32}
+            src={`${CONFIG.assetsDir}/assets/icons/navbar/ic-dashboard.svg`}
+            sx={{ color: 'success.main' }}
           />
           <SvgColor
-            src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-dashboard.svg`}
-            sx={{ color: 'warning.main', width: 32, height: 32 }}
+            width={32}
+            src={`${CONFIG.assetsDir}/assets/icons/navbar/ic-dashboard.svg`}
+            sx={{ color: 'warning.main' }}
           />
           <SvgColor
-            src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-dashboard.svg`}
-            sx={{ color: 'error.main', width: 32, height: 32 }}
+            width={32}
+            src={`${CONFIG.assetsDir}/assets/icons/navbar/ic-dashboard.svg`}
+            sx={{ color: 'error.main' }}
           />
         </ComponentBlock>
 
-        <ComponentBlock title="Social icon">
-          <Tooltip title="Google">
-            <SocialIcon width={32} icon="google" />
-          </Tooltip>
+        <ComponentBlock title="Social icon" sx={{ flexDirection: 'column' }}>
+          <Box gap={2} display="flex">
+            <Tooltip title="Google">
+              <GoogleIcon width={24} />
+            </Tooltip>
+            <FacebookIcon width={24} />
+            <LinkedinIcon width={24} />
+            <InstagramIcon width={24} />
+            <TwitterIcon width={24} />
+            <GithubIcon width={24} />
+          </Box>
 
-          <SocialIcon width={32} icon="facebook" />
-          <SocialIcon width={32} icon="linkedin" />
-          <SocialIcon width={32} icon="twitter" />
-          <SocialIcon width={32} icon="instagram" />
-          <SocialIcon width={32} icon="github" />
+          <Box gap={2} display="flex">
+            <GoogleIcon width={32} sx={{ color: 'primary.main' }} />
+            <FacebookIcon width={32} sx={{ color: 'secondary.main' }} />
+            <LinkedinIcon width={32} sx={{ color: 'info.main' }} />
+            <InstagramIcon width={32} sx={{ color: 'success.main' }} />
+            <TwitterIcon width={32} sx={{ color: 'warning.main' }} />
+            <GithubIcon width={32} sx={{ color: 'error.main' }} />
+          </Box>
         </ComponentBlock>
 
         <ComponentBlock title="Flag icon">

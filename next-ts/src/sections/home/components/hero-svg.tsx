@@ -1,13 +1,11 @@
 import type { MotionProps } from 'framer-motion';
-import type { StackProps } from '@mui/material/Stack';
+import type { BoxProps } from '@mui/material/Box';
 import type { ColorType } from 'src/theme/core/palette';
 import type { Theme, SxProps } from '@mui/material/styles';
 
 import { m } from 'framer-motion';
 
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import { useTheme } from '@mui/material/styles';
 
 import { stylesMode } from 'src/theme/styles';
 
@@ -208,9 +206,9 @@ export function PlusIcon() {
 
 // ----------------------------------------------------------------------
 
-export function Texts({ sx, ...other }: StackProps) {
+export function Texts({ sx, ...other }: BoxProps) {
   return (
-    <Stack
+    <Box
       component={m.div}
       variants={varFade().in}
       sx={{
@@ -251,7 +249,7 @@ export function Texts({ sx, ...other }: StackProps) {
           Minimal Design System Minimal Design System
         </m.text>
       </Box>
-    </Stack>
+    </Box>
   );
 }
 
@@ -265,8 +263,6 @@ type DotProps = {
 };
 
 function Dot({ color = 'primary', animate, transition, sx, ...other }: DotProps) {
-  const theme = useTheme();
-
   return (
     <Box
       component={m.div}
@@ -299,10 +295,11 @@ function Dot({ color = 'primary', animate, transition, sx, ...other }: DotProps)
           width: 1,
           height: 1,
           borderRadius: '50%',
-          boxShadow: `0px -2px 4px 0px ${theme.vars.palette[color].main} inset`,
-          background: `linear-gradient(135deg, ${theme.vars.palette[color].lighter}, ${theme.vars.palette[color].light})`,
+          boxShadow: (theme) => `0px -2px 4px 0px ${theme.vars.palette[color].main} inset`,
+          background: (theme) =>
+            `linear-gradient(135deg, ${theme.vars.palette[color].lighter}, ${theme.vars.palette[color].light})`,
           [stylesMode.dark]: {
-            boxShadow: `0px -2px 4px 0px ${theme.vars.palette[color].dark} inset`,
+            boxShadow: (theme) => `0px -2px 4px 0px ${theme.vars.palette[color].dark} inset`,
           },
           ...sx,
         }}

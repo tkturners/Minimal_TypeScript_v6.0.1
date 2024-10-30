@@ -51,13 +51,12 @@ export function TypographyView() {
           {['primary', 'secondary', 'disabled'].map((color) => (
             <Paper key={color}>
               <Typography
-                gutterBottom
                 variant="subtitle2"
-                sx={{ color: `text.${color}`, textTransform: 'capitalize' }}
+                sx={{ mb: 1, color: `text.${color}`, textTransform: 'capitalize' }}
               >
                 text {color}
               </Typography>
-              <Typography gutterBottom variant="body2" sx={{ color: `text.${color}` }}>
+              <Typography variant="body2" sx={{ mb: 1, color: `text.${color}` }}>
                 Cras ultricies mi eu turpis hendrerit fringilla. Fusce vel dui. Pellentesque auctor
                 neque nec urna. Sed cursus turpis vitae tortor. Curabitur suscipit suscipit tellus.
               </Typography>
@@ -67,13 +66,12 @@ export function TypographyView() {
           {['primary', 'secondary', 'info', 'warning', 'error'].map((color) => (
             <Paper key={color}>
               <Typography
-                gutterBottom
                 variant="subtitle2"
-                sx={{ color: `${color}.main`, textTransform: 'capitalize' }}
+                sx={{ mb: 1, color: `${color}.main`, textTransform: 'capitalize' }}
               >
                 {color}
               </Typography>
-              <Typography gutterBottom variant="body2" sx={{ color: `${color}.main` }}>
+              <Typography variant="body2" sx={{ mb: 1, color: `${color}.main` }}>
                 Cras ultricies mi eu turpis hendrerit fringilla. Fusce vel dui. Pellentesque auctor
                 neque nec urna. Sed cursus turpis vitae tortor. Curabitur suscipit suscipit tellus.
               </Typography>

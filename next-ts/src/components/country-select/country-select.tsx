@@ -1,3 +1,4 @@
+import type { TextFieldProps } from '@mui/material/TextField';
 import type {
   AutocompleteProps,
   AutocompleteRenderInputParams,
@@ -9,6 +10,7 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import InputAdornment from '@mui/material/InputAdornment';
 import { filledInputClasses } from '@mui/material/FilledInput';
+import { outlinedInputClasses } from '@mui/material/OutlinedInput';
 
 import { countries } from 'src/assets/data';
 
@@ -32,12 +34,14 @@ export type CountrySelectProps = AutocompleteBaseProps & {
   hiddenLabel?: boolean;
   getValue?: 'label' | 'code';
   helperText?: React.ReactNode;
+  variant?: TextFieldProps['variant'];
 };
 
 export function CountrySelect({
   id,
   label,
   error,
+  variant,
   multiple,
   helperText,
   hiddenLabel,
@@ -72,6 +76,7 @@ export function CountrySelect({
     const baseField = {
       ...params,
       label,
+      variant,
       placeholder,
       helperText,
       hiddenLabel,
@@ -96,15 +101,18 @@ export function CountrySelect({
               <FlagIcon
                 key={country.label}
                 code={country.code}
-                sx={{ ml: 0.5, mr: -0.5, width: 22, height: 22, borderRadius: '50%' }}
+                sx={{ width: 22, height: 22, borderRadius: '50%' }}
               />
             </InputAdornment>
           ),
         }}
         sx={{
-          ...(!hiddenLabel && {
-            [`& .${filledInputClasses.root}`]: { [`& .${iconifyClasses.root}`]: { mt: -2 } },
-          }),
+          [`& .${outlinedInputClasses.root}`]: {
+            [`& .${iconifyClasses.flag}`]: { ml: 0.5, mr: -0.5 },
+          },
+          [`& .${filledInputClasses.root}`]: {
+            [`& .${iconifyClasses.flag}`]: { ml: 0.5, mr: -0.5, mt: hiddenLabel ? 0 : -2 },
+          },
         }}
       />
     );

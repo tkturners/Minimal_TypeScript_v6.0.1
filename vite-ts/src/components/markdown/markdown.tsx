@@ -54,7 +54,7 @@ type ComponentTag = {
 const rehypePlugins = [rehypeRaw, rehypeHighlight, [remarkGfm, { singleTilde: false }]];
 
 const components = {
-  img: ({ node, ...other }: ComponentTag) => (
+  img: ({ ...other }: ComponentTag) => (
     <Image
       ratio="16/9"
       className={markdownClasses.content.image}
@@ -62,7 +62,7 @@ const components = {
       {...other}
     />
   ),
-  a: ({ href, children, node, ...other }: ComponentTag) => {
+  a: ({ href, children, ...other }: ComponentTag) => {
     const linkProps = isExternalLink(href)
       ? { target: '_blank', rel: 'noopener' }
       : { component: RouterLink };
@@ -78,7 +78,7 @@ const components = {
       <pre>{children}</pre>
     </div>
   ),
-  code({ className, children, node, ...other }: ComponentTag) {
+  code({ className, children, ...other }: ComponentTag) {
     const language = /language-(\w+)/.exec(className || '');
 
     return language ? (

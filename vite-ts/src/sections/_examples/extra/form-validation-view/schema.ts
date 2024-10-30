@@ -41,9 +41,7 @@ export const FormSchema = zod
       value: string;
       label: string;
     } | null>({ message: { required_error: 'Autocomplete is required!' } }),
-    singleCountry: schemaHelper.objectOrNull({
-      message: { required_error: 'Single country is required!' },
-    }),
+    singleCountry: zod.string().min(1, { message: 'Single country is required!' }),
     multiCountry: zod.string().array().min(2, { message: 'Must have at least 2 items!' }),
     //
     singleSelect: zod.string().min(1, { message: 'Single select is required!' }),

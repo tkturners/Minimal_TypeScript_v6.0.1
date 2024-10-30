@@ -1,13 +1,13 @@
-import { useMemo, useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 
 // ----------------------------------------------------------------------
 
 export type UseDebounceReturn = string;
 
-export function useDebounce(value: string, delay = 500): UseDebounceReturn {
+export function useDebounce(value: string, delay: number = 1000): UseDebounceReturn {
   const [debouncedValue, setDebouncedValue] = useState(value);
 
-  const debounceHandler = useCallback(() => {
+  useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedValue(value);
     }, delay);
@@ -17,11 +17,5 @@ export function useDebounce(value: string, delay = 500): UseDebounceReturn {
     };
   }, [value, delay]);
 
-  useEffect(() => {
-    debounceHandler();
-  }, [debounceHandler]);
-
-  const memoizedValue = useMemo(() => debouncedValue, [debouncedValue]);
-
-  return memoizedValue;
+  return debouncedValue;
 }

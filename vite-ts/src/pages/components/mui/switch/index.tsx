@@ -6,7 +6,7 @@ import { SwitchView } from 'src/sections/_examples/mui/switch-view';
 
 // ----------------------------------------------------------------------
 
-const metadata = { title: `Switch | MUI - ${CONFIG.site.name}` };
+const metadata = { title: `Switch | MUI - ${CONFIG.appName}` };
 
 export default function Page() {
   return (

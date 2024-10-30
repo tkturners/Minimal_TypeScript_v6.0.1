@@ -1,4 +1,4 @@
-import type { StackProps } from '@mui/material/Stack';
+import type { BoxProps } from '@mui/material/Box';
 
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
@@ -29,7 +29,7 @@ export const StyledDot = styled(Box)(() => ({
 
 // ----------------------------------------------------------------------
 
-type Props = StackProps & {
+type Props = BoxProps & {
   labels?: string[];
   colors?: string[];
   values?: string[];
@@ -38,15 +38,15 @@ type Props = StackProps & {
 };
 
 export function ChartLegends({
-  labels = [],
-  colors = [],
+  icons,
   values,
   sublabels,
-  icons,
+  labels = [],
+  colors = [],
   ...other
 }: Props) {
   return (
-    <Stack direction="row" flexWrap="wrap" spacing={2} {...other}>
+    <Box gap={2} display="flex" flexWrap="wrap" {...other}>
       {labels?.map((series, index) => (
         <Stack key={series} spacing={1}>
           <StyledLegend>
@@ -70,6 +70,6 @@ export function ChartLegends({
           {values && <Box sx={{ typography: 'h6' }}>{values[index]}</Box>}
         </Stack>
       ))}
-    </Stack>
+    </Box>
   );
 }

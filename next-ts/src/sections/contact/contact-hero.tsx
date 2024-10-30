@@ -1,3 +1,5 @@
+import type { BoxProps } from '@mui/material/Box';
+
 import { m } from 'framer-motion';
 
 import Box from '@mui/material/Box';
@@ -29,21 +31,24 @@ const CONTACTS = [
 
 // ----------------------------------------------------------------------
 
-export function ContactHero() {
+export function ContactHero({ sx, ...other }: BoxProps) {
   const theme = useTheme();
 
   return (
     <Box
+      component="section"
       sx={{
         ...bgGradient({
           color: `0deg, ${varAlpha(theme.vars.palette.grey['900Channel'], 0.8)}, ${varAlpha(theme.vars.palette.grey['900Channel'], 0.8)}`,
-          imgUrl: `${CONFIG.site.basePath}/assets/images/contact/hero.webp`,
+          imgUrl: `${CONFIG.assetsDir}/assets/images/contact/hero.webp`,
         }),
         height: { md: 560 },
         py: { xs: 10, md: 0 },
         overflow: 'hidden',
         position: 'relative',
+        ...sx,
       }}
+      {...other}
     >
       <Container component={MotionContainer}>
         <Box
@@ -76,7 +81,7 @@ export function ContactHero() {
             {CONTACTS.map((contact) => (
               <Box key={contact.country}>
                 <m.div variants={varFade({ distance: 24 }).inUp}>
-                  <Typography variant="h6" gutterBottom>
+                  <Typography variant="h6" sx={{ mb: 1 }}>
                     {contact.country}
                   </Typography>
                 </m.div>

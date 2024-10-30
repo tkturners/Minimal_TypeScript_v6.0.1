@@ -44,7 +44,7 @@ export function BankingCurrentBalance({ list, sx, ...other }: Props) {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
-        backgroundImage: `url('${CONFIG.site.basePath}/assets/background/background-4.jpg')`,
+        backgroundImage: `url('${CONFIG.assetsDir}/assets/background/background-4.jpg')`,
         '&::before, &::after': {
           left: 0,
           right: 0,

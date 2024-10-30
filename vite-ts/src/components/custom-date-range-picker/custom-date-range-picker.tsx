@@ -1,3 +1,5 @@
+import type { DialogProps } from '@mui/material/Dialog';
+
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
@@ -21,11 +23,13 @@ export function CustomDateRangePicker({
   endDate,
   onClose,
   startDate,
+  PaperProps,
   onChangeEndDate,
   variant = 'input',
   onChangeStartDate,
   title = 'Select date range',
-}: UseDateRangePickerReturn) {
+  ...other
+}: DialogProps & UseDateRangePickerReturn) {
   const mdUp = useResponsive('up', 'md');
 
   const isCalendarView = variant === 'calendar';
@@ -33,10 +37,17 @@ export function CustomDateRangePicker({
   return (
     <Dialog
       fullWidth
-      maxWidth={isCalendarView ? false : 'xs'}
       open={open}
       onClose={onClose}
-      PaperProps={{ sx: { ...(isCalendarView && { maxWidth: 720 }) } }}
+      maxWidth={isCalendarView ? false : 'xs'}
+      PaperProps={{
+        ...PaperProps,
+        sx: {
+          ...(isCalendarView && { maxWidth: 720 }),
+          ...PaperProps?.sx,
+        },
+      }}
+      {...other}
     >
       <DialogTitle sx={{ pb: 2 }}>{title}</DialogTitle>
 
@@ -83,7 +94,6 @@ export function CustomDateRangePicker({
         <Button variant="outlined" color="inherit" onClick={onClose}>
           Cancel
         </Button>
-
         <Button disabled={error} variant="contained" onClick={onClose}>
           Apply
         </Button>

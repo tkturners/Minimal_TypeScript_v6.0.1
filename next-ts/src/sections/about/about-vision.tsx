@@ -1,10 +1,10 @@
+import type { BoxProps } from '@mui/material/Box';
+
 import { m } from 'framer-motion';
 
 import Fab from '@mui/material/Fab';
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
-import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 
 import { CONFIG } from 'src/config-global';
@@ -16,23 +16,23 @@ import { varFade, MotionViewport } from 'src/components/animate';
 
 // ----------------------------------------------------------------------
 
-export function AboutVision() {
-  const theme = useTheme();
-
+export function AboutVision({ sx, ...other }: BoxProps) {
   const renderImg = (
     <Image
-      src={`${CONFIG.site.basePath}/assets/images/about/vision.webp`}
+      src={`${CONFIG.assetsDir}/assets/images/about/vision.webp`}
       alt="about-vision"
       ratio={{ xs: '4/3', sm: '16/9' }}
       slotProps={{
-        overlay: { background: varAlpha(theme.vars.palette.grey['900Channel'], 0.48) },
+        overlay: {
+          bgcolor: (theme) => varAlpha(theme.vars.palette.grey['900Channel'], 0.48),
+        },
       }}
     />
   );
 
   const renderLogos = (
-    <Stack
-      direction="row"
+    <Box
+      display="flex"
       flexWrap="wrap"
       alignItems="center"
       justifyContent="center"
@@ -51,15 +51,16 @@ export function AboutVision() {
           key={logo}
           variants={varFade().in}
           alt={logo}
-          src={`${CONFIG.site.basePath}/assets/icons/brands/ic-brand-${logo}.svg`}
+          src={`${CONFIG.assetsDir}/assets/icons/brands/ic-brand-${logo}.svg`}
           sx={{ m: { xs: 1.5, md: 2.5 }, height: { xs: 20, md: 32 } }}
         />
       ))}
-    </Stack>
+    </Box>
   );
 
   return (
     <Box
+      component="section"
       sx={{
         pb: 10,
         position: 'relative',
@@ -73,7 +74,9 @@ export function AboutVision() {
           height: { xs: 80, md: 120 },
           bgcolor: 'background.default',
         },
+        ...sx,
       }}
+      {...other}
     >
       <Container component={MotionViewport}>
         <Box

@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 
-import Stack from '@mui/material/Stack';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Popover from '@mui/material/Popover';
 import TextField from '@mui/material/TextField';
@@ -61,7 +61,7 @@ export function ImageBlock({ editor }: Pick<EditorToolbarProps, 'editor'>) {
           URL
         </Typography>
 
-        <Stack direction="row" alignItems="center" spacing={1}>
+        <Box gap={1} display="flex" alignItems="center">
           <TextField
             size="small"
             placeholder="Enter URL here..."
@@ -74,7 +74,7 @@ export function ImageBlock({ editor }: Pick<EditorToolbarProps, 'editor'>) {
           <Button variant="contained" onClick={handleUpdateUrl}>
             Apply
           </Button>
-        </Stack>
+        </Box>
       </Popover>
     </>
   );

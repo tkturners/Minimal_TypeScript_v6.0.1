@@ -1,4 +1,4 @@
-import type { StackProps } from '@mui/material/Stack';
+import type { BoxProps } from '@mui/material/Box';
 
 import { m } from 'framer-motion';
 
@@ -19,7 +19,7 @@ import { CircleSvg, FloatLine, FloatPlusIcon } from './components/svg-elements';
 
 // ----------------------------------------------------------------------
 
-export function HomeMinimal({ sx, ...other }: StackProps) {
+export function HomeMinimal({ sx, ...other }: BoxProps) {
   const renderLines = (
     <>
       <FloatPlusIcon sx={{ top: 72, left: 72 }} />
@@ -93,7 +93,7 @@ export function HomeMinimal({ sx, ...other }: StackProps) {
         <Box
           component="img"
           alt="Home Chart"
-          src={`${CONFIG.site.basePath}/assets/images/home/home-chart.webp`}
+          src={`${CONFIG.assetsDir}/assets/images/home/home-chart.webp`}
           sx={{ width: 720 }}
         />
       </Box>
@@ -101,7 +101,7 @@ export function HomeMinimal({ sx, ...other }: StackProps) {
   );
 
   return (
-    <Stack
+    <Box
       component="section"
       sx={{
         overflow: 'hidden',
@@ -128,7 +128,7 @@ export function HomeMinimal({ sx, ...other }: StackProps) {
           <CircleSvg variants={varFade().in} sx={{ display: { xs: 'none', md: 'block' } }} />
         </Container>
       </MotionViewport>
-    </Stack>
+    </Box>
   );
 }
 
@@ -136,17 +136,17 @@ export function HomeMinimal({ sx, ...other }: StackProps) {
 
 const ITEMS = [
   {
-    icon: `${CONFIG.site.basePath}/assets/icons/home/ic-make-brand.svg`,
+    icon: `${CONFIG.assetsDir}/assets/icons/home/ic-make-brand.svg`,
     title: 'Branding',
     description: 'Consistent design makes it easy to brand your own.',
   },
   {
-    icon: `${CONFIG.site.basePath}/assets/icons/home/ic-design.svg`,
+    icon: `${CONFIG.assetsDir}/assets/icons/home/ic-design.svg`,
     title: 'UI & UX design',
     description: 'The kit is built on the principles of the atomic design system.',
   },
   {
-    icon: `${CONFIG.site.basePath}/assets/icons/home/ic-development.svg`,
+    icon: `${CONFIG.assetsDir}/assets/icons/home/ic-development.svg`,
     title: 'Development',
     description: 'Easy to customize and extend, saving you time and money.',
   },

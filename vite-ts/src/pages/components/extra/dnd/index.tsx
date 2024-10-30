@@ -6,7 +6,7 @@ import { DndView } from 'src/sections/_examples/extra/dnd-view';
 
 // ----------------------------------------------------------------------
 
-const metadata = { title: `Dnd | Components - ${CONFIG.site.name}` };
+const metadata = { title: `Dnd | Components - ${CONFIG.appName}` };
 
 export default function Page() {
   return (

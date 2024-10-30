@@ -6,7 +6,7 @@ import { MenuView } from 'src/sections/_examples/mui/menu-view';
 
 // ----------------------------------------------------------------------
 
-const metadata = { title: `Menu | MUI - ${CONFIG.site.name}` };
+const metadata = { title: `Menu | MUI - ${CONFIG.appName}` };
 
 export default function Page() {
   return (

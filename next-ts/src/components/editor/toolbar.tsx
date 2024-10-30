@@ -60,6 +60,15 @@ export function Toolbar({ editor, fullItem, fullScreen, onToggleFullScreen }: Ed
           icon={<path d="M15 20H7V18H9.92661L12.0425 6H9V4H17V6H14.0734L11.9575 18H15V20Z" />}
         />
         <ToolbarItem
+          aria-label="Underline"
+          active={editor.isActive('underline')}
+          className={editorClasses.toolbar.underline}
+          onClick={() => editor.chain().focus().toggleUnderline().run()}
+          icon={
+            <path d="M8 3V12C8 14.2091 9.79086 16 12 16C14.2091 16 16 14.2091 16 12V3H18V12C18 15.3137 15.3137 18 12 18C8.68629 18 6 15.3137 6 12V3H8ZM4 20H20V22H4V20Z" />
+          }
+        />
+        <ToolbarItem
           aria-label="Strike"
           active={editor.isActive('strike')}
           className={editorClasses.toolbar.italic}

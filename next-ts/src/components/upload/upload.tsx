@@ -1,13 +1,13 @@
 import { useDropzone } from 'react-dropzone';
 
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import FormHelperText from '@mui/material/FormHelperText';
 
 import { varAlpha } from 'src/theme/styles';
 
 import { Iconify } from '../iconify';
+import { uploadClasses } from './classes';
 import { UploadPlaceholder } from './components/placeholder';
 import { RejectionFiles } from './components/rejection-files';
 import { MultiFilePreview } from './components/preview-multi-file';
@@ -28,6 +28,7 @@ export function Upload({
   thumbnail,
   helperText,
   onRemoveAll,
+  className,
   multiple = false,
   ...other
 }: UploadProps) {
@@ -50,7 +51,7 @@ export function Upload({
       <MultiFilePreview files={value} thumbnail={thumbnail} onRemove={onRemove} sx={{ my: 3 }} />
 
       {(onRemoveAll || onUpload) && (
-        <Stack direction="row" justifyContent="flex-end" spacing={1.5}>
+        <Box gap={1.5} display="flex" justifyContent="flex-end">
           {onRemoveAll && (
             <Button color="inherit" variant="outlined" size="small" onClick={onRemoveAll}>
               Remove all
@@ -67,13 +68,16 @@ export function Upload({
               Upload
             </Button>
           )}
-        </Stack>
+        </Box>
       )}
     </>
   );
 
   return (
-    <Box sx={{ width: 1, position: 'relative', ...sx }}>
+    <Box
+      className={uploadClasses.upload.concat(className ? ` ${className}` : '')}
+      sx={{ width: 1, position: 'relative', ...sx }}
+    >
       <Box
         {...getRootProps()}
         sx={{

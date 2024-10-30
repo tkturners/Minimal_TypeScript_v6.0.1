@@ -1,11 +1,9 @@
-import type { StackProps } from '@mui/material/Stack';
-import type { CSSObject } from '@mui/material/styles';
+import type { BoxProps } from '@mui/material/Box';
 import type { ButtonBaseProps } from '@mui/material/ButtonBase';
+import type { Theme, SxProps, CSSObject } from '@mui/material/styles';
 
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
 import SvgIcon from '@mui/material/SvgIcon';
-import { useTheme } from '@mui/material/styles';
 import ButtonBase, { buttonBaseClasses } from '@mui/material/ButtonBase';
 
 import { varAlpha, stylesMode } from 'src/theme/styles';
@@ -19,24 +17,21 @@ import type { CarouselArrowButtonProps, CarouselArrowButtonsProps } from '../typ
 export function CarouselArrowBasicButtons({
   options,
   slotProps,
-  totalSlides,
-  selectedIndex,
-  //
   onClickPrev,
   onClickNext,
   disablePrev,
   disableNext,
   sx,
+  className,
   ...other
-}: StackProps & CarouselArrowButtonsProps) {
+}: BoxProps & CarouselArrowButtonsProps) {
   return (
-    <Stack
-      direction="row"
+    <Box
+      gap={0.5}
       alignItems="center"
       display="inline-flex"
-      className={carouselClasses.arrows}
+      className={carouselClasses.arrows.concat(className ? ` ${className}` : '')}
       sx={{
-        gap: 0.5,
         zIndex: 9,
         color: 'action.active',
         ...sx,
@@ -62,7 +57,7 @@ export function CarouselArrowBasicButtons({
         svgSize={slotProps?.prevBtn?.svgSize}
         sx={slotProps?.prevBtn?.sx}
       />
-    </Stack>
+    </Box>
   );
 }
 
@@ -73,29 +68,26 @@ export function CarouselArrowNumberButtons({
   slotProps,
   totalSlides,
   selectedIndex,
-  //
   onClickPrev,
   onClickNext,
   disablePrev,
   disableNext,
   sx,
+  className,
   ...other
-}: StackProps & CarouselArrowButtonsProps) {
-  const theme = useTheme();
-
+}: BoxProps & CarouselArrowButtonsProps) {
   return (
-    <Stack
-      direction="row"
+    <Box
       alignItems="center"
       display="inline-flex"
-      className={carouselClasses.arrows}
+      className={carouselClasses.arrows.concat(className ? ` ${className}` : '')}
       sx={{
         p: 0.5,
         gap: 0.25,
         zIndex: 9,
         borderRadius: 1.25,
         color: 'common.white',
-        bgcolor: varAlpha(theme.vars.palette.grey['900Channel'], 0.48),
+        bgcolor: (theme) => varAlpha(theme.vars.palette.grey['900Channel'], 0.48),
         ...sx,
       }}
       {...other}
@@ -127,21 +119,22 @@ export function CarouselArrowNumberButtons({
         svgIcon={slotProps?.nextBtn?.svgIcon}
         svgSize={slotProps?.prevBtn?.svgSize ?? 16}
       />
-    </Stack>
+    </Box>
   );
 }
 
 // ----------------------------------------------------------------------
 
 export function CarouselArrowFloatButtons({
+  sx,
   options,
   slotProps,
   onClickPrev,
   onClickNext,
   disablePrev,
   disableNext,
-}: StackProps & CarouselArrowButtonsProps) {
-  const baseStyles: CSSObject = {
+}: CarouselArrowButtonsProps & { sx?: SxProps<Theme> }) {
+  const baseStyles = {
     zIndex: 9,
     top: '50%',
     borderRadius: 1.5,
@@ -151,7 +144,8 @@ export function CarouselArrowFloatButtons({
     transform: 'translateY(-50%)',
     '&:hover': { opacity: 0.8 },
     [stylesMode.dark]: { color: 'grey.800' },
-  };
+    ...sx,
+  } as CSSObject;
 
   return (
     <>
@@ -181,11 +175,12 @@ export function CarouselArrowFloatButtons({
 // ----------------------------------------------------------------------
 
 export function ArrowButton({
-  sx,
   svgIcon,
   svgSize,
   options,
   variant,
+  sx,
+  className,
   ...other
 }: ButtonBaseProps & CarouselArrowButtonProps) {
   const arrowPrev = variant === 'prev';
@@ -211,7 +206,11 @@ export function ArrowButton({
 
   return (
     <ButtonBase
-      className={arrowPrev ? carouselClasses.arrowPrev : carouselClasses.arrowPrev}
+      className={
+        arrowPrev
+          ? carouselClasses.arrowPrev.concat(className ? ` ${className}` : '')
+          : carouselClasses.arrowNext.concat(className ? ` ${className}` : '')
+      }
       aria-label={arrowPrev ? 'Prev button' : 'Next button'}
       sx={{
         p: 1,

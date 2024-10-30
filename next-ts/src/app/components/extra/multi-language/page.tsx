@@ -6,7 +6,7 @@ import { navData } from 'src/sections/_examples/extra/multi-language-view/config
 
 // ----------------------------------------------------------------------
 
-export const metadata = { title: `Multi language | Components - ${CONFIG.site.name}` };
+export const metadata = { title: `Multi language | Components - ${CONFIG.appName}` };
 
 export default async function Page() {
   let ssrNavData;

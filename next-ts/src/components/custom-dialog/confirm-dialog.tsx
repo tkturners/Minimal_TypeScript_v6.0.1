@@ -9,10 +9,10 @@ import type { ConfirmDialogProps } from './types';
 // ----------------------------------------------------------------------
 
 export function ConfirmDialog({
-  title,
-  content,
-  action,
   open,
+  title,
+  action,
+  content,
   onClose,
   ...other
 }: ConfirmDialogProps) {

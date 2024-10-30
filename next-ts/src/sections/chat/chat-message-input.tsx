@@ -9,14 +9,15 @@ import IconButton from '@mui/material/IconButton';
 import { paths } from 'src/routes/paths';
 import { useRouter } from 'src/routes/hooks';
 
-import { uuidv4 } from 'src/utils/uuidv4';
-import { fSub, today } from 'src/utils/format-time';
+import { today } from 'src/utils/format-time';
 
 import { sendMessage, createConversation } from 'src/actions/chat';
 
 import { Iconify } from 'src/components/iconify';
 
 import { useMockedUser } from 'src/auth/hooks';
+
+import { initialConversation } from './utils/initial-conversation';
 
 // ----------------------------------------------------------------------
 
@@ -56,28 +57,11 @@ export function ChatMessageInput({
     [user]
   );
 
-  const messageData = useMemo(
-    () => ({
-      id: uuidv4(),
-      attachments: [],
-      body: message,
-      contentType: 'text',
-      createdAt: fSub({ minutes: 1 }),
-      senderId: myContact.id,
-    }),
-    [message, myContact.id]
-  );
-
-  const conversationData = useMemo(
-    () => ({
-      id: uuidv4(),
-      messages: [messageData],
-      participants: [...recipients, myContact],
-      type: recipients.length > 1 ? 'GROUP' : 'ONE_TO_ONE',
-      unreadCount: 0,
-    }),
-    [messageData, myContact, recipients]
-  );
+  const { messageData, conversationData } = initialConversation({
+    message,
+    recipients,
+    me: myContact,
+  });
 
   const handleAttach = useCallback(() => {
     if (fileRef.current) {
@@ -91,23 +75,23 @@ export function ChatMessageInput({
 
   const handleSendMessage = useCallback(
     async (event: React.KeyboardEvent<HTMLInputElement>) => {
+      if (event.key !== 'Enter' || !message) return;
+
       try {
-        if (event.key === 'Enter') {
-          if (message) {
-            if (selectedConversationId) {
-              await sendMessage(selectedConversationId, messageData);
-            } else {
-              const res = await createConversation(conversationData);
+        if (selectedConversationId) {
+          // If the conversation already exists
+          await sendMessage(selectedConversationId, messageData);
+        } else {
+          // If the conversation does not exist
+          const res = await createConversation(conversationData);
+          router.push(`${paths.dashboard.chat}?id=${res.conversation.id}`);
 
-              router.push(`${paths.dashboard.chat}?id=${res.conversation.id}`);
-
-              onAddRecipients([]);
-            }
-          }
-          setMessage('');
+          onAddRecipients([]);
         }
       } catch (error) {
         console.error(error);
+      } finally {
+        setMessage('');
       }
     },
     [conversationData, message, messageData, onAddRecipients, router, selectedConversationId]

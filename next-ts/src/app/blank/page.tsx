@@ -1,11 +1,11 @@
-import { Typography } from '@mui/material';
 import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
 
 import { CONFIG } from 'src/config-global';
 
 // ----------------------------------------------------------------------
 
-export const metadata = { title: `Blank - ${CONFIG.site.name}` };
+export const metadata = { title: `Blank - ${CONFIG.appName}` };
 
 export default function Page() {
   return (

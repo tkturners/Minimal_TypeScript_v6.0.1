@@ -7,7 +7,7 @@ import { PostEditView } from 'src/sections/blog/view';
 
 // ----------------------------------------------------------------------
 
-export const metadata = { title: `Post edit | Dashboard - ${CONFIG.site.name}` };
+export const metadata = { title: `Post edit | Dashboard - ${CONFIG.appName}` };
 
 type Props = {
   params: { title: string };

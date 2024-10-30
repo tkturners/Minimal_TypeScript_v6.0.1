@@ -16,9 +16,6 @@ export type UseCarouselDotsReturn = {
 
 export type CarouselDotButtonsProps = Omit<UseCarouselDotsReturn, 'dotCount'> & {
   gap?: number;
-  sx?: SxProps<Theme>;
-  fallback?: boolean;
-  fallbackCount?: number;
   variant?: 'circular' | 'rounded' | 'number';
   slotProps?: {
     dot?: {
@@ -154,7 +151,6 @@ export type UseCarouselReturn = {
 export type CarouselProps = {
   carousel: UseCarouselReturn;
   children: React.ReactNode;
-  sx?: SxProps<Theme>;
   slotProps?: {
     container?: SxProps<Theme>;
     slide?: SxProps<Theme>;

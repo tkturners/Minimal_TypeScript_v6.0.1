@@ -46,7 +46,7 @@ export function BaseOption({ icon, label, tooltip, selected, ...other }: Props) 
         justifyContent="space-between"
         sx={{ width: 1, mb: 3 }}
       >
-        <SvgColor src={`${CONFIG.site.basePath}/assets/icons/setting/ic-${icon}.svg`} />
+        <SvgColor src={`${CONFIG.assetsDir}/assets/icons/settings/ic-${icon}.svg`} />
         <Switch name={label} size="small" color="default" checked={selected} sx={{ mr: -0.75 }} />
       </Box>
 

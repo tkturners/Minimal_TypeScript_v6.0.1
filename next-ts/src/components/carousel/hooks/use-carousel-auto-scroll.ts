@@ -1,3 +1,4 @@
+import type {} from 'embla-carousel-auto-scroll';
 import type { EmblaCarouselType } from 'embla-carousel';
 
 import { useState, useEffect, useCallback } from 'react';

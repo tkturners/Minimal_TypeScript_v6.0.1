@@ -68,36 +68,27 @@ export function OverviewFileView() {
           name: 'Images',
           usedStorage: GB / 2,
           filesCount: 223,
-          icon: (
-            <Box component="img" src={`${CONFIG.site.basePath}/assets/icons/files/ic-img.svg`} />
-          ),
+          icon: <Box component="img" src={`${CONFIG.assetsDir}/assets/icons/files/ic-img.svg`} />,
         },
         {
           name: 'Media',
           usedStorage: GB / 5,
           filesCount: 223,
-          icon: (
-            <Box component="img" src={`${CONFIG.site.basePath}/assets/icons/files/ic-video.svg`} />
-          ),
+          icon: <Box component="img" src={`${CONFIG.assetsDir}/assets/icons/files/ic-video.svg`} />,
         },
         {
           name: 'Documents',
           usedStorage: GB / 5,
           filesCount: 223,
           icon: (
-            <Box
-              component="img"
-              src={`${CONFIG.site.basePath}/assets/icons/files/ic-document.svg`}
-            />
+            <Box component="img" src={`${CONFIG.assetsDir}/assets/icons/files/ic-document.svg`} />
           ),
         },
         {
           name: 'Other',
           usedStorage: GB / 10,
           filesCount: 223,
-          icon: (
-            <Box component="img" src={`${CONFIG.site.basePath}/assets/icons/files/ic-file.svg`} />
-          ),
+          icon: <Box component="img" src={`${CONFIG.assetsDir}/assets/icons/files/ic-file.svg`} />,
         },
       ]}
     />
@@ -116,7 +107,7 @@ export function OverviewFileView() {
               title="Dropbox"
               value={GB / 10}
               total={GB}
-              icon={`${CONFIG.site.basePath}/assets/icons/app/ic-app-dropbox.svg`}
+              icon={`${CONFIG.assetsDir}/assets/icons/apps/ic-app-dropbox.svg`}
             />
           </Grid>
 
@@ -125,7 +116,7 @@ export function OverviewFileView() {
               title="Drive"
               value={GB / 5}
               total={GB}
-              icon={`${CONFIG.site.basePath}/assets/icons/app/ic-app-drive.svg`}
+              icon={`${CONFIG.assetsDir}/assets/icons/apps/ic-app-drive.svg`}
             />
           </Grid>
 
@@ -134,7 +125,7 @@ export function OverviewFileView() {
               title="OneDrive"
               value={GB / 2}
               total={GB}
-              icon={`${CONFIG.site.basePath}/assets/icons/app/ic-app-onedrive.svg`}
+              icon={`${CONFIG.assetsDir}/assets/icons/apps/ic-app-onedrive.svg`}
             />
           </Grid>
 

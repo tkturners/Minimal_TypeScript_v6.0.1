@@ -6,18 +6,20 @@ import IconButton from '@mui/material/IconButton';
 import { varAlpha } from 'src/theme/styles';
 
 import { Iconify } from '../../iconify';
+import { uploadClasses } from '../classes';
 
 import type { SingleFilePreviewProps } from '../types';
 
 // ----------------------------------------------------------------------
 
-export function SingleFilePreview({ file }: SingleFilePreviewProps) {
+export function SingleFilePreview({ file, sx, className, ...other }: SingleFilePreviewProps) {
   const fileName = typeof file === 'string' ? file : file.name;
 
   const previewUrl = typeof file === 'string' ? file : URL.createObjectURL(file);
 
   return (
     <Box
+      className={uploadClasses.uploadSinglePreview.concat(className ? ` ${className}` : '')}
       sx={{
         p: 1,
         top: 0,
@@ -25,7 +27,9 @@ export function SingleFilePreview({ file }: SingleFilePreviewProps) {
         width: 1,
         height: 1,
         position: 'absolute',
+        ...sx,
       }}
+      {...other}
     >
       <Box
         component="img"

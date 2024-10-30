@@ -9,7 +9,7 @@ import { TourDetailsView } from 'src/sections/tour/view';
 
 // ----------------------------------------------------------------------
 
-const metadata = { title: `Tour details | Dashboard - ${CONFIG.site.name}` };
+const metadata = { title: `Tour details | Dashboard - ${CONFIG.appName}` };
 
 export default function Page() {
   const { id = '' } = useParams();

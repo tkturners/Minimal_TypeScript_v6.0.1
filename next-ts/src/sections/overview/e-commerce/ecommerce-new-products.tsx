@@ -7,7 +7,6 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import Link from '@mui/material/Link';
 import Button from '@mui/material/Button';
-import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 
 import { varAlpha } from 'src/theme/styles';
@@ -53,8 +52,6 @@ type CarouselItemProps = BoxProps & {
 };
 
 function CarouselItem({ item, ...other }: CarouselItemProps) {
-  const theme = useTheme();
-
   return (
     <Box sx={{ width: 1, position: 'relative', ...other }}>
       <Box
@@ -88,7 +85,8 @@ function CarouselItem({ item, ...other }: CarouselItemProps) {
         src={item.coverUrl}
         slotProps={{
           overlay: {
-            background: `linear-gradient(to bottom, ${varAlpha(theme.vars.palette.grey['900Channel'], 0)} 0%, ${theme.vars.palette.grey[900]} 75%)`,
+            backgroundImage: (theme) =>
+              `linear-gradient(to bottom, ${varAlpha(theme.vars.palette.common.blackChannel, 0)} 0%, ${theme.vars.palette.common.black} 75%)`,
           },
         }}
         sx={{

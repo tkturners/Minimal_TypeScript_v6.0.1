@@ -14,6 +14,7 @@ export const editorClasses = {
     image: 'nml__editor__toolbar__image',
     italic: 'nml__editor__toolbar__italic',
     strike: 'nml__editor__toolbar__strike',
+    underline: 'nml__editor__toolbar__underline',
     hardbreak: 'nml__editor__toolbar__hardbreak',
     unsetlink: 'nml__editor__toolbar__unsetlink',
     codeBlock: 'nml__editor__toolbar__code__block',

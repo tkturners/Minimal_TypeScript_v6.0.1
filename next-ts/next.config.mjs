@@ -6,7 +6,6 @@ const isStaticExport = 'false';
 
 const nextConfig = {
   trailingSlash: true,
-  basePath: process.env.NEXT_PUBLIC_BASE_PATH,
   env: {
     BUILD_STATIC_EXPORT: isStaticExport,
   },

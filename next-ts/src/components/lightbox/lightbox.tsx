@@ -25,6 +25,7 @@ export function Lightbox({
   disableThumbnails,
   disableFullscreen,
   onGetCurrentIndex,
+  className,
   ...other
 }: LightBoxProps) {
   const totalItems = slides ? slides.length : 0;
@@ -67,7 +68,7 @@ export function Lightbox({
         iconExitFullscreen: () => <Iconify width={24} icon="carbon:center-to-fit" />,
         iconEnterFullscreen: () => <Iconify width={24} icon="carbon:fit-to-screen" />,
       }}
-      className={lightboxClasses.root}
+      className={lightboxClasses.root.concat(className ? ` ${className}` : '')}
       {...other}
     />
   );

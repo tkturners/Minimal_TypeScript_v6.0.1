@@ -6,7 +6,7 @@ import { MaintenanceView } from 'src/sections/maintenance/view';
 
 // ----------------------------------------------------------------------
 
-const metadata = { title: `Maintenance - ${CONFIG.site.name}` };
+const metadata = { title: `Maintenance - ${CONFIG.appName}` };
 
 export default function Page() {
   return (

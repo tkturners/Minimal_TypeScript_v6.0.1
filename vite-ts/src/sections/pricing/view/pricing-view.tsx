@@ -29,7 +29,7 @@ const arrowIcon = (
 
 export function PricingView() {
   return (
-    <Container sx={{ pt: 5, pb: 10 }}>
+    <Container sx={{ pt: { xs: 3, md: 5 }, pb: 10 }}>
       <Typography variant="h3" align="center" sx={{ mb: 2 }}>
         Flexible plans for your
         <br /> {`community's size and needs`}

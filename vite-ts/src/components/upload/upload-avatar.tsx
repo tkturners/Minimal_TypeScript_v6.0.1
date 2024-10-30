@@ -8,13 +8,22 @@ import { varAlpha } from 'src/theme/styles';
 
 import { Image } from '../image';
 import { Iconify } from '../iconify';
+import { uploadClasses } from './classes';
 import { RejectionFiles } from './components/rejection-files';
 
 import type { UploadProps } from './types';
 
 // ----------------------------------------------------------------------
 
-export function UploadAvatar({ sx, error, value, disabled, helperText, ...other }: UploadProps) {
+export function UploadAvatar({
+  sx,
+  error,
+  value,
+  disabled,
+  helperText,
+  className,
+  ...other
+}: UploadProps) {
   const { getRootProps, getInputProps, isDragActive, isDragReject, fileRejections } = useDropzone({
     multiple: false,
     disabled,
@@ -98,6 +107,7 @@ export function UploadAvatar({ sx, error, value, disabled, helperText, ...other 
     <>
       <Box
         {...getRootProps()}
+        className={uploadClasses.uploadBox.concat(className ? ` ${className}` : '')}
         sx={{
           p: 1,
           m: 'auto',

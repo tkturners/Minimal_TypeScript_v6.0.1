@@ -7,15 +7,14 @@ import { UploadIllustration } from 'src/assets/illustrations';
 
 // ----------------------------------------------------------------------
 
-export function UploadPlaceholder({ ...other }: BoxProps) {
+export function UploadPlaceholder({ sx, ...other }: BoxProps) {
   return (
     <Box
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-        flexDirection: 'column',
-        justifyContent: 'center',
-      }}
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+      flexDirection="column"
+      sx={sx}
       {...other}
     >
       <UploadIllustration hideBackground sx={{ width: 200 }} />

@@ -1,5 +1,4 @@
 import Box from '@mui/material/Box';
-import { useTheme } from '@mui/material/styles';
 import { cardClasses } from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
 
@@ -20,14 +19,14 @@ import { CourseWidgetSummary } from '../course-widget-summary';
 // ----------------------------------------------------------------------
 
 export function OverviewCourseView() {
-  const theme = useTheme();
-
   return (
     <DashboardContent
       maxWidth={false}
       disablePadding
       sx={{
-        borderTop: { lg: `solid 1px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.12)}` },
+        borderTop: (theme) => ({
+          lg: `solid 1px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.12)}`,
+        }),
       }}
     >
       <Box
@@ -46,9 +45,9 @@ export function OverviewCourseView() {
             flexDirection: 'column',
             flex: { lg: '1 1 auto' },
             px: { xs: 2, sm: 3, xl: 5 },
-            borderRight: {
+            borderRight: (theme) => ({
               lg: `solid 1px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.12)}`,
-            },
+            }),
           }}
         >
           <Box sx={{ mb: 2 }}>
@@ -64,27 +63,30 @@ export function OverviewCourseView() {
             sx={{
               gap: 3,
               display: 'grid',
-              gridTemplateColumns: { xs: 'repeat(1, 1fr)', md: 'repeat(3, 1fr)' },
+              gridTemplateColumns: {
+                xs: 'repeat(1, 1fr)',
+                md: 'repeat(3, 1fr)',
+              },
             }}
           >
             <CourseWidgetSummary
               title="Courses in progress"
               total={6}
-              icon={`${CONFIG.site.basePath}/assets/icons/courses/ic-courses-progress.svg`}
+              icon={`${CONFIG.assetsDir}/assets/icons/courses/ic-courses-progress.svg`}
             />
 
             <CourseWidgetSummary
               title="Courses completed"
               total={3}
               color="success"
-              icon={`${CONFIG.site.basePath}/assets/icons/courses/ic-courses-completed.svg`}
+              icon={`${CONFIG.assetsDir}/assets/icons/courses/ic-courses-completed.svg`}
             />
 
             <CourseWidgetSummary
               title="Certificates"
               total={2}
               color="secondary"
-              icon={`${CONFIG.site.basePath}/assets/icons/courses/ic-courses-certificates.svg`}
+              icon={`${CONFIG.assetsDir}/assets/icons/courses/ic-courses-certificates.svg`}
             />
           </Box>
 
@@ -116,7 +118,10 @@ export function OverviewCourseView() {
               gap: 3,
               display: 'grid',
               alignItems: 'flex-start',
-              gridTemplateColumns: { xs: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' },
+              gridTemplateColumns: {
+                xs: 'repeat(1, 1fr)',
+                md: 'repeat(2, 1fr)',
+              },
             }}
           >
             <CourseProgress

@@ -1,40 +1,50 @@
-'use client';
-
-import type { PaperProps } from '@mui/material/Paper';
+import type { BoxProps } from '@mui/material/Box';
 
 import { useState, useCallback } from 'react';
 
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import ListItemText from '@mui/material/ListItemText';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
 
 import { useBoolean } from 'src/hooks/use-boolean';
 
+import { varAlpha } from 'src/theme/styles';
+
 import { Iconify } from 'src/components/iconify';
 
-import { PaymentNewCardDialog } from './payment-new-card-dialog';
+import { PaymentNewCardForm } from './payment-new-card-form';
 
 // ----------------------------------------------------------------------
 
 const PAYMENT_OPTIONS = [
-  { value: 'paypal', label: 'Paypal' },
-  { value: 'credit', label: 'Credit / Debit card' },
+  { label: 'Paypal', value: 'paypal' },
+  { label: 'Credit / debit', value: 'creditcard' },
 ];
 
 const CARD_OPTIONS = [
-  { value: 'visa1', label: '**** **** **** 1212 - Jimmy Holland' },
-  { value: 'visa2', label: '**** **** **** 2424 - Shawn Stokes' },
-  { value: 'mastercard', label: '**** **** **** 4545 - Cole Armstrong' },
+  {
+    value: 'visa1',
+    label: '**** **** **** 1212 - Jimmy Holland',
+  },
+  {
+    value: 'visa2',
+    label: '**** **** **** 2424 - Shawn Stokes',
+  },
+  {
+    value: 'mastercard',
+    label: '**** **** **** 4545 - Cole Armstrong',
+  },
 ];
 
 // ----------------------------------------------------------------------
 
-export function PaymentMethods() {
-  const newCard = useBoolean();
+export function PaymentMethods({ sx, ...other }: BoxProps) {
+  const openForm = useBoolean();
 
   const [method, setMethod] = useState('paypal');
 
@@ -44,83 +54,106 @@ export function PaymentMethods() {
 
   return (
     <>
-      <Stack spacing={5}>
-        <Typography variant="h6">Payment method</Typography>
+      <Box sx={sx} {...other}>
+        <Typography component="h6" variant="h5" sx={{ mb: { xs: 3, md: 5 } }}>
+          Payment method
+        </Typography>
 
-        <Stack spacing={3}>
-          {PAYMENT_OPTIONS.map((option) => (
-            <OptionItem
-              key={option.label}
-              option={option}
-              selected={method === option.value}
-              isCredit={option.value === 'credit' && method === 'credit'}
-              onOpen={newCard.onTrue}
-              onClick={() => handleChangeMethod(option.value)}
-            />
-          ))}
-        </Stack>
-      </Stack>
+        <Box gap={3} display="flex" flexDirection="column">
+          {PAYMENT_OPTIONS.map((option) => {
+            const isSelected = method === option.value;
 
-      <PaymentNewCardDialog open={newCard.value} onClose={newCard.onFalse} />
+            return (
+              <OptionItem
+                key={option.label}
+                option={option}
+                selected={isSelected}
+                onOpen={openForm.onTrue}
+                isCredit={isSelected && option.value === 'creditcard'}
+                onClick={() => handleChangeMethod(option.value)}
+              />
+            );
+          })}
+        </Box>
+      </Box>
+
+      <Dialog fullWidth maxWidth="xs" open={openForm.value} onClose={openForm.onFalse}>
+        <DialogTitle> Add new card </DialogTitle>
+
+        <DialogContent sx={{ overflow: 'unset' }}>
+          <PaymentNewCardForm />
+        </DialogContent>
+
+        <DialogActions>
+          <Button color="inherit" variant="outlined" onClick={openForm.onFalse}>
+            Cancel
+          </Button>
+
+          <Button color="inherit" variant="contained" onClick={openForm.onFalse}>
+            Add
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 }
 
 // ----------------------------------------------------------------------
 
-type OptionItemProps = PaperProps & {
+type OptionItemProps = BoxProps & {
   selected: boolean;
   isCredit: boolean;
   onOpen: () => void;
-  option: { value: string; label: string };
+  option: (typeof PAYMENT_OPTIONS)[number];
 };
 
-function OptionItem({ option, selected, isCredit, onOpen, ...other }: OptionItemProps) {
-  const { value, label } = option;
-
+function OptionItem({ option, onOpen, selected, isCredit, sx, ...other }: OptionItemProps) {
   return (
-    <Paper
-      variant="outlined"
-      key={value}
+    <Box
       sx={{
-        p: 2.5,
-        cursor: 'pointer',
-        ...(selected && { boxShadow: (theme) => `0 0 0 2px ${theme.vars.palette.text.primary}` }),
+        borderRadius: 1.5,
+        border: (theme) => `solid 1px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.24)}`,
+        transition: (theme) =>
+          theme.transitions.create(['box-shadow'], {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.shortest,
+          }),
+        ...(selected && {
+          boxShadow: (theme) => `0 0 0 2px ${theme.vars.palette.text.primary}`,
+        }),
+        ...sx,
       }}
       {...other}
     >
-      <ListItemText
-        primary={
-          <Stack direction="row" alignItems="center">
-            <Iconify
-              icon={selected ? 'eva:checkmark-circle-2-fill' : 'eva:radio-button-off-fill'}
-              width={24}
-              sx={{ mr: 2, color: selected ? 'primary.main' : 'text.secondary' }}
-            />
+      <Box display="flex" alignItems="center" sx={{ px: 2, gap: 2, height: 80, cursor: 'pointer' }}>
+        <Iconify
+          width={24}
+          icon={selected ? 'solar:check-circle-bold' : 'carbon:radio-button'}
+          sx={{
+            color: 'text.disabled',
+            ...(selected && { color: 'primary.main' }),
+          }}
+        />
 
-            <Box component="span" sx={{ flexGrow: 1 }}>
-              {label}
-            </Box>
+        <Box component="span" sx={{ typography: 'subtitle1', flexGrow: 1 }}>
+          {option.label}
+        </Box>
 
-            <Stack spacing={1} direction="row" alignItems="center">
-              {value === 'credit' && (
-                <>
-                  <Iconify icon="logos:mastercard" width={24} />
-                  ,
-                  <Iconify icon="logos:visa" width={24} />
-                </>
-              )}
-              {value === 'paypal' && <Iconify icon="logos:paypal" width={24} />}
-              {value === 'cash' && <Iconify icon="solar:wad-of-money-bold" width={24} />}
-            </Stack>
-          </Stack>
-        }
-        primaryTypographyProps={{ typography: 'subtitle2' }}
-      />
+        <Box gap={1} display="flex" alignItems="center">
+          {option.value === 'creditcard' ? (
+            <>
+              <Iconify width={24} icon="logos:mastercard" />
+              <Iconify width={24} icon="logos:visa" />
+            </>
+          ) : (
+            <Iconify width={24} icon="logos:paypal" />
+          )}
+        </Box>
+      </Box>
 
       {isCredit && (
-        <Stack spacing={2.5} alignItems="flex-end" sx={{ pt: 2.5 }}>
-          <TextField select fullWidth label="Cards" SelectProps={{ native: true }}>
+        <Box sx={{ px: 3 }}>
+          <TextField select fullWidth label="Card" SelectProps={{ native: true }}>
             {CARD_OPTIONS.map((card) => (
               <option key={card.value} value={card.value}>
                 {card.label}
@@ -131,13 +164,14 @@ function OptionItem({ option, selected, isCredit, onOpen, ...other }: OptionItem
           <Button
             size="small"
             color="primary"
-            startIcon={<Iconify icon="mingcute:add-line" />}
+            startIcon={<Iconify icon="mingcute:add-line" sx={{ mr: -0.5 }} />}
             onClick={onOpen}
+            sx={{ my: 3 }}
           >
             Add new card
           </Button>
-        </Stack>
+        </Box>
       )}
-    </Paper>
+    </Box>
   );
 }

@@ -9,7 +9,7 @@ import { PostDetailsView } from 'src/sections/blog/view';
 
 // ----------------------------------------------------------------------
 
-const metadata = { title: `Post details | Dashboard - ${CONFIG.site.name}` };
+const metadata = { title: `Post details | Dashboard - ${CONFIG.appName}` };
 
 export default function Page() {
   const { title = '' } = useParams();

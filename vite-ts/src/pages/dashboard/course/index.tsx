@@ -6,7 +6,7 @@ import { OverviewCourseView } from 'src/sections/overview/course/view';
 
 // ----------------------------------------------------------------------
 
-const metadata = { title: `Course | Dashboard - ${CONFIG.site.name}` };
+const metadata = { title: `Course | Dashboard - ${CONFIG.appName}` };
 
 export default function Page() {
   return (

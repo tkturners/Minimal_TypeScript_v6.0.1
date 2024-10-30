@@ -5,7 +5,7 @@ import { TourDetailsView } from 'src/sections/tour/view';
 
 // ----------------------------------------------------------------------
 
-export const metadata = { title: `Tour details | Dashboard - ${CONFIG.site.name}` };
+export const metadata = { title: `Tour details | Dashboard - ${CONFIG.appName}` };
 
 type Props = {
   params: { id: string };

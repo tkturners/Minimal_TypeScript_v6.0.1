@@ -45,7 +45,6 @@ export function AccountPopover({ data = [], sx, ...other }: AccountPopoverProps)
   return (
     <>
       <AccountButton
-        open={popover.open}
         onClick={popover.onOpen}
         photoURL={user?.photoURL}
         displayName={user?.displayName}

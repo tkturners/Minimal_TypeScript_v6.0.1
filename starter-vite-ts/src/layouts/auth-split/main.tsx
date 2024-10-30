@@ -57,16 +57,14 @@ export function Content({ sx, children, layoutQuery, ...other }: MainProps) {
     <Box
       className={layoutClasses.content}
       sx={{
-        px: 2,
-        py: 5,
         display: 'flex',
         flex: '1 1 auto',
         alignItems: 'center',
         flexDirection: 'column',
-        justifyContent: 'center',
+        p: theme.spacing(3, 2, 10, 2),
         [theme.breakpoints.up(layoutQuery)]: {
-          px: 0,
-          py: 'calc(var(--layout-header-desktop-height) + 24px)',
+          justifyContent: 'center',
+          p: theme.spacing(10, 2, 10, 2),
         },
         ...sx,
       }}

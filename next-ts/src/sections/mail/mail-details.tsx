@@ -1,5 +1,6 @@
 import type { IMail, IMailLabel } from 'src/types/mail';
 
+import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
@@ -10,7 +11,7 @@ import Checkbox from '@mui/material/Checkbox';
 import ButtonBase from '@mui/material/ButtonBase';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { darken, lighten, useTheme, alpha as hexAlpha } from '@mui/material/styles';
+import { darken, lighten, alpha as hexAlpha } from '@mui/material/styles';
 
 import { useBoolean } from 'src/hooks/use-boolean';
 
@@ -38,8 +39,6 @@ type Props = {
 };
 
 export function MailDetails({ mail, renderLabel, empty, loading }: Props) {
-  const theme = useTheme();
-
   const showAttachments = useBoolean(true);
 
   if (loading) {
@@ -51,14 +50,14 @@ export function MailDetails({ mail, renderLabel, empty, loading }: Props) {
       <EmptyContent
         title="No conversation selected"
         description="Select a conversation to read"
-        imgUrl={`${CONFIG.site.basePath}/assets/icons/empty/ic-email-selected.svg`}
+        imgUrl={`${CONFIG.assetsDir}/assets/icons/empty/ic-email-selected.svg`}
       />
     );
   }
 
   const renderHead = (
     <>
-      <Stack direction="row" spacing={1} flexGrow={1}>
+      <Box gap={1} display="flex" flexGrow={1}>
         {mail.labelIds.map((labelId) => {
           const label = renderLabel(labelId);
 
@@ -75,9 +74,9 @@ export function MailDetails({ mail, renderLabel, empty, loading }: Props) {
             </Label>
           ) : null;
         })}
-      </Stack>
+      </Box>
 
-      <Stack direction="row" alignItems="center">
+      <Box display="flex" alignItems="center">
         <Checkbox
           color="warning"
           icon={<Iconify icon="eva:star-outline" />}
@@ -115,7 +114,7 @@ export function MailDetails({ mail, renderLabel, empty, loading }: Props) {
         <IconButton>
           <Iconify icon="eva:more-vertical-fill" />
         </IconButton>
-      </Stack>
+      </Box>
     </>
   );
 
@@ -126,7 +125,7 @@ export function MailDetails({ mail, renderLabel, empty, loading }: Props) {
       </Typography>
 
       <Stack spacing={0.5}>
-        <Stack direction="row" alignItems="center" justifyContent="flex-end">
+        <Box display="flex" alignItems="center" justifyContent="flex-end">
           <IconButton size="small">
             <Iconify width={18} icon="solar:reply-bold" />
           </IconButton>
@@ -138,7 +137,7 @@ export function MailDetails({ mail, renderLabel, empty, loading }: Props) {
           <IconButton size="small">
             <Iconify width={18} icon="solar:forward-bold" />
           </IconButton>
-        </Stack>
+        </Box>
 
         <Typography variant="caption" noWrap sx={{ color: 'text.disabled' }}>
           {fDateTime(mail.createdAt)}
@@ -158,14 +157,14 @@ export function MailDetails({ mail, renderLabel, empty, loading }: Props) {
       </Avatar>
 
       <Stack spacing={0.5} sx={{ width: 0, flexGrow: 1 }}>
-        <Stack spacing={0.5} direction="row">
+        <Box gap={0.5} display="flex">
           <Typography component="span" variant="subtitle2" sx={{ flexShrink: 0 }}>
             {mail.from.name}
           </Typography>
           <Typography component="span" noWrap variant="body2" sx={{ color: 'text.secondary' }}>
             {`<${mail.from.email}>`}
           </Typography>
-        </Stack>
+        </Box>
 
         <Typography noWrap component="span" variant="caption" sx={{ color: 'text.secondary' }}>
           {`To: `}
@@ -181,7 +180,7 @@ export function MailDetails({ mail, renderLabel, empty, loading }: Props) {
 
   const renderAttachments = (
     <Stack spacing={1} sx={{ p: 1, borderRadius: 1, bgcolor: 'background.neutral' }}>
-      <Stack direction="row" alignItems="center" justifyContent="space-between">
+      <Box display="flex" alignItems="center" justifyContent="space-between">
         <ButtonBase
           onClick={showAttachments.onToggle}
           sx={{ borderRadius: 0.5, typography: 'caption', color: 'text.secondary' }}
@@ -209,10 +208,10 @@ export function MailDetails({ mail, renderLabel, empty, loading }: Props) {
         >
           <Iconify width={18} icon="eva:cloud-download-fill" /> Download
         </ButtonBase>
-      </Stack>
+      </Box>
 
       <Collapse in={showAttachments.value} unmountOnExit timeout="auto">
-        <Stack direction="row" flexWrap="wrap" spacing={0.75}>
+        <Box gap={0.75} display="flex" flexWrap="wrap">
           {mail.attachments.map((attachment) => (
             <FileThumbnail
               key={attachment.id}
@@ -224,7 +223,7 @@ export function MailDetails({ mail, renderLabel, empty, loading }: Props) {
               slotProps={{ icon: { width: 24, height: 24 } }}
             />
           ))}
-        </Stack>
+        </Box>
       </Collapse>
     </Stack>
   );
@@ -237,7 +236,7 @@ export function MailDetails({ mail, renderLabel, empty, loading }: Props) {
     <>
       <Editor sx={{ maxHeight: 320 }} />
 
-      <Stack direction="row" alignItems="center">
+      <Box display="flex" alignItems="center">
         <IconButton>
           <Iconify icon="solar:gallery-add-bold" />
         </IconButton>
@@ -255,32 +254,32 @@ export function MailDetails({ mail, renderLabel, empty, loading }: Props) {
         >
           Send
         </Button>
-      </Stack>
+      </Box>
     </>
   );
 
   return (
     <>
-      <Stack direction="row" alignItems="center" flexShrink={0} sx={{ pl: 2, pr: 1, height: 56 }}>
+      <Box display="flex" alignItems="center" flexShrink={0} sx={{ pl: 2, pr: 1, height: 56 }}>
         {renderHead}
-      </Stack>
+      </Box>
 
-      <Stack
-        spacing={2}
+      <Box
+        gap={2}
         flexShrink={0}
-        direction="row"
-        sx={{
+        display="flex"
+        sx={(theme) => ({
           p: 2,
           borderTop: `1px dashed ${theme.vars.palette.divider}`,
           borderBottom: `1px dashed ${theme.vars.palette.divider}`,
-        }}
+        })}
       >
         {renderSubject}
-      </Stack>
+      </Box>
 
-      <Stack flexShrink={0} direction="row" alignItems="center" sx={{ pt: 2, px: 2 }}>
+      <Box display="flex" alignItems="center" flexShrink={0} sx={{ pt: 2, px: 2 }}>
         {renderSender}
-      </Stack>
+      </Box>
 
       {!!mail.attachments.length && <Stack sx={{ px: 2, mt: 2 }}> {renderAttachments} </Stack>}
 

@@ -6,7 +6,7 @@ import { TextfieldView } from 'src/sections/_examples/mui/textfield-view';
 
 // ----------------------------------------------------------------------
 
-const metadata = { title: `Textfield | MUI - ${CONFIG.site.name}` };
+const metadata = { title: `Textfield | MUI - ${CONFIG.appName}` };
 
 export default function Page() {
   return (

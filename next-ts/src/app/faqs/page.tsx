@@ -4,7 +4,7 @@ import { FaqsView } from 'src/sections/faqs/view';
 
 // ----------------------------------------------------------------------
 
-export const metadata = { title: `Faqs - ${CONFIG.site.name}` };
+export const metadata = { title: `Faqs - ${CONFIG.appName}` };
 
 export default function Page() {
   return <FaqsView />;

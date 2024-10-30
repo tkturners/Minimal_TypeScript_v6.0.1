@@ -5,9 +5,9 @@ import { useState, useCallback } from 'react';
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 
-import { CONFIG } from 'src/config-global';
+import { Iconify } from 'src/components/iconify';
 
-import { SvgColor, svgColorClasses } from '../../svg-color';
+import { svgColorClasses } from '../../svg-color';
 
 // ----------------------------------------------------------------------
 
@@ -31,17 +31,20 @@ export function FullScreenButton() {
         sx={{
           [`& .${svgColorClasses.root}`]: {
             background: (theme) =>
-              `linear-gradient(135deg, ${theme.vars.palette.grey[500]} 0%, ${theme.vars.palette.grey[600]} 100%)`,
+              `linear-gradient(135deg, ${theme.vars.palette.grey[500]}, ${theme.vars.palette.grey[600]})`,
             ...(fullscreen && {
               background: (theme) =>
-                `linear-gradient(135deg, ${theme.vars.palette.primary.light} 0%, ${theme.vars.palette.primary.main} 100%)`,
+                `linear-gradient(135deg, ${theme.vars.palette.primary.light}, ${theme.vars.palette.primary.main})`,
             }),
           },
         }}
       >
-        <SvgColor
-          src={`${CONFIG.site.basePath}/assets/icons/setting/${fullscreen ? 'ic-exit-full-screen' : 'ic-full-screen'}.svg`}
-          sx={{ width: 18, height: 18 }}
+        <Iconify
+          icon={
+            fullscreen
+              ? 'solar:quit-full-screen-square-outline'
+              : 'solar:full-screen-square-outline'
+          }
         />
       </IconButton>
     </Tooltip>

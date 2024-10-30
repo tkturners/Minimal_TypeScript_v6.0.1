@@ -6,7 +6,7 @@ import { ButtonView } from 'src/sections/_examples/mui/button-view';
 
 // ----------------------------------------------------------------------
 
-const metadata = { title: `Button | MUI - ${CONFIG.site.name}` };
+const metadata = { title: `Button | MUI - ${CONFIG.appName}` };
 
 export default function Page() {
   return (

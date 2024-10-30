@@ -81,7 +81,7 @@ export function UpgradeBlock({ sx, ...other }: StackProps) {
       sx={{
         ...bgGradient({
           color: `135deg, ${hexAlpha('#F7BB95', 0.92)}, ${hexAlpha('#5B2FF3', 0.92)}`,
-          imgUrl: `${CONFIG.site.basePath}/assets/background/background-7.webp`,
+          imgUrl: `${CONFIG.assetsDir}/assets/background/background-7.webp`,
         }),
         px: 3,
         py: 4,
@@ -113,7 +113,7 @@ export function UpgradeBlock({ sx, ...other }: StackProps) {
           repeatDelay: 0,
         }}
         alt="Small Rocket"
-        src={`${CONFIG.site.basePath}/assets/illustrations/illustration-rocket-small.webp`}
+        src={`${CONFIG.assetsDir}/assets/illustrations/illustration-rocket-small.webp`}
         sx={{ right: 0, width: 112, height: 112, position: 'absolute' }}
       />
 

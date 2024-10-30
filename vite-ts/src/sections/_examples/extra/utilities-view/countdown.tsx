@@ -8,9 +8,9 @@ import { ComponentBlock, ComponentContainer } from '../../component-block';
 // ----------------------------------------------------------------------
 
 export function Countdown() {
-  const countdownDate = useCountdownDate(new Date('08/08/2025 21:30'));
+  const countdownDate = useCountdownDate(new Date('2025-08-20 20:30'));
 
-  const { countdown, startCountdown, counting } = useCountdownSeconds(30);
+  const countdownSeconds = useCountdownSeconds(10);
 
   return (
     <ComponentContainer
@@ -54,8 +54,16 @@ export function Countdown() {
           alignItems="center"
           sx={{ typography: 'h5', textAlign: 'center' }}
         >
-          <Button disabled={counting} onClick={startCountdown}>
-            {counting ? `Counting... (${countdown})` : `Start`}
+          <Button
+            disabled={countdownSeconds.isCounting}
+            onClick={() => {
+              if (!countdownSeconds.isCounting) {
+                countdownSeconds.reset();
+                countdownSeconds.start();
+              }
+            }}
+          >
+            {countdownSeconds.isCounting ? `Counting... (${countdownSeconds.value})` : `Start`}
           </Button>
         </Box>
       </ComponentBlock>

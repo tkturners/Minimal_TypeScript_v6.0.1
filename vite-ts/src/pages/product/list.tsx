@@ -7,7 +7,7 @@ import { ProductShopView } from 'src/sections/product/view';
 
 // ----------------------------------------------------------------------
 
-const metadata = { title: `Product shop - ${CONFIG.site.name}` };
+const metadata = { title: `Product shop - ${CONFIG.appName}` };
 
 export default function Page() {
   const { products, productsLoading } = useGetProducts();

@@ -16,6 +16,7 @@ type StyledRootProps = StackProps & {
   disabled?: boolean;
   fullScreen?: boolean;
 };
+
 export const StyledRoot = styled(Stack, {
   shouldForwardProp: (prop) => prop !== 'error' && prop !== 'disabled' && prop !== 'fullScreen',
 })<StyledRootProps>(({ error, disabled, fullScreen, theme }) => ({
@@ -136,7 +137,7 @@ export const StyledRoot = styled(Stack, {
       },
       [`& .${editorClasses.content.listItem}`]: {
         lineHeight: 2,
-        '& > p': { margin: 0, display: 'inline-block' },
+        '& > p': { margin: 0 },
       },
       /**
        * Blockquote

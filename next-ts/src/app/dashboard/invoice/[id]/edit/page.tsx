@@ -5,7 +5,7 @@ import { InvoiceEditView } from 'src/sections/invoice/view';
 
 // ----------------------------------------------------------------------
 
-export const metadata = { title: `Invoice edit | Dashboard - ${CONFIG.site.name}` };
+export const metadata = { title: `Invoice edit | Dashboard - ${CONFIG.appName}` };
 
 type Props = {
   params: { id: string };

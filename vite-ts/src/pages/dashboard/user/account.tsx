@@ -6,7 +6,7 @@ import { AccountView } from 'src/sections/account/view';
 
 // ----------------------------------------------------------------------
 
-const metadata = { title: `Account settings | Dashboard - ${CONFIG.site.name}` };
+const metadata = { title: `Account settings | Dashboard - ${CONFIG.appName}` };
 
 export default function Page() {
   return (

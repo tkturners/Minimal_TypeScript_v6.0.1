@@ -1,3 +1,4 @@
+import type { CardProps } from '@mui/material/Card';
 import type { IAddressItem } from 'src/types/common';
 
 import Box from '@mui/material/Box';
@@ -10,14 +11,14 @@ import { Iconify } from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
 
-type Props = {
+type Props = CardProps & {
   onBackStep: () => void;
   billing: IAddressItem | null;
 };
 
-export function CheckoutBillingInfo({ billing, onBackStep }: Props) {
+export function CheckoutBillingInfo({ billing, onBackStep, sx, ...other }: Props) {
   return (
-    <Card sx={{ mb: 3 }}>
+    <Card sx={{ mb: 3, ...sx }} {...other}>
       <CardHeader
         title="Address"
         action={

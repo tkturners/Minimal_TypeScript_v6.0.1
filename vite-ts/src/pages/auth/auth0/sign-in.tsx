@@ -2,11 +2,11 @@ import { Helmet } from 'react-helmet-async';
 
 import { CONFIG } from 'src/config-global';
 
-import { Auth0SignInView } from 'src/sections/auth/auth0';
+import { Auth0SignInView } from 'src/auth/view/auth0';
 
 // ----------------------------------------------------------------------
 
-const metadata = { title: `Sign in | Auth0 - ${CONFIG.site.name}` };
+const metadata = { title: `Sign in | Auth0 - ${CONFIG.appName}` };
 
 export default function Page() {
   return (

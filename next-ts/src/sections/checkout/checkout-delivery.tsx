@@ -1,36 +1,36 @@
+import type { BoxProps } from '@mui/material/Box';
 import type { CardProps } from '@mui/material/Card';
-import type { PaperProps } from '@mui/material/Paper';
 import type { ICheckoutDeliveryOption } from 'src/types/checkout';
 
 import { Controller, useFormContext } from 'react-hook-form';
 
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
-import Stack from '@mui/material/Stack';
-import Paper from '@mui/material/Paper';
 import CardHeader from '@mui/material/CardHeader';
-import ListItemText from '@mui/material/ListItemText';
+
+import { varAlpha } from 'src/theme/styles';
 
 import { Iconify } from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
 
 type Props = CardProps & {
+  name: string;
   options: ICheckoutDeliveryOption[];
   onApplyShipping: (shipping: number) => void;
 };
 
-export function CheckoutDelivery({ options, onApplyShipping, ...other }: Props) {
+export function CheckoutDelivery({ name, options, onApplyShipping, sx, ...other }: Props) {
   const { control } = useFormContext();
 
   return (
-    <Card {...other}>
+    <Card sx={sx} {...other}>
       <CardHeader title="Delivery" />
 
       <Controller
-        name="delivery"
+        name={name}
         control={control}
-        render={({ field }) => (
+        render={({ field: { value, onChange } }) => (
           <Box
             columnGap={2}
             rowGap={2.5}
@@ -42,9 +42,9 @@ export function CheckoutDelivery({ options, onApplyShipping, ...other }: Props) 
               <OptionItem
                 key={option.label}
                 option={option}
-                selected={field.value === option.value}
+                selected={value === option.value}
                 onClick={() => {
-                  field.onChange(option.value);
+                  onChange(option.value);
                   onApplyShipping(option.value);
                 }}
               />
@@ -58,44 +58,53 @@ export function CheckoutDelivery({ options, onApplyShipping, ...other }: Props) 
 
 // ----------------------------------------------------------------------
 
-type OptionItemProps = PaperProps & {
+type OptionItemProps = BoxProps & {
   selected: boolean;
   option: ICheckoutDeliveryOption;
 };
 
-function OptionItem({ option, selected, ...other }: OptionItemProps) {
-  const { value, label, description } = option;
-
+function OptionItem({ option, selected, sx, ...other }: OptionItemProps) {
   return (
-    <Paper
-      variant="outlined"
-      key={value}
+    <Box
+      display="flex"
       sx={{
         p: 2.5,
+        gap: 2,
         cursor: 'pointer',
-        display: 'flex',
-        ...(selected && { boxShadow: (theme) => `0 0 0 2px ${theme.vars.palette.text.primary}` }),
+        borderRadius: 1.5,
+        border: (theme) => `solid 1px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.24)}`,
+        transition: (theme) =>
+          theme.transitions.create(['box-shadow'], {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.shortest,
+          }),
+        ...(selected && {
+          boxShadow: (theme) => `0 0 0 2px ${theme.vars.palette.text.primary}`,
+        }),
+        ...sx,
       }}
       {...other}
     >
-      {label === 'Free' && <Iconify icon="carbon:bicycle" width={32} />}
-      {label === 'Standard' && <Iconify icon="carbon:delivery" width={32} />}
-      {label === 'Express' && <Iconify icon="carbon:rocket" width={32} />}
-
-      <ListItemText
-        sx={{ ml: 2 }}
-        primary={
-          <Stack direction="row" alignItems="center">
-            <Box component="span" sx={{ flexGrow: 1 }}>
-              {label}
-            </Box>
-            <Box component="span" sx={{ typography: 'h6' }}>{`$${value}`}</Box>
-          </Stack>
+      <Iconify
+        width={28}
+        icon={
+          (option.label === 'Standard' && 'carbon:delivery') ||
+          (option.label === 'Express' && 'carbon:rocket') ||
+          'carbon:bicycle'
         }
-        secondary={description}
-        primaryTypographyProps={{ typography: 'subtitle1', mb: 0.5 }}
-        secondaryTypographyProps={{ typography: 'body2' }}
       />
-    </Paper>
+
+      <Box flex="1 1 auto">
+        <Box display="flex" alignItems="center" sx={{ mb: 0.5, typography: 'h6' }}>
+          <Box component="span" flexGrow={1} sx={{ typography: 'subtitle1' }}>
+            {option.label}
+          </Box>
+          {`$${option.value}`}
+        </Box>
+        <Box component="span" display="flex" sx={{ typography: 'body2', color: 'text.secondary' }}>
+          {option.description}
+        </Box>
+      </Box>
+    </Box>
   );
 }

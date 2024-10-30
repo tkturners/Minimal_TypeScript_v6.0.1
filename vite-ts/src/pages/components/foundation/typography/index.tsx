@@ -6,7 +6,7 @@ import { TypographyView } from 'src/sections/_examples/foundation/typography-vie
 
 // ----------------------------------------------------------------------
 
-const metadata = { title: `Typography | Foundations - ${CONFIG.site.name}` };
+const metadata = { title: `Typography | Foundations - ${CONFIG.appName}` };
 
 export default function Page() {
   return (

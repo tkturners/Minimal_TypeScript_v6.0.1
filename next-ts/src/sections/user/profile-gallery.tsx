@@ -2,7 +2,6 @@ import type { IUserProfileGallery } from 'src/types/user';
 
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
-import { useTheme } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import ListItemText from '@mui/material/ListItemText';
@@ -22,8 +21,6 @@ type Props = {
 };
 
 export function ProfileGallery({ gallery }: Props) {
-  const theme = useTheme();
-
   const slides = gallery.map((slide) => ({ src: slide.imageUrl }));
 
   const lightbox = useLightBox(slides);
@@ -81,7 +78,8 @@ export function ProfileGallery({ gallery }: Props) {
               onClick={() => lightbox.onOpen(image.imageUrl)}
               slotProps={{
                 overlay: {
-                  background: `linear-gradient(to bottom, ${varAlpha(theme.vars.palette.grey['900Channel'], 0)} 0%, ${theme.vars.palette.grey[900]} 75%)`,
+                  backgroundImage: (theme) =>
+                    `linear-gradient(to bottom, ${varAlpha(theme.vars.palette.common.blackChannel, 0)} 0%, ${theme.vars.palette.common.black} 75%)`,
                 },
               }}
             />

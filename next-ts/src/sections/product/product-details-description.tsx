@@ -1,28 +1,31 @@
+import type { Theme, SxProps } from '@mui/material/styles';
+
 import { Markdown } from 'src/components/markdown';
 
 // ----------------------------------------------------------------------
 
 type Props = {
   description?: string;
+  sx?: SxProps<Theme>;
 };
 
-export function ProductDetailsDescription({ description }: Props) {
+export function ProductDetailsDescription({ description, sx }: Props) {
   return (
     <Markdown
       children={description}
       sx={{
         p: 3,
-        '& p, li, ol': {
+        '& p, li, ol, table': {
           typography: 'body2',
         },
-        '& ol': {
-          p: 0,
-          display: { md: 'flex' },
-          listStyleType: 'none',
-          '& li': {
-            '&:first-of-type': { minWidth: 240, mb: { xs: 0.5, md: 0 } },
-          },
+        '& table': {
+          mt: 2,
+          maxWidth: 640,
+          '& td': { px: 2 },
+          '& td:first-of-type': { color: 'text.secondary' },
+          'tbody tr:nth-of-type(odd)': { bgcolor: 'transparent' },
         },
+        ...sx,
       }}
     />
   );

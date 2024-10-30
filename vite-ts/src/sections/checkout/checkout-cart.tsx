@@ -44,7 +44,7 @@ export function CheckoutCart() {
             <EmptyContent
               title="Cart is empty!"
               description="Look like you have no items in your shopping cart."
-              imgUrl={`${CONFIG.site.basePath}/assets/icons/empty/ic-cart.svg`}
+              imgUrl={`${CONFIG.assetsDir}/assets/icons/empty/ic-cart.svg`}
               sx={{ pt: 5, pb: 10 }}
             />
           ) : (

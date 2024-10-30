@@ -13,8 +13,9 @@ import Typography from '@mui/material/Typography';
 import InputAdornment from '@mui/material/InputAdornment';
 
 import { _socials } from 'src/_mock';
+import { TwitterIcon, FacebookIcon, LinkedinIcon, InstagramIcon } from 'src/assets/icons';
 
-import { Iconify, SocialIcon } from 'src/components/iconify';
+import { Iconify } from 'src/components/iconify';
 import { SearchNotFound } from 'src/components/search-not-found';
 import { usePopover, CustomPopover } from 'src/components/custom-popover';
 
@@ -115,8 +116,11 @@ function FriendCard({ item }: FriendCardProps) {
 
         <Stack alignItems="center" justifyContent="center" direction="row">
           {_socials.map((social) => (
-            <IconButton key={social.name}>
-              <SocialIcon icon={social.name} />
+            <IconButton key={social.label} color="inherit">
+              {social.value === 'facebook' && <FacebookIcon />}
+              {social.value === 'instagram' && <InstagramIcon />}
+              {social.value === 'linkedin' && <LinkedinIcon />}
+              {social.value === 'twitter' && <TwitterIcon />}
             </IconButton>
           ))}
         </Stack>

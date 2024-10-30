@@ -30,7 +30,7 @@ export function ComponentHero({ children, sx, ...other }: BoxProps) {
         sx={{
           ...bgGradient({
             color: `0deg, ${varAlpha(theme.vars.palette.background.defaultChannel, 0.9)}, ${varAlpha(theme.vars.palette.background.defaultChannel, 0.9)}`,
-            imgUrl: `${CONFIG.site.basePath}/assets/background/background-3-blur.webp`,
+            imgUrl: `${CONFIG.assetsDir}/assets/background/background-3-blur.webp`,
           }),
           top: 0,
           left: 0,

@@ -2,12 +2,10 @@ import { m } from 'framer-motion';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 
 import { varAlpha, bgGradient } from 'src/theme/styles';
 
-import { Image } from 'src/components/image';
 import { varFade, MotionContainer } from 'src/components/animate';
 import { Carousel, useCarousel, CarouselArrowNumberButtons } from 'src/components/carousel';
 
@@ -60,21 +58,22 @@ type CarouselItemProps = {
 };
 
 function CarouselItem({ item, index, selected }: CarouselItemProps) {
-  const theme = useTheme();
-
   return (
     <Box sx={{ position: 'relative' }}>
       <IndexLabel index={index + 1} />
 
-      <Image
-        visibleByDefault
+      <Box
+        component="img"
         alt={item.title}
         src={item.coverUrl}
-        ratio={{ xs: '4/3', sm: '16/10' }}
+        sx={{
+          objectFit: 'cover',
+          aspectRatio: { xs: '4/3', sm: '16/10' },
+        }}
       />
 
       <Box
-        sx={{
+        sx={(theme) => ({
           ...bgGradient({
             color: `to top, ${theme.vars.palette.grey[900]}, ${varAlpha(theme.vars.palette.grey['900Channel'], 0)}`,
           }),
@@ -82,7 +81,7 @@ function CarouselItem({ item, index, selected }: CarouselItemProps) {
           width: 1,
           height: 1,
           position: 'absolute',
-        }}
+        })}
       />
 
       <Box

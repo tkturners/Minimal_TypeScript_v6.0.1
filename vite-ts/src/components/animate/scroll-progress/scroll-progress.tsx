@@ -26,7 +26,7 @@ export function ScrollProgress({
 }: ScrollProgressProps) {
   const scaleX = useSpring(progress, { stiffness: 100, damping: 30, restDelta: 0.001 });
 
-  const progressSize = variant === 'circular' ? size ?? 64 : size ?? 3;
+  const progressSize = variant === 'circular' ? (size ?? 64) : (size ?? 3);
 
   const renderCircular = (
     <Box

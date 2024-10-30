@@ -10,7 +10,7 @@ import { orderBy } from 'src/utils/helper';
 
 import { hideScrollY } from 'src/theme/styles';
 
-import { muiNav, extraNav, foundationNav } from './config-nav';
+import { muiNav, extraNav, foundationNav } from './config-nav-components';
 
 // ----------------------------------------------------------------------
 

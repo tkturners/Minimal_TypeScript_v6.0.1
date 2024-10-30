@@ -30,9 +30,9 @@ export type NewInvoiceSchemaType = zod.infer<typeof NewInvoiceSchema>;
 
 export const NewInvoiceSchema = zod
   .object({
-    invoiceTo: zod
-      .custom<IInvoice['invoiceTo'] | null>()
-      .refine((data) => data !== null, { message: 'Invoice to is required!' }),
+    invoiceTo: schemaHelper.objectOrNull<IInvoice['invoiceTo'] | null>({
+      message: { required_error: 'Invoice to is required!' },
+    }),
     createDate: schemaHelper.date({ message: { required_error: 'Create date is required!' } }),
     dueDate: schemaHelper.date({ message: { required_error: 'Due date is required!' } }),
     items: zod.array(

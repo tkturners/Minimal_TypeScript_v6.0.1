@@ -1,29 +1,34 @@
+import type { CardProps } from '@mui/material/Card';
 import type { IPaymentCard } from 'src/types/common';
 
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
 import CardHeader from '@mui/material/CardHeader';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
 
 import { useBoolean } from 'src/hooks/use-boolean';
 
 import { Iconify } from 'src/components/iconify';
 
 import { PaymentCardItem } from '../payment/payment-card-item';
-import { PaymentNewCardDialog } from '../payment/payment-new-card-dialog';
+import { PaymentNewCardForm } from '../payment/payment-new-card-form';
 
 // ----------------------------------------------------------------------
 
-type Props = {
+type Props = CardProps & {
   cards: IPaymentCard[];
 };
 
-export function AccountBillingPayment({ cards }: Props) {
-  const newCard = useBoolean();
+export function AccountBillingPayment({ cards, sx, ...other }: Props) {
+  const openForm = useBoolean();
 
   return (
     <>
-      <Card sx={{ my: 3 }}>
+      <Card sx={{ my: 3, ...sx }} {...other}>
         <CardHeader
           title="Payment method"
           action={
@@ -31,9 +36,9 @@ export function AccountBillingPayment({ cards }: Props) {
               size="small"
               color="primary"
               startIcon={<Iconify icon="mingcute:add-line" />}
-              onClick={newCard.onTrue}
+              onClick={openForm.onTrue}
             >
-              New Card
+              New card
             </Button>
           }
         />
@@ -51,7 +56,23 @@ export function AccountBillingPayment({ cards }: Props) {
         </Box>
       </Card>
 
-      <PaymentNewCardDialog open={newCard.value} onClose={newCard.onFalse} />
+      <Dialog fullWidth maxWidth="xs" open={openForm.value} onClose={openForm.onFalse}>
+        <DialogTitle> Add new card </DialogTitle>
+
+        <DialogContent sx={{ overflow: 'unset' }}>
+          <PaymentNewCardForm />
+        </DialogContent>
+
+        <DialogActions>
+          <Button color="inherit" variant="outlined" onClick={openForm.onFalse}>
+            Cancel
+          </Button>
+
+          <Button color="inherit" variant="contained" onClick={openForm.onFalse}>
+            Add
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 }

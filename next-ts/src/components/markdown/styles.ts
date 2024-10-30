@@ -111,9 +111,12 @@ export const StyledRoot = styled(ReactMarkdown)(({ theme }) => ({
       padding: theme.spacing(3),
       color: theme.vars.palette.common.white,
       borderRadius: theme.shape.borderRadius,
-      backgroundColor: theme.vars.palette.grey[900],
       fontFamily: "'JetBrainsMono', monospace",
+      backgroundColor: theme.vars.palette.grey[900],
       '& code': { fontSize: theme.typography.body2.fontSize },
+      [stylesMode.dark]: {
+        backgroundColor: theme.vars.palette.grey[800],
+      },
     },
   },
   /**

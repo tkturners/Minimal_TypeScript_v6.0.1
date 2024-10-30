@@ -24,7 +24,7 @@ export function AppWelcome({ title, description, action, img, sx, ...other }: Pr
       sx={{
         ...bgGradient({
           color: `to right, ${varAlpha(theme.vars.palette.grey['900Channel'], 0.88)} 0%, ${theme.vars.palette.grey[900]} 75%`,
-          imgUrl: `${CONFIG.site.basePath}/assets/background/background-5.webp`,
+          imgUrl: `${CONFIG.assetsDir}/assets/background/background-5.webp`,
         }),
         pt: 5,
         pb: 5,

@@ -33,7 +33,7 @@ export const paths = {
   zoneStore: 'https://mui.com/store/items/zone-landing-page/',
   minimalStore: 'https://mui.com/store/items/minimal-dashboard/',
   freeUI: 'https://mui.com/store/items/minimal-dashboard-free/',
-  figma: 'https://www.figma.com/design/cAPz4pYPtQEXivqe11EcDE/%5BPreview%5D-Minimal-Web.v6.0.0',
+  figmaUrl: 'https://www.figma.com/design/cAPz4pYPtQEXivqe11EcDE/%5BPreview%5D-Minimal-Web.v6.0.0',
   product: {
     root: `/product`,
     checkout: `/product/checkout`,

@@ -5,7 +5,7 @@ import { JobDetailsView } from 'src/sections/job/view';
 
 // ----------------------------------------------------------------------
 
-export const metadata = { title: `Job details | Dashboard - ${CONFIG.site.name}` };
+export const metadata = { title: `Job details | Dashboard - ${CONFIG.appName}` };
 
 type Props = {
   params: { id: string };

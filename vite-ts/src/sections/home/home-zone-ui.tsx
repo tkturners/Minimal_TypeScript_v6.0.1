@@ -1,4 +1,4 @@
-import type { StackProps } from '@mui/material/Stack';
+import type { BoxProps } from '@mui/material/Box';
 
 import { m } from 'framer-motion';
 
@@ -21,7 +21,7 @@ import { FloatLine, CircleSvg, FloatTriangleDownIcon } from './components/svg-el
 
 // ----------------------------------------------------------------------
 
-export function HomeZoneUI({ sx, ...other }: StackProps) {
+export function HomeZoneUI({ sx, ...other }: BoxProps) {
   const renderLines = (
     <>
       <Stack
@@ -75,7 +75,7 @@ export function HomeZoneUI({ sx, ...other }: StackProps) {
       <Box
         component="img"
         alt="Zone landing page"
-        src={`${CONFIG.site.basePath}/assets/images/home/zone-landing.webp`}
+        src={`${CONFIG.assetsDir}/assets/images/home/zone-landing.webp`}
         sx={{
           width: 720,
           objectFit: 'cover',
@@ -105,7 +105,7 @@ export function HomeZoneUI({ sx, ...other }: StackProps) {
   );
 
   return (
-    <Stack
+    <Box
       component="section"
       sx={{
         pt: 10,
@@ -137,6 +137,6 @@ export function HomeZoneUI({ sx, ...other }: StackProps) {
           <CircleSvg variants={varFade().in} sx={{ display: { xs: 'none', md: 'block' } }} />
         </Container>
       </MotionViewport>
-    </Stack>
+    </Box>
   );
 }

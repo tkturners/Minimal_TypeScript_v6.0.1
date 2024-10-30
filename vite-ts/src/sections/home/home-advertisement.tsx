@@ -1,11 +1,10 @@
-import type { StackProps } from '@mui/material/Stack';
+import type { BoxProps } from '@mui/material/Box';
 
 import { m } from 'framer-motion';
 
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import { useTheme } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 
 import { paths } from 'src/routes/paths';
@@ -21,9 +20,7 @@ import { FloatLine, FloatPlusIcon } from './components/svg-elements';
 
 // ----------------------------------------------------------------------
 
-export function HomeAdvertisement({ sx, ...other }: StackProps) {
-  const theme = useTheme();
-
+export function HomeAdvertisement({ sx, ...other }: BoxProps) {
   const renderLines = (
     <>
       <FloatPlusIcon sx={{ left: 72, top: '50%', mt: -1 }} />
@@ -43,12 +40,12 @@ export function HomeAdvertisement({ sx, ...other }: StackProps) {
         <br /> Minimal kit
         <Box
           component="span"
-          sx={{
+          sx={(theme) => ({
             ...textGradient(
               `to right, ${theme.vars.palette.common.white}, ${varAlpha(theme.vars.palette.common.whiteChannel, 0.4)}`
             ),
             ml: 1,
-          }}
+          })}
         >
           today
         </Box>
@@ -102,7 +99,7 @@ export function HomeAdvertisement({ sx, ...other }: StackProps) {
         animate={{ y: [-20, 0, -20] }}
         transition={{ duration: 4, repeat: Infinity }}
         alt="rocket"
-        src={`${CONFIG.site.basePath}/assets/illustrations/illustration-rocket-large.webp`}
+        src={`${CONFIG.assetsDir}/assets/illustrations/illustration-rocket-large.webp`}
         sx={{ zIndex: 9, width: 360, aspectRatio: '1/1' }}
       />
     </m.div>
@@ -111,7 +108,7 @@ export function HomeAdvertisement({ sx, ...other }: StackProps) {
   const renderGridBg = (
     <m.div variants={varFade().in}>
       <SvgColor
-        src={`${CONFIG.site.basePath}/assets/background/shape-grid.svg`}
+        src={`${CONFIG.assetsDir}/assets/background/shape-grid.svg`}
         sx={{
           top: 0,
           left: 0,
@@ -143,7 +140,7 @@ export function HomeAdvertisement({ sx, ...other }: StackProps) {
   );
 
   return (
-    <Stack component="section" sx={{ position: 'relative', ...sx }} {...other}>
+    <Box component="section" sx={{ position: 'relative', ...sx }} {...other}>
       <MotionViewport>
         {renderLines}
 
@@ -160,7 +157,7 @@ export function HomeAdvertisement({ sx, ...other }: StackProps) {
               bgcolor: 'grey.900',
               position: 'relative',
               textAlign: { xs: 'center', md: 'left' },
-              border: `solid 1px ${theme.vars.palette.grey[800]}`,
+              border: (theme) => `solid 1px ${theme.vars.palette.grey[800]}`,
             }}
           >
             {renderImg}
@@ -173,6 +170,6 @@ export function HomeAdvertisement({ sx, ...other }: StackProps) {
           </Stack>
         </Container>
       </MotionViewport>
-    </Stack>
+    </Box>
   );
 }

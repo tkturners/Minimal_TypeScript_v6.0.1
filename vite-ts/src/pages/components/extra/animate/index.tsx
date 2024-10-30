@@ -6,7 +6,7 @@ import { AnimateView } from 'src/sections/_examples/extra/animate-view';
 
 // ----------------------------------------------------------------------
 
-const metadata = { title: `Animate | Components - ${CONFIG.site.name}` };
+const metadata = { title: `Animate | Components - ${CONFIG.appName}` };
 
 export default function Page() {
   return (

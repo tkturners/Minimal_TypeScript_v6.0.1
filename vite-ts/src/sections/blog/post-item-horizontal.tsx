@@ -1,4 +1,5 @@
 import type { IPostItem } from 'src/types/blog';
+import type { CardProps } from '@mui/material/Card';
 
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
@@ -7,7 +8,6 @@ import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
 import MenuList from '@mui/material/MenuList';
 import MenuItem from '@mui/material/MenuItem';
-import { useTheme } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 
@@ -27,56 +27,42 @@ import { usePopover, CustomPopover } from 'src/components/custom-popover';
 
 // ----------------------------------------------------------------------
 
-type Props = {
+type Props = CardProps & {
   post: IPostItem;
 };
 
-export function PostItemHorizontal({ post }: Props) {
-  const theme = useTheme();
-
+export function PostItemHorizontal({ post, sx, ...other }: Props) {
   const popover = usePopover();
 
   const router = useRouter();
 
-  const {
-    title,
-    author,
-    publish,
-    coverUrl,
-    createdAt,
-    totalViews,
-    totalShares,
-    totalComments,
-    description,
-  } = post;
-
   return (
     <>
-      <Card sx={{ display: 'flex' }}>
-        <Stack spacing={1} sx={{ p: theme.spacing(3, 3, 2, 3) }}>
+      <Card sx={{ display: 'flex', ...sx }} {...other}>
+        <Stack spacing={1} flexGrow={1} sx={{ p: (theme) => theme.spacing(3, 3, 2, 3) }}>
           <Box display="flex" alignItems="center" justifyContent="space-between" sx={{ mb: 2 }}>
-            <Label variant="soft" color={(publish === 'published' && 'info') || 'default'}>
-              {publish}
+            <Label variant="soft" color={(post.publish === 'published' && 'info') || 'default'}>
+              {post.publish}
             </Label>
 
             <Box component="span" sx={{ typography: 'caption', color: 'text.disabled' }}>
-              {fDate(createdAt)}
+              {fDate(post.createdAt)}
             </Box>
           </Box>
 
           <Stack spacing={1} flexGrow={1}>
             <Link
               component={RouterLink}
-              href={paths.dashboard.post.details(title)}
+              href={paths.dashboard.post.details(post.title)}
               color="inherit"
               variant="subtitle2"
               sx={{ ...maxLine({ line: 2 }) }}
             >
-              {title}
+              {post.title}
             </Link>
 
             <Typography variant="body2" sx={{ ...maxLine({ line: 2 }), color: 'text.secondary' }}>
-              {description}
+              {post.description}
             </Typography>
           </Stack>
 
@@ -95,17 +81,17 @@ export function PostItemHorizontal({ post }: Props) {
             >
               <Box display="flex" alignItems="center" gap={0.5}>
                 <Iconify icon="eva:message-circle-fill" width={16} />
-                {fShortenNumber(totalComments)}
+                {fShortenNumber(post.totalComments)}
               </Box>
 
               <Box display="flex" alignItems="center" gap={0.5}>
                 <Iconify icon="solar:eye-bold" width={16} />
-                {fShortenNumber(totalViews)}
+                {fShortenNumber(post.totalViews)}
               </Box>
 
               <Box display="flex" alignItems="center" gap={0.5}>
                 <Iconify icon="solar:share-bold" width={16} />
-                {fShortenNumber(totalShares)}
+                {fShortenNumber(post.totalShares)}
               </Box>
             </Box>
           </Box>
@@ -122,11 +108,11 @@ export function PostItemHorizontal({ post }: Props) {
           }}
         >
           <Avatar
-            alt={author.name}
-            src={author.avatarUrl}
+            alt={post.author.name}
+            src={post.author.avatarUrl}
             sx={{ top: 16, right: 16, zIndex: 9, position: 'absolute' }}
           />
-          <Image alt={title} src={coverUrl} sx={{ height: 1, borderRadius: 1.5 }} />
+          <Image alt={post.title} src={post.coverUrl} sx={{ height: 1, borderRadius: 1.5 }} />
         </Box>
       </Card>
 
@@ -140,7 +126,7 @@ export function PostItemHorizontal({ post }: Props) {
           <MenuItem
             onClick={() => {
               popover.onClose();
-              router.push(paths.dashboard.post.details(title));
+              router.push(paths.dashboard.post.details(post.title));
             }}
           >
             <Iconify icon="solar:eye-bold" />
@@ -150,7 +136,7 @@ export function PostItemHorizontal({ post }: Props) {
           <MenuItem
             onClick={() => {
               popover.onClose();
-              router.push(paths.dashboard.post.edit(title));
+              router.push(paths.dashboard.post.edit(post.title));
             }}
           >
             <Iconify icon="solar:pen-bold" />

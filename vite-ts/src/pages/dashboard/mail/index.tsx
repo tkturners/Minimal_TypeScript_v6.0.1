@@ -6,7 +6,7 @@ import { MailView } from 'src/sections/mail/view';
 
 // ----------------------------------------------------------------------
 
-const metadata = { title: `Mail | Dashboard - ${CONFIG.site.name}` };
+const metadata = { title: `Mail | Dashboard - ${CONFIG.appName}` };
 
 export default function Page() {
   return (

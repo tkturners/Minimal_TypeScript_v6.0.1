@@ -2,11 +2,11 @@ import { Helmet } from 'react-helmet-async';
 
 import { CONFIG } from 'src/config-global';
 
-import { AmplifyUpdatePasswordView } from 'src/sections/auth/amplify';
+import { AmplifyUpdatePasswordView } from 'src/auth/view/amplify';
 
 // ----------------------------------------------------------------------
 
-const metadata = { title: `Update password | Amplify - ${CONFIG.site.name}` };
+const metadata = { title: `Update password | Amplify - ${CONFIG.appName}` };
 
 export default function Page() {
   return (

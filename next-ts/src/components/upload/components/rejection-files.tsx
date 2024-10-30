@@ -1,4 +1,5 @@
 import type { FileRejection } from 'react-dropzone';
+import type { PaperProps } from '@mui/material/Paper';
 
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -8,15 +9,16 @@ import { fData } from 'src/utils/format-number';
 
 import { varAlpha } from 'src/theme/styles';
 
+import { uploadClasses } from '../classes';
 import { fileData } from '../../file-thumbnail';
 
 // ----------------------------------------------------------------------
 
-type Props = {
+type RejectionFilesProps = PaperProps & {
   files: FileRejection[];
 };
 
-export function RejectionFiles({ files }: Props) {
+export function RejectionFiles({ files, sx, className, ...other }: RejectionFilesProps) {
   if (!files.length) {
     return null;
   }
@@ -24,6 +26,7 @@ export function RejectionFiles({ files }: Props) {
   return (
     <Paper
       variant="outlined"
+      className={uploadClasses.uploadRejectionFiles.concat(className ? ` ${className}` : '')}
       sx={{
         py: 1,
         px: 2,
@@ -32,7 +35,9 @@ export function RejectionFiles({ files }: Props) {
         borderStyle: 'dashed',
         borderColor: 'error.main',
         bgcolor: (theme) => varAlpha(theme.vars.palette.error.mainChannel, 0.08),
+        ...sx,
       }}
+      {...other}
     >
       {files.map(({ file, errors }) => {
         const { path, size } = fileData(file);

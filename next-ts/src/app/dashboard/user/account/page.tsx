@@ -4,7 +4,7 @@ import { AccountView } from 'src/sections/account/view';
 
 // ----------------------------------------------------------------------
 
-export const metadata = { title: `Account settings | Dashboard - ${CONFIG.site.name}` };
+export const metadata = { title: `Account settings | Dashboard - ${CONFIG.appName}` };
 
 export default function Page() {
   return <AccountView />;

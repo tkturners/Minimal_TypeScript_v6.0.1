@@ -6,7 +6,7 @@ import { MarkdownView } from 'src/sections/_examples/extra/markdown-view';
 
 // ----------------------------------------------------------------------
 
-const metadata = { title: `Markdown | Components - ${CONFIG.site.name}` };
+const metadata = { title: `Markdown | Components - ${CONFIG.appName}` };
 
 export default function Page() {
   return (

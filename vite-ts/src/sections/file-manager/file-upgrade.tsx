@@ -4,7 +4,6 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 
 import { CONFIG } from 'src/config-global';
@@ -14,8 +13,6 @@ import { SvgColor } from 'src/components/svg-color';
 // ----------------------------------------------------------------------
 
 export function FileUpgrade({ sx, ...other }: CardProps) {
-  const theme = useTheme();
-
   return (
     <Card
       sx={{
@@ -23,7 +20,8 @@ export function FileUpgrade({ sx, ...other }: CardProps) {
         display: 'flex',
         alignItems: 'center',
         color: 'common.white',
-        background: `radial-gradient(70% 70% at 0% 0%, ${theme.vars.palette.grey[700]} 0%, ${theme.vars.palette.common.black} 100%)`,
+        background: (theme) =>
+          `radial-gradient(70% 70% at 0% 0%, ${theme.vars.palette.grey[700]} 0%, ${theme.vars.palette.common.black} 100%)`,
         ...sx,
       }}
       {...other}
@@ -31,7 +29,7 @@ export function FileUpgrade({ sx, ...other }: CardProps) {
       <Box
         component="img"
         alt="Upgrade Illustration"
-        src={`${CONFIG.site.basePath}/assets/illustrations/illustration-upgrade.webp`}
+        src={`${CONFIG.assetsDir}/assets/illustrations/illustration-upgrade.webp`}
         sx={{
           right: 16,
           zIndex: 9,
@@ -42,7 +40,7 @@ export function FileUpgrade({ sx, ...other }: CardProps) {
       />
 
       <SvgColor
-        src={`${CONFIG.site.basePath}/assets/background/shape-circle-1.svg`}
+        src={`${CONFIG.assetsDir}/assets/background/shape-circle-1.svg`}
         sx={{
           zIndex: 8,
           width: 200,

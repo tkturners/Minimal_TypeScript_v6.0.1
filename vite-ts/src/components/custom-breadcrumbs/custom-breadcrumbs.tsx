@@ -1,6 +1,5 @@
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
-import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 
@@ -56,8 +55,8 @@ export function CustomBreadcrumbs({
   );
 
   return (
-    <Stack spacing={2} sx={sx}>
-      <Stack direction="row" alignItems="center">
+    <Box gap={2} display="flex" flexDirection="column" sx={sx} {...other}>
+      <Box display="flex" alignItems="center">
         <Box sx={{ flexGrow: 1 }}>
           {heading && renderHeading}
 
@@ -65,10 +64,10 @@ export function CustomBreadcrumbs({
         </Box>
 
         {action && renderAction}
-      </Stack>
+      </Box>
 
       {!!moreLink && renderMoreLink}
-    </Stack>
+    </Box>
   );
 }
 

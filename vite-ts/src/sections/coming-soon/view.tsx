@@ -13,13 +13,12 @@ import { useCountdownDate } from 'src/hooks/use-countdown';
 import { _socials } from 'src/_mock';
 import { varAlpha } from 'src/theme/styles';
 import { ComingSoonIllustration } from 'src/assets/illustrations';
-
-import { SocialIcon } from 'src/components/iconify';
+import { TwitterIcon, FacebookIcon, LinkedinIcon, InstagramIcon } from 'src/assets/icons';
 
 // ----------------------------------------------------------------------
 
 export function ComingSoonView() {
-  const countdown = useCountdownDate(new Date('08/08/2025 21:30'));
+  const countdown = useCountdownDate(new Date('2025-08-20 20:30'));
 
   return (
     <Container>
@@ -74,13 +73,16 @@ export function ComingSoonView() {
         sx={{ my: 5 }}
       />
 
-      <Stack spacing={1} alignItems="center" justifyContent="center" direction="row">
+      <Box gap={1} display="flex" justifyContent="center">
         {_socials.map((social) => (
-          <IconButton key={social.name}>
-            <SocialIcon icon={social.name} />
+          <IconButton key={social.label} color="inherit">
+            {social.value === 'facebook' && <FacebookIcon />}
+            {social.value === 'instagram' && <InstagramIcon />}
+            {social.value === 'linkedin' && <LinkedinIcon />}
+            {social.value === 'twitter' && <TwitterIcon />}
           </IconButton>
         ))}
-      </Stack>
+      </Box>
     </Container>
   );
 }

@@ -2,7 +2,6 @@ import type { IChatParticipant, IChatConversation } from 'src/types/chat';
 
 import Stack from '@mui/material/Stack';
 import Drawer from '@mui/material/Drawer';
-import { useTheme } from '@mui/material/styles';
 
 import { Scrollbar } from 'src/components/scrollbar';
 
@@ -27,11 +26,9 @@ type Props = {
 };
 
 export function ChatRoom({ collapseNav, participants, messages, loading }: Props) {
-  const theme = useTheme();
-
   const { collapseDesktop, openMobile, onCloseMobile } = collapseNav;
 
-  const group = participants.length > 1;
+  const isGroup = participants.length > 1;
 
   const attachments = messages.map((msg) => msg.attachments).flat(1) || [];
 
@@ -40,7 +37,7 @@ export function ChatRoom({ collapseNav, participants, messages, loading }: Props
   ) : (
     <Scrollbar>
       <div>
-        {group ? (
+        {isGroup ? (
           <ChatRoomGroup participants={participants} />
         ) : (
           <ChatRoomSingle participant={participants[0]} />
@@ -59,10 +56,11 @@ export function ChatRoom({ collapseNav, participants, messages, loading }: Props
           flex: '1 1 auto',
           width: NAV_WIDTH,
           display: { xs: 'none', lg: 'flex' },
-          borderLeft: `solid 1px ${theme.vars.palette.divider}`,
-          transition: theme.transitions.create(['width'], {
-            duration: theme.transitions.duration.shorter,
-          }),
+          borderLeft: (theme) => `solid 1px ${theme.vars.palette.divider}`,
+          transition: (theme) =>
+            theme.transitions.create(['width'], {
+              duration: theme.transitions.duration.shorter,
+            }),
           ...(collapseDesktop && { width: 0 }),
         }}
       >

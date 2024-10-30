@@ -5,7 +5,7 @@ import { UserEditView } from 'src/sections/user/view';
 
 // ----------------------------------------------------------------------
 
-export const metadata = { title: `User edit | Dashboard - ${CONFIG.site.name}` };
+export const metadata = { title: `User edit | Dashboard - ${CONFIG.appName}` };
 
 type Props = {
   params: { id: string };

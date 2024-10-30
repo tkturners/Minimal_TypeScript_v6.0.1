@@ -1,12 +1,10 @@
 import type { BoxProps } from '@mui/material/Box';
-import type { StackProps } from '@mui/material/Stack';
 import type { MotionProps, MotionValue } from 'framer-motion';
 
 import { useRef, useState, forwardRef } from 'react';
 import { m, useSpring, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
 
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
@@ -18,6 +16,7 @@ import { paths } from 'src/routes/paths';
 import { useClientRect } from 'src/hooks/use-client-rect';
 
 import { CONFIG } from 'src/config-global';
+import { stylesMode } from 'src/theme/styles';
 
 import { Iconify } from 'src/components/iconify';
 import { varFade, MotionViewport } from 'src/components/animate';
@@ -27,7 +26,7 @@ import { FloatLine, FloatTriangleLeftIcon } from './components/svg-elements';
 
 // ----------------------------------------------------------------------
 
-export function HomeHugePackElements({ sx, ...other }: StackProps) {
+export function HomeHugePackElements({ sx, ...other }: BoxProps) {
   const renderLines = (
     <>
       <FloatTriangleLeftIcon sx={{ top: 80, left: 80, opacity: 0.4 }} />
@@ -36,7 +35,7 @@ export function HomeHugePackElements({ sx, ...other }: StackProps) {
   );
 
   return (
-    <Stack component="section" sx={{ pt: 10, position: 'relative', ...sx }} {...other}>
+    <Box component="section" sx={{ pt: 10, position: 'relative', ...sx }} {...other}>
       <MotionViewport>
         {renderLines}
 
@@ -85,7 +84,7 @@ export function HomeHugePackElements({ sx, ...other }: StackProps) {
       </MotionViewport>
 
       <ScrollContent />
-    </Stack>
+    </Box>
   );
 }
 
@@ -182,7 +181,10 @@ function ScrollContent() {
             sx={{
               height: { xs: 160, md: 180 },
               width: { xs: '600%', md: '400%' },
-              backgroundImage: `url(${CONFIG.site.basePath}/assets/images/home/bundle-${theme.palette.mode}-1.webp)`,
+              backgroundImage: `url(${CONFIG.assetsDir}/assets/images/home/bundle-light-1.webp)`,
+              [stylesMode.dark]: {
+                backgroundImage: `url(${CONFIG.assetsDir}/assets/images/home/bundle-dark-1.webp)`,
+              },
             }}
           />
           <StyledItem
@@ -190,7 +192,10 @@ function ScrollContent() {
             sx={{
               height: { xs: 400, md: 480 },
               width: { xs: '600%', md: '400%' },
-              backgroundImage: `url(${CONFIG.site.basePath}/assets/images/home/bundle-${theme.palette.mode}-2.webp)`,
+              backgroundImage: `url(${CONFIG.assetsDir}/assets/images/home/bundle-light-2.webp)`,
+              [stylesMode.dark]: {
+                backgroundImage: `url(${CONFIG.assetsDir}/assets/images/home/bundle-dark-2.webp)`,
+              },
             }}
           />
         </StyledContent>

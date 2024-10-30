@@ -7,7 +7,6 @@ export type ScrollbarProps = SimplebarProps & {
   sx?: SxProps<Theme>;
   children?: React.ReactNode;
   fillContent?: boolean;
-  naturalScroll?: boolean;
   slotProps?: {
     wrapper?: SxProps<Theme>;
     contentWrapper?: SxProps<Theme>;

@@ -5,21 +5,16 @@ import packageJson from '../package.json';
 // ----------------------------------------------------------------------
 
 export type ConfigValue = {
-  site: {
-    name: string;
-    serverUrl: string;
-    assetURL: string;
-    basePath: string;
-    version: string;
-  };
+  appName: string;
+  appVersion: string;
+  serverUrl: string;
+  assetsDir: string;
   auth: {
     method: 'jwt' | 'amplify' | 'firebase' | 'supabase' | 'auth0';
     skip: boolean;
     redirectPath: string;
   };
-  mapbox: {
-    apiKey: string;
-  };
+  mapboxApiKey: string;
   firebase: {
     appId: string;
     apiKey: string;
@@ -37,13 +32,10 @@ export type ConfigValue = {
 // ----------------------------------------------------------------------
 
 export const CONFIG: ConfigValue = {
-  site: {
-    name: 'Minimals',
-    serverUrl: import.meta.env.VITE_SERVER_URL ?? '',
-    assetURL: import.meta.env.VITE_ASSET_URL ?? '',
-    basePath: import.meta.env.VITE_BASE_PATH ?? '',
-    version: packageJson.version,
-  },
+  appName: 'Minimal UI',
+  appVersion: packageJson.version,
+  serverUrl: import.meta.env.VITE_SERVER_URL ?? '',
+  assetsDir: import.meta.env.VITE_ASSETS_DIR ?? '',
   /**
    * Auth
    * @method jwt | amplify | firebase | supabase | auth0
@@ -54,11 +46,9 @@ export const CONFIG: ConfigValue = {
     redirectPath: paths.dashboard.root,
   },
   /**
-   * APMapboxI
+   * Mapbox
    */
-  mapbox: {
-    apiKey: import.meta.env.VITE_MAPBOX_API_KEY ?? '',
-  },
+  mapboxApiKey: import.meta.env.VITE_MAPBOX_API_KEY ?? '',
   /**
    * Firebase
    */

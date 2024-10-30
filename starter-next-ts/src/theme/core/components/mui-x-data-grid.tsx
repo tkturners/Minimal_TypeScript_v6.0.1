@@ -78,17 +78,53 @@ const MuiDataGrid: Components<Theme>['MuiDataGrid'] = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    root: ({ theme }) => ({
-      '--unstable_DataGrid-radius': 0,
-      '--DataGrid-rowBorderColor': theme.vars.palette.divider,
-      '--DataGrid-containerBackground': theme.vars.palette.background.neutral,
-      '--unstable_DataGrid-headWeight': theme.typography.fontWeightSemiBold,
-      borderWidth: 0,
-      scrollbarWidth: 'thin',
-      scrollbarColor: `${varAlpha(theme.vars.palette.text.disabledChannel, 0.4)} ${varAlpha(theme.vars.palette.text.disabledChannel, 0.08)}`,
-      '& .MuiDataGrid-filler > div': { borderTopStyle: 'dashed' },
-      '& .MuiDataGrid-topContainer::after': { height: 0 },
-    }),
+    root: ({ theme }) => {
+      const styles = {
+        pinnedCell: {
+          common: {
+            backgroundColor: theme.palette.background.default,
+            '&::after': {
+              backgroundColor: theme.vars.palette.action.hover,
+            },
+          },
+          selected: {
+            backgroundColor: theme.palette.background.default,
+            '&::after': {
+              backgroundColor: varAlpha(
+                theme.vars.palette.primary.mainChannel,
+                theme.vars.palette.action.selectedOpacity
+              ),
+            },
+          },
+        },
+      };
+
+      return {
+        '--unstable_DataGrid-radius': 0,
+        '--DataGrid-rowBorderColor': theme.vars.palette.divider,
+        '--DataGrid-containerBackground': theme.vars.palette.background.neutral,
+        '--unstable_DataGrid-headWeight': theme.typography.fontWeightSemiBold,
+        borderWidth: 0,
+        scrollbarWidth: 'thin',
+        scrollbarColor: `${varAlpha(theme.vars.palette.text.disabledChannel, 0.4)} ${varAlpha(theme.vars.palette.text.disabledChannel, 0.08)}`,
+        '& .MuiDataGrid-filler > div': { borderTopStyle: 'dashed' },
+        '& .MuiDataGrid-topContainer::after': { height: 0 },
+        '& .MuiDataGrid-virtualScrollerContent': {
+          '& .MuiDataGrid-row': {
+            '&:hover': {
+              '& .MuiDataGrid-cell--pinnedLeft, & .MuiDataGrid-cell--pinnedRight':
+                styles.pinnedCell.common,
+            },
+            '&.Mui-selected': {
+              '& .MuiDataGrid-cell--pinnedLeft, & .MuiDataGrid-cell--pinnedRight':
+                styles.pinnedCell.selected,
+              '&:hover .MuiDataGrid-cell--pinnedLeft, &:hover .MuiDataGrid-cell--pinnedRight':
+                styles.pinnedCell.selected,
+            },
+          },
+        },
+      };
+    },
     withBorderColor: { borderColor: 'var(--DataGrid-rowBorderColor)' },
     /**
      * Column
@@ -107,6 +143,17 @@ const MuiDataGrid: Components<Theme>['MuiDataGrid'] = {
       '&--editing': {
         boxShadow: 'none',
         backgroundColor: varAlpha(theme.vars.palette.primary.mainChannel, 0.08),
+      },
+      '&--pinnedLeft, &--pinnedRight': {
+        '&::after': {
+          top: 0,
+          left: 0,
+          zIndex: -1,
+          content: "''",
+          width: '100%',
+          height: '100%',
+          position: 'absolute',
+        },
       },
     }),
     /**

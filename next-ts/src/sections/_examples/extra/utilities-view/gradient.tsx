@@ -39,7 +39,7 @@ export function Gradient() {
           sx={{
             ...bgGradient({
               color: `135deg, ${varAlpha(theme.vars.palette.warning.lighterChannel, 0.8)}, ${varAlpha(theme.vars.palette.primary.mainChannel, 0.8)}`,
-              imgUrl: `${CONFIG.site.basePath}/assets/background/background-3.webp`,
+              imgUrl: `${CONFIG.assetsDir}/assets/background/background-3.webp`,
             }),
             width: 1,
             height: 160,

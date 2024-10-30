@@ -1,3 +1,5 @@
+import type { BoxProps } from '@mui/material/Box';
+
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
 
@@ -22,7 +24,7 @@ const Map = dynamic(() => import('src/components/map').then((mod) => mod.Map), {
 
 // ----------------------------------------------------------------------
 
-type ContactMapProps = {
+type ContactMapProps = BoxProps & {
   contacts: {
     latlng: number[];
     address: string;
@@ -30,12 +32,10 @@ type ContactMapProps = {
   }[];
 };
 
-export function ContactMap({ contacts }: ContactMapProps) {
+export function ContactMap({ contacts, sx, ...other }: ContactMapProps) {
   const theme = useTheme();
 
   const [popupInfo, setPopupInfo] = useState<ContactMapProps['contacts'][0] | null>(null);
-
-  const lightMode = theme.palette.mode === 'light';
 
   return (
     <Box
@@ -45,11 +45,13 @@ export function ContactMap({ contacts }: ContactMapProps) {
         overflow: 'hidden',
         position: 'relative',
         height: { xs: 320, md: 560 },
+        ...sx,
       }}
+      {...other}
     >
       <Map
         initialViewState={{ latitude: 12, longitude: 42, zoom: 2 }}
-        mapStyle={`mapbox://styles/mapbox/${lightMode ? 'light' : 'dark'}-v10`}
+        mapStyle={`mapbox://styles/mapbox/${theme.palette.mode === 'light' ? 'light' : 'dark'}-v10`}
       >
         <MapControl hideGeolocate />
 

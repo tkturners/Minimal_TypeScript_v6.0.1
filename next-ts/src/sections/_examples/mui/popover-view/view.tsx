@@ -78,7 +78,7 @@ export function PopoverView() {
               slotProps={{ arrow: { placement: 'top-center' } }}
             >
               <Box sx={{ p: 2, maxWidth: 280 }}>
-                <Typography variant="subtitle1" gutterBottom>
+                <Typography variant="subtitle1" sx={{ mb: 1 }}>
                   Etiam feugiat lorem non metus
                 </Typography>
                 <Typography variant="body2" sx={{ color: 'text.secondary' }}>
@@ -112,7 +112,7 @@ export function PopoverView() {
               sx={{ pointerEvents: 'none' }}
             >
               <Box sx={{ p: 2, maxWidth: 280 }}>
-                <Typography variant="subtitle1" gutterBottom>
+                <Typography variant="subtitle1" sx={{ mb: 1 }}>
                   Etiam feugiat lorem non metus
                 </Typography>
                 <Typography variant="body2" sx={{ color: 'text.secondary' }}>
@@ -162,7 +162,7 @@ export function PopoverView() {
             slotProps={{ arrow: { placement: arrow } }}
           >
             <Box sx={{ p: 2, maxWidth: 280 }}>
-              <Typography variant="subtitle1" gutterBottom>
+              <Typography variant="subtitle1" sx={{ mb: 1 }}>
                 Etiam feugiat lorem non metus
               </Typography>
               <Typography variant="body2" sx={{ color: 'text.secondary' }}>

@@ -7,8 +7,9 @@ export type EditorProps = Partial<EditorOptions> & {
   value?: string;
   error?: boolean;
   fullItem?: boolean;
-  resetValue?: boolean;
+  className?: string;
   sx?: SxProps<Theme>;
+  resetValue?: boolean;
   placeholder?: string;
   helperText?: React.ReactNode;
   onChange?: (value: string) => void;

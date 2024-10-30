@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 
 import { withLoadingProps } from 'src/utils/with-loading-props';
 
+import { chartClasses } from './classes';
 import { ChartLoading } from './chart-loading';
 
 import type { ChartProps, ChartBaseProps, ChartLoadingProps } from './types';
@@ -33,6 +34,7 @@ export function Chart({
   series,
   height,
   options,
+  className,
   loadingProps,
   width = '100%',
   ...other
@@ -40,6 +42,7 @@ export function Chart({
   return (
     <Box
       dir="ltr"
+      className={chartClasses.root.concat(className ? ` ${className}` : '')}
       sx={{
         width,
         height,

@@ -73,15 +73,13 @@ export function NavAPI() {
 // ----------------------------------------------------------------------
 
 const NAV_ICONS = {
-  'icon.landing': <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-dashboard.svg`} />,
-  'icon.services': (
-    <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-analytics.svg`} />
-  ),
-  'icon.blog': <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-blog.svg`} />,
-  'icon.about': <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-user.svg`} />,
-  'icon.tour': <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-tour.svg`} />,
-  'icon.menu': <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-menu-item.svg`} />,
-  'icon.level2a': <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-chat.svg`} />,
-  'icon.level2b': <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-mail.svg`} />,
-  'icon.level2c': <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-calendar.svg`} />,
+  'icon.landing': <SvgColor src={`${CONFIG.assetsDir}/assets/icons/navbar/ic-dashboard.svg`} />,
+  'icon.services': <SvgColor src={`${CONFIG.assetsDir}/assets/icons/navbar/ic-analytics.svg`} />,
+  'icon.blog': <SvgColor src={`${CONFIG.assetsDir}/assets/icons/navbar/ic-blog.svg`} />,
+  'icon.about': <SvgColor src={`${CONFIG.assetsDir}/assets/icons/navbar/ic-user.svg`} />,
+  'icon.tour': <SvgColor src={`${CONFIG.assetsDir}/assets/icons/navbar/ic-tour.svg`} />,
+  'icon.menu': <SvgColor src={`${CONFIG.assetsDir}/assets/icons/navbar/ic-menu-item.svg`} />,
+  'icon.level2a': <SvgColor src={`${CONFIG.assetsDir}/assets/icons/navbar/ic-chat.svg`} />,
+  'icon.level2b': <SvgColor src={`${CONFIG.assetsDir}/assets/icons/navbar/ic-mail.svg`} />,
+  'icon.level2c': <SvgColor src={`${CONFIG.assetsDir}/assets/icons/navbar/ic-calendar.svg`} />,
 };

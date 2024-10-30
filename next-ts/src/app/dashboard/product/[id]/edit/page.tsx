@@ -6,7 +6,7 @@ import { ProductEditView } from 'src/sections/product/view';
 
 // ----------------------------------------------------------------------
 
-export const metadata = { title: `Product edit | Dashboard - ${CONFIG.site.name}` };
+export const metadata = { title: `Product edit | Dashboard - ${CONFIG.appName}` };
 
 type Props = {
   params: { id: string };

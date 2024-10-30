@@ -8,6 +8,7 @@ import ClickAwayListener from '@mui/material/ClickAwayListener';
 import InputBase, { inputBaseClasses } from '@mui/material/InputBase';
 
 import { uuidv4 } from 'src/utils/uuidv4';
+import { fAdd, today } from 'src/utils/format-time';
 
 import { _mock } from 'src/_mock';
 
@@ -33,7 +34,7 @@ export function KanbanTaskAdd({ status, openAddTask, onAddTask, onCloseAddTask }
       labels: [],
       comments: [],
       assignee: [],
-      due: [null, null],
+      due: [today(), fAdd({ days: 1 })],
       reporter: { id: _mock.id(16), name: _mock.fullName(16), avatarUrl: _mock.image.avatar(16) },
     }),
     [status, taskName]

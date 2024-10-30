@@ -63,11 +63,7 @@ export function ControlPanel({
 
       <br />
 
-      <Typography
-        gutterBottom
-        variant="body2"
-        sx={{ color: allDays ? 'text.disabled' : 'common.white' }}
-      >
+      <Typography variant="body2" sx={{ mb: 1, color: allDays ? 'text.disabled' : 'common.white' }}>
         Each day: {fDate(selectedTime)}
       </Typography>
 

@@ -12,7 +12,7 @@ import { Iconify } from 'src/components/iconify';
 
 import { useMockedUser } from 'src/auth/hooks';
 
-import { useMessage } from './hooks/use-message';
+import { getMessage } from './utils/get-message';
 
 // ----------------------------------------------------------------------
 
@@ -25,7 +25,7 @@ type Props = {
 export function ChatMessageItem({ message, participants, onOpenLightbox }: Props) {
   const { user } = useMockedUser();
 
-  const { me, senderDetails, hasImage } = useMessage({
+  const { me, senderDetails, hasImage } = getMessage({
     message,
     participants,
     currentUserId: `${user?.id}`,
@@ -110,6 +110,10 @@ export function ChatMessageItem({ message, participants, onOpenLightbox }: Props
       </IconButton>
     </Stack>
   );
+
+  if (!message.body) {
+    return null;
+  }
 
   return (
     <Stack direction="row" justifyContent={me ? 'flex-end' : 'unset'} sx={{ mb: 5 }}>

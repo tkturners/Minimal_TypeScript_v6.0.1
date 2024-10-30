@@ -6,7 +6,6 @@ import { m } from 'framer-motion';
 
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 
 import { varAlpha, textGradient } from 'src/theme/styles';
@@ -41,8 +40,6 @@ export function SectionTitle({
   description,
   ...other
 }: Props) {
-  const theme = useTheme();
-
   return (
     <Stack spacing={3} {...other}>
       {caption && (
@@ -62,13 +59,13 @@ export function SectionTitle({
         {`${title} `}
         <Box
           component="span"
-          sx={{
+          sx={(theme) => ({
             opacity: 0.4,
             display: 'inline-block',
             ...textGradient(
               `to right, ${theme.vars.palette.text.primary}, ${varAlpha(theme.vars.palette.text.primaryChannel, 0.2)}`
             ),
-          }}
+          })}
         >
           {txtGradient}
         </Box>

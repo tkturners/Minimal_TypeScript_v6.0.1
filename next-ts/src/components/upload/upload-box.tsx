@@ -5,12 +5,13 @@ import Box from '@mui/material/Box';
 import { varAlpha } from 'src/theme/styles';
 
 import { Iconify } from '../iconify';
+import { uploadClasses } from './classes';
 
 import type { UploadProps } from './types';
 
 // ----------------------------------------------------------------------
 
-export function UploadBox({ placeholder, error, disabled, sx, ...other }: UploadProps) {
+export function UploadBox({ placeholder, error, disabled, className, sx, ...other }: UploadProps) {
   const { getRootProps, getInputProps, isDragActive, isDragReject } = useDropzone({
     disabled,
     ...other,
@@ -21,6 +22,7 @@ export function UploadBox({ placeholder, error, disabled, sx, ...other }: Upload
   return (
     <Box
       {...getRootProps()}
+      className={uploadClasses.uploadBox.concat(className ? ` ${className}` : '')}
       sx={{
         width: 64,
         height: 64,

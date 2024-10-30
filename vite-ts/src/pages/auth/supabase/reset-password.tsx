@@ -2,11 +2,11 @@ import { Helmet } from 'react-helmet-async';
 
 import { CONFIG } from 'src/config-global';
 
-import { SupabaseResetPasswordView } from 'src/sections/auth/supabase';
+import { SupabaseResetPasswordView } from 'src/auth/view/supabase';
 
 // ----------------------------------------------------------------------
 
-const metadata = { title: `Reset password | Supabase - ${CONFIG.site.name}` };
+const metadata = { title: `Reset password | Supabase - ${CONFIG.appName}` };
 
 export default function Page() {
   return (

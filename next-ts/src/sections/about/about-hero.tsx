@@ -1,3 +1,5 @@
+import type { BoxProps } from '@mui/material/Box';
+
 import { m } from 'framer-motion';
 
 import Box from '@mui/material/Box';
@@ -10,9 +12,10 @@ import { varFade, AnimateText, MotionContainer, animateTextClasses } from 'src/c
 
 // ----------------------------------------------------------------------
 
-export function AboutHero() {
+export function AboutHero({ sx, ...other }: BoxProps) {
   return (
     <Box
+      component="section"
       sx={{
         height: { md: 560 },
         py: { xs: 10, md: 0 },
@@ -20,8 +23,10 @@ export function AboutHero() {
         position: 'relative',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        backgroundImage: `url(${CONFIG.site.basePath}/assets/background/overlay.svg), url(${CONFIG.site.basePath}/assets/images/about/hero.webp)`,
+        backgroundImage: `url(${CONFIG.assetsDir}/assets/background/overlay.svg), url(${CONFIG.assetsDir}/assets/images/about/hero.webp)`,
+        ...sx,
       }}
+      {...other}
     >
       <Container component={MotionContainer}>
         <Box

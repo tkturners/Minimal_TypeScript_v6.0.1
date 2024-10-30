@@ -1,12 +1,10 @@
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
-import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import CardContent from '@mui/material/CardContent';
 
 import { maxLine, varAlpha, bgGradient } from 'src/theme/styles';
 
-import { Image } from 'src/components/image';
 import { Iconify } from 'src/components/iconify';
 import {
   Carousel,
@@ -67,16 +65,19 @@ type CarouselItemProps = {
 };
 
 function CarouselItem({ item, index }: CarouselItemProps) {
-  const theme = useTheme();
-
   return (
     <Box sx={{ borderRadius: 2, overflow: 'hidden', position: 'relative' }}>
       <IndexLabel index={index + 1} />
 
-      <Image visibleByDefault alt={item.title} src={item.coverUrl} ratio="3/4" />
+      <Box
+        component="img"
+        alt={item.title}
+        src={item.coverUrl}
+        sx={{ aspectRatio: '3/4', objectFit: 'cover' }}
+      />
 
       <CardContent
-        sx={{
+        sx={(theme) => ({
           ...bgGradient({
             color: `to top, ${theme.vars.palette.grey[900]} 25%, ${varAlpha(theme.vars.palette.grey['900Channel'], 0)} 100%`,
           }),
@@ -86,7 +87,7 @@ function CarouselItem({ item, index }: CarouselItemProps) {
           textAlign: 'left',
           position: 'absolute',
           color: 'common.white',
-        }}
+        })}
       >
         <Typography variant="h5" sx={{ ...maxLine({ line: 2 }), mb: 2 }}>
           {item.title}
@@ -95,16 +96,17 @@ function CarouselItem({ item, index }: CarouselItemProps) {
         <Link
           color="inherit"
           variant="overline"
-          sx={{
+          sx={(theme) => ({
+            gap: 1,
             opacity: 0.72,
             alignItems: 'center',
             display: 'inline-flex',
             transition: theme.transitions.create(['opacity']),
             '&:hover': { opacity: 1 },
-          }}
+          })}
         >
-          learn More
-          <Iconify icon="eva:arrow-forward-fill" width={16} sx={{ ml: 1 }} />
+          Learn more
+          <Iconify width={16} icon="eva:arrow-forward-fill" />
         </Link>
       </CardContent>
     </Box>

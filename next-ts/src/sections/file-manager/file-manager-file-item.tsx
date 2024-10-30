@@ -12,7 +12,6 @@ import Divider from '@mui/material/Divider';
 import MenuList from '@mui/material/MenuList';
 import MenuItem from '@mui/material/MenuItem';
 import Checkbox from '@mui/material/Checkbox';
-import { useTheme } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import AvatarGroup, { avatarGroupClasses } from '@mui/material/AvatarGroup';
@@ -44,8 +43,6 @@ type Props = CardProps & {
 };
 
 export function FileManagerFileItem({ file, selected, onSelect, onDelete, sx, ...other }: Props) {
-  const theme = useTheme();
-
   const share = useBoolean();
 
   const confirm = useBoolean();
@@ -114,12 +111,12 @@ export function FileManagerFileItem({ file, selected, onSelect, onDelete, sx, ..
       <Typography
         variant="subtitle2"
         onClick={details.onTrue}
-        sx={{
+        sx={(theme) => ({
           ...maxLine({ line: 2, persistent: theme.typography.subtitle2 }),
           mt: 2,
           mb: 0.5,
           width: 1,
-        }}
+        })}
       >
         {file.name}
       </Typography>
@@ -187,7 +184,7 @@ export function FileManagerFileItem({ file, selected, onSelect, onDelete, sx, ..
           alignItems: 'flex-start',
           ...((checkbox.value || selected) && {
             bgcolor: 'background.paper',
-            boxShadow: theme.customShadows.z20,
+            boxShadow: (theme) => theme.customShadows.z20,
           }),
           ...sx,
         }}

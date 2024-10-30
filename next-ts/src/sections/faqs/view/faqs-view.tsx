@@ -16,7 +16,7 @@ export function FaqsView() {
     <>
       <FaqsHero />
 
-      <Container sx={{ pb: 10, pt: { xs: 10, md: 15 }, position: 'relative' }}>
+      <Container component="section" sx={{ pb: 10, pt: { xs: 10, md: 15 }, position: 'relative' }}>
         <FaqsCategory />
 
         <Typography variant="h3" sx={{ my: { xs: 5, md: 10 } }}>
@@ -29,7 +29,6 @@ export function FaqsView() {
           gridTemplateColumns={{ xs: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }}
         >
           <FaqsList />
-
           <FaqsForm />
         </Box>
       </Container>

@@ -1,6 +1,5 @@
+import type { MotionProps } from 'framer-motion';
 import type { BoxProps } from '@mui/material/Box';
-import type { StackProps } from '@mui/material/Stack';
-import type { MotionValue, MotionProps } from 'framer-motion';
 import type { UseClientRectReturn } from 'src/hooks/use-client-rect';
 
 import { useRef, useState, forwardRef } from 'react';
@@ -27,7 +26,7 @@ import { FloatLine, FloatPlusIcon } from './components/svg-elements';
 
 // ----------------------------------------------------------------------
 
-export function HomeHighlightFeatures({ sx, ...other }: StackProps) {
+export function HomeHighlightFeatures({ sx, ...other }: BoxProps) {
   const containerRoot = useClientRect();
 
   const renderLines = (
@@ -39,12 +38,16 @@ export function HomeHighlightFeatures({ sx, ...other }: StackProps) {
   );
 
   return (
-    <Stack
+    <Box
       component="section"
-      sx={{ position: 'relative', pt: { xs: 10, md: 20 }, ...sx }}
+      sx={{
+        position: 'relative',
+        pt: { xs: 10, md: 20 },
+        ...sx,
+      }}
       {...other}
     >
-      <MotionViewport sx={{}}>
+      <MotionViewport>
         {renderLines}
 
         <Container>
@@ -77,7 +80,7 @@ export function HomeHighlightFeatures({ sx, ...other }: StackProps) {
       </MotionViewport>
 
       <ScrollContent containerRoot={containerRoot} />
-    </Stack>
+    </Box>
   );
 }
 
@@ -115,7 +118,10 @@ const StyledContent = styled(
   gap: theme.spacing(5),
   paddingLeft: theme.spacing(3),
   transition: theme.transitions.create(['margin-left', 'margin-top']),
-  [theme.breakpoints.up('md')]: { gap: theme.spacing(8), paddingLeft: theme.spacing(0) },
+  [theme.breakpoints.up('md')]: {
+    gap: theme.spacing(8),
+    paddingLeft: theme.spacing(0),
+  },
 }));
 
 // ----------------------------------------------------------------------
@@ -127,10 +133,10 @@ type ScrollContentProps = {
 function ScrollContent({ containerRoot }: ScrollContentProps) {
   const theme = useTheme();
 
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef(null);
   const containeRect = useClientRect(containerRef);
 
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef(null);
   const scrollRect = useClientRect(scrollRef);
 
   const { scrollYProgress } = useScroll({ target: containerRef });
@@ -143,7 +149,7 @@ function ScrollContent({ containerRoot }: ScrollContentProps) {
 
   const x = useSpring(useTransform(scrollYProgress, [0, 1], [0, scrollRange]), physics);
 
-  const background: MotionValue<string> = useTransform(
+  const background = useTransform(
     scrollYProgress,
     [0, 0.12, 0.28, 0.48, 0.58, 0.62, 0.72, 0.92],
     [
@@ -182,7 +188,7 @@ function ScrollContent({ containerRoot }: ScrollContentProps) {
 // ----------------------------------------------------------------------
 
 type ItemProps = BoxProps & {
-  item: (typeof ITEMS)[0];
+  item: (typeof ITEMS)[number];
 };
 
 function Item({ item, sx, ...other }: ItemProps) {
@@ -216,8 +222,7 @@ function Item({ item, sx, ...other }: ItemProps) {
               alt={url}
               src={url}
               sx={{
-                width: 1,
-                maxWidth: {
+                width: {
                   xs: 480,
                   sm: 640,
                   md: 800,
@@ -240,24 +245,24 @@ const ITEMS = [
     title: 'Dark mode',
     subtitle: 'A dark theme that feels easier on the eyes.',
     icon: 'solar:cloudy-moon-bold-duotone',
-    imgUrl: [`${CONFIG.site.basePath}/assets/images/home/highlight-darkmode.webp`],
+    imgUrl: [`${CONFIG.assetsDir}/assets/images/home/highlight-darkmode.webp`],
   },
   {
     title: 'Color presets',
     subtitle: 'Express your own style with just one click.',
     icon: 'solar:pallete-2-bold-duotone',
     imgUrl: [
-      `${CONFIG.site.basePath}/assets/images/home/highlight-presets-1.webp`,
-      `${CONFIG.site.basePath}/assets/images/home/highlight-presets-2.webp`,
-      `${CONFIG.site.basePath}/assets/images/home/highlight-presets-3.webp`,
-      `${CONFIG.site.basePath}/assets/images/home/highlight-presets-4.webp`,
-      `${CONFIG.site.basePath}/assets/images/home/highlight-presets-5.webp`,
+      `${CONFIG.assetsDir}/assets/images/home/highlight-presets-1.webp`,
+      `${CONFIG.assetsDir}/assets/images/home/highlight-presets-2.webp`,
+      `${CONFIG.assetsDir}/assets/images/home/highlight-presets-3.webp`,
+      `${CONFIG.assetsDir}/assets/images/home/highlight-presets-4.webp`,
+      `${CONFIG.assetsDir}/assets/images/home/highlight-presets-5.webp`,
     ],
   },
   {
     title: 'Right-to-left',
     subtitle: 'Support languages such as Arabic, Persian, and Hebrew.',
     icon: 'solar:align-right-bold-duotone',
-    imgUrl: [`${CONFIG.site.basePath}/assets/images/home/highlight-rtl.webp`],
+    imgUrl: [`${CONFIG.assetsDir}/assets/images/home/highlight-rtl.webp`],
   },
 ];

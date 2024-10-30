@@ -2,11 +2,11 @@ import { Helmet } from 'react-helmet-async';
 
 import { CONFIG } from 'src/config-global';
 
-import { SupabaseSignInView } from 'src/sections/auth/supabase';
+import { SupabaseSignInView } from 'src/auth/view/supabase';
 
 // ----------------------------------------------------------------------
 
-const metadata = { title: `Sign in | Supabase - ${CONFIG.site.name}` };
+const metadata = { title: `Sign in | Supabase - ${CONFIG.appName}` };
 
 export default function Page() {
   return (

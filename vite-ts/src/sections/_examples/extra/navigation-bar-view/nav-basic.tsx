@@ -117,19 +117,19 @@ export const NAV_ITEMS = [
   {
     title: 'Home',
     path: '#',
-    icon: <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-analytics.svg`} />,
+    icon: <SvgColor src={`${CONFIG.assetsDir}/assets/icons/navbar/ic-analytics.svg`} />,
   },
   {
     title: 'Page',
     path: '/basic/page',
     caption: 'This is the caption',
-    icon: <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-banking.svg`} />,
+    icon: <SvgColor src={`${CONFIG.assetsDir}/assets/icons/navbar/ic-banking.svg`} />,
     info: <Label color="info">+2</Label>,
     children: [
       {
         title: 'Page 1',
         path: '/basic/page/1',
-        icon: <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-booking.svg`} />,
+        icon: <SvgColor src={`${CONFIG.assetsDir}/assets/icons/navbar/ic-booking.svg`} />,
         caption: 'This is the caption',
         info: '+3',
         children: [
@@ -140,7 +140,7 @@ export const NAV_ITEMS = [
       {
         title: 'Page 2',
         path: '/basic/page/2',
-        icon: <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-chat.svg`} />,
+        icon: <SvgColor src={`${CONFIG.assetsDir}/assets/icons/navbar/ic-chat.svg`} />,
         children: [
           { title: 'Page 2.1', path: '/basic/page/2/1' },
           { title: 'Page 2.2', path: '/basic/page/2/2' },
@@ -158,24 +158,24 @@ export const NAV_ITEMS = [
       {
         title: 'Page 3',
         path: '#',
-        icon: <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-lock.svg`} />,
+        icon: <SvgColor src={`${CONFIG.assetsDir}/assets/icons/navbar/ic-lock.svg`} />,
       },
     ],
   },
   {
     title: 'Blog',
     path: '#',
-    icon: <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-mail.svg`} />,
+    icon: <SvgColor src={`${CONFIG.assetsDir}/assets/icons/navbar/ic-mail.svg`} />,
   },
   {
     title: 'Contact',
     path: '#',
-    icon: <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-user.svg`} />,
+    icon: <SvgColor src={`${CONFIG.assetsDir}/assets/icons/navbar/ic-user.svg`} />,
     disabled: true,
   },
   {
     title: 'External',
     path: 'https://www.google.com/',
-    icon: <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-tour.svg`} />,
+    icon: <SvgColor src={`${CONFIG.assetsDir}/assets/icons/navbar/ic-tour.svg`} />,
   },
 ];

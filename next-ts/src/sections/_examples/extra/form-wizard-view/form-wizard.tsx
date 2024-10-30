@@ -8,14 +8,13 @@ import Card from '@mui/material/Card';
 import Button from '@mui/material/Button';
 import LoadingButton from '@mui/lab/LoadingButton';
 
-import { toast } from 'src/components/snackbar';
 import { Form } from 'src/components/hook-form';
 
 import { Stepper, StepOne, StepTwo, StepThree, StepCompleted } from './form-steps';
 
 // ----------------------------------------------------------------------
 
-const steps = ['Step one', 'Step two', 'Step three'];
+const STEPS = ['Step one', 'Step two', 'Step three'];
 
 const StepOneSchema = zod.object({
   firstName: zod.string().min(1, { message: 'Full name is required!' }),
@@ -65,6 +64,7 @@ export function FormWizard() {
   const {
     reset,
     trigger,
+    clearErrors,
     handleSubmit,
     formState: { isSubmitting },
   } = methods;
@@ -75,17 +75,18 @@ export function FormWizard() {
         const isValid = await trigger(step);
 
         if (isValid) {
-          setActiveStep((prevActiveStep) => prevActiveStep + 1);
+          clearErrors();
+          setActiveStep((currentStep) => currentStep + 1);
         }
       } else {
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        setActiveStep((currentStep) => currentStep + 1);
       }
     },
-    [trigger]
+    [trigger, clearErrors]
   );
 
   const handleBack = useCallback(() => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    setActiveStep((currentStep) => currentStep - 1);
   }, []);
 
   const handleReset = useCallback(() => {
@@ -97,7 +98,6 @@ export function FormWizard() {
     try {
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      toast.success('Create success!');
       console.info('DATA', data);
       handleNext();
     } catch (error) {
@@ -105,12 +105,12 @@ export function FormWizard() {
     }
   });
 
-  const completedStep = activeStep === steps.length;
+  const completedStep = activeStep === STEPS.length;
 
   return (
     <Card sx={{ p: 5, width: 1, mx: 'auto', maxWidth: 720 }}>
       <Form methods={methods} onSubmit={onSubmit}>
-        <Stepper steps={steps} activeStep={activeStep} />
+        <Stepper steps={STEPS} activeStep={activeStep} />
 
         <Box
           gap={3}
@@ -137,16 +137,18 @@ export function FormWizard() {
             <Box sx={{ flex: '1 1 auto' }} />
 
             {activeStep === 0 && (
-              <Button variant="contained" onClick={() => handleNext('stepOne')}>
+              <Button type="submit" variant="contained" onClick={() => handleNext('stepOne')}>
                 Next
               </Button>
             )}
+
             {activeStep === 1 && (
-              <Button variant="contained" onClick={() => handleNext('stepTwo')}>
+              <Button type="submit" variant="contained" onClick={() => handleNext('stepTwo')}>
                 Next
               </Button>
             )}
-            {activeStep === 2 && (
+
+            {activeStep === STEPS.length - 1 && (
               <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
                 Save changes
               </LoadingButton>

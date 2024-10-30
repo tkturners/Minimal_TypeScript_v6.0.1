@@ -1,3 +1,4 @@
+import type { TextFieldProps } from '@mui/material/TextField';
 import type { AutocompleteProps } from '@mui/material/Autocomplete';
 
 import { Controller, useFormContext } from 'react-hook-form';
@@ -18,13 +19,14 @@ export type RHFAutocompleteProps = AutocompleteBaseProps & {
   placeholder?: string;
   hiddenLabel?: boolean;
   helperText?: React.ReactNode;
+  variant?: TextFieldProps['variant'];
 };
 
 export function RHFAutocomplete({
   name,
   label,
+  variant,
   helperText,
-  hiddenLabel,
   placeholder,
   ...other
 }: RHFAutocompleteProps) {
@@ -44,6 +46,7 @@ export function RHFAutocomplete({
               {...params}
               label={label}
               placeholder={placeholder}
+              variant={variant}
               error={!!error}
               helperText={error ? error?.message : helperText}
               inputProps={{ ...params.inputProps, autoComplete: 'new-password' }}

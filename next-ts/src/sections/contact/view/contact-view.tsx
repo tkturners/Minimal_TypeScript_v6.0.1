@@ -16,7 +16,7 @@ export function ContactView() {
     <>
       <ContactHero />
 
-      <Container sx={{ py: 10 }}>
+      <Container component="section" sx={{ py: 10 }}>
         <Box
           gap={10}
           display="grid"

@@ -5,7 +5,6 @@ import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Card from '@mui/material/Card';
 import Button from '@mui/material/Button';
-import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 
 import { fCurrency, fShortenNumber } from 'src/utils/format-number';
@@ -31,7 +30,7 @@ type Props = BoxProps & {
   }[];
 };
 
-export function CourseFeatured({ title, list, ...other }: Props) {
+export function CourseFeatured({ title, list, sx, ...other }: Props) {
   const carousel = useCarousel({
     align: 'start',
     slideSpacing: '24px',
@@ -39,7 +38,7 @@ export function CourseFeatured({ title, list, ...other }: Props) {
   });
 
   return (
-    <Box {...other}>
+    <Box sx={sx} {...other}>
       <Box sx={{ display: 'flex', alignItems: 'center' }}>
         <Typography variant="h6" sx={{ flexGrow: 1 }}>
           {title}
@@ -69,9 +68,7 @@ type CarouselItemProps = CardProps & {
   item: Props['list'][number];
 };
 
-function CarouselItem({ item, ...other }: CarouselItemProps) {
-  const theme = useTheme();
-
+function CarouselItem({ item, sx, ...other }: CarouselItemProps) {
   const renderImage = (
     <Box sx={{ px: 1, pt: 1 }}>
       <Image alt={item.title} src={item.coverUrl} ratio="5/4" sx={{ borderRadius: 1.5 }} />
@@ -121,7 +118,7 @@ function CarouselItem({ item, ...other }: CarouselItemProps) {
   );
 
   return (
-    <Card sx={{ width: 1 }} {...other}>
+    <Card sx={{ width: 1, ...sx }} {...other}>
       {renderImage}
 
       <Box sx={{ px: 2, py: 2.5 }}>
@@ -131,7 +128,9 @@ function CarouselItem({ item, ...other }: CarouselItemProps) {
           variant="subtitle2"
           color="inherit"
           underline="none"
-          sx={{ ...maxLine({ line: 2, persistent: theme.typography.subtitle2 }) }}
+          sx={(theme) => ({
+            ...maxLine({ line: 2, persistent: theme.typography.subtitle2 }),
+          })}
         >
           {item.title}
         </Link>

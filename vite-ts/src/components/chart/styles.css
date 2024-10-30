@@ -45,15 +45,12 @@
   .apexcharts-legend {
     padding: 0;
   }
-  .apexcharts-legend-series {
-    font-size: 0;
-  }
   .apexcharts-legend-marker {
     margin-right: 6px;
-    vertical-align: top;
-    transform: translateY(3px);
   }
   .apexcharts-legend-text {
+    margin-left: 0;
+    padding-left: 0;
     line-height: 18px;
   }
 }

@@ -31,13 +31,13 @@ export function RHFDatePicker({ name, slotProps, ...other }: RHFDatePickerProps)
           onChange={(newValue) => field.onChange(dayjs(newValue).format())}
           format={formatStr.split.date}
           slotProps={{
+            ...slotProps,
             textField: {
               fullWidth: true,
               error: !!error,
               helperText: error?.message ?? (slotProps?.textField as TextFieldProps)?.helperText,
               ...slotProps?.textField,
             },
-            ...slotProps,
           }}
           {...other}
         />

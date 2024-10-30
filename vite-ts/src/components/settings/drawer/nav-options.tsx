@@ -1,15 +1,13 @@
 import type { ButtonBaseProps } from '@mui/material/ButtonBase';
 
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
 import { useTheme } from '@mui/material/styles';
-import ButtonBase from '@mui/material/ButtonBase';
 
 import { CONFIG } from 'src/config-global';
-import { varAlpha, stylesMode } from 'src/theme/styles';
+import { varAlpha } from 'src/theme/styles';
 
-import { Block } from './styles';
-import { SvgColor, svgColorClasses } from '../../svg-color';
+import { SvgColor } from '../../svg-color';
+import { Block, BlockOption } from './styles';
 
 import type { SettingsState } from '../types';
 
@@ -35,15 +33,6 @@ type Props = {
 export function NavOptions({ options, value, onClickOption, hideNavColor, hideNavLayout }: Props) {
   const theme = useTheme();
 
-  const cssVars = {
-    '--item-radius': '12px',
-    '--item-bg': theme.vars.palette.grey[500],
-    '--item-border-color': varAlpha(theme.vars.palette.grey['500Channel'], 0.08),
-    '--item-active-color': `linear-gradient(135deg, ${theme.vars.palette.primary.light} 0%, ${theme.vars.palette.primary.main} 100%)`,
-    '--item-active-shadow-light': `-8px 8px 20px -4px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.12)}`,
-    '--item-active-shadow-dark': `-8px 8px 20px -4px ${varAlpha(theme.vars.palette.common.blackChannel, 0.12)}`,
-  };
-
   const labelStyles: React.CSSProperties = {
     display: 'block',
     lineHeight: '14px',
@@ -53,11 +42,11 @@ export function NavOptions({ options, value, onClickOption, hideNavColor, hideNa
   };
 
   const renderLayout = (
-    <div>
+    <Box gap={1.5} display="flex" flexDirection="column">
       <Box component="span" sx={labelStyles}>
         Layout
       </Box>
-      <Box gap={1.5} display="flex" sx={{ mt: 1.5 }}>
+      <Box gap={1.5} display="flex">
         {options.layouts.map((option) => (
           <LayoutOption
             key={option}
@@ -67,15 +56,15 @@ export function NavOptions({ options, value, onClickOption, hideNavColor, hideNa
           />
         ))}
       </Box>
-    </div>
+    </Box>
   );
 
   const renderColor = (
-    <div>
+    <Box gap={1.5} display="flex" flexDirection="column">
       <Box component="span" sx={labelStyles}>
         Color
       </Box>
-      <Box gap={1.5} display="flex" sx={{ mt: 1.5 }}>
+      <Box gap={1.5} display="flex">
         {options.colors.map((option) => (
           <ColorOption
             key={option}
@@ -85,11 +74,11 @@ export function NavOptions({ options, value, onClickOption, hideNavColor, hideNa
           />
         ))}
       </Box>
-    </div>
+    </Box>
   );
 
   return (
-    <Block title="Nav" tooltip="Dashboard only" sx={{ ...cssVars, gap: 2.5 }}>
+    <Block title="Nav" tooltip="Dashboard only" sx={{ gap: 2.5 }}>
       {!hideNavLayout && renderLayout}
       {!hideNavColor && renderColor}
     </Block>
@@ -104,8 +93,12 @@ type OptionProps = ButtonBaseProps & {
 };
 
 export function LayoutOption({ option, selected, sx, ...other }: OptionProps) {
-  const renderNav = () => {
-    const baseStyles = { flexShrink: 0, borderRadius: 1, bgcolor: 'var(--item-bg)' };
+  const renderIconNav = () => {
+    const baseStyles = {
+      flexShrink: 0,
+      borderRadius: 1,
+      bgcolor: 'currentColor',
+    };
 
     const circle = (
       <Box
@@ -114,12 +107,12 @@ export function LayoutOption({ option, selected, sx, ...other }: OptionProps) {
           width: 10,
           height: 10,
           opacity: 0.8,
-          ...(selected && { opacity: 1, background: 'var(--item-active-color)' }),
+          ...(selected && { opacity: 1, background: 'var(--active-color)' }),
         }}
       />
     );
 
-    const primaryItem = (
+    const primaryLine = (
       <Box
         sx={{
           ...baseStyles,
@@ -127,12 +120,12 @@ export function LayoutOption({ option, selected, sx, ...other }: OptionProps) {
           height: 4,
           opacity: 0.48,
           ...(option === 'horizontal' && { width: 16 }),
-          ...(selected && { background: 'var(--item-active-color)' }),
+          ...(selected && { background: 'var(--active-color)' }),
         }}
       />
     );
 
-    const secondaryItem = (
+    const secondaryLine = (
       <Box
         sx={{
           ...baseStyles,
@@ -141,22 +134,22 @@ export function LayoutOption({ option, selected, sx, ...other }: OptionProps) {
           maxWidth: 14,
           opacity: 0.24,
           ...(option === 'horizontal' && { maxWidth: 10 }),
-          ...(selected && { background: 'var(--item-active-color)' }),
+          ...(selected && { background: 'var(--active-color)' }),
         }}
       />
     );
 
     return (
-      <Stack
-        spacing={0.5}
+      <Box
+        gap={0.5}
         flexShrink={0}
+        display="flex"
+        flexDirection={option === 'horizontal' ? 'row' : 'column'}
         sx={{
           p: 0.75,
           width: 32,
           height: 1,
-          borderRightWidth: 1,
-          borderRightStyle: 'solid',
-          borderRightColor: 'var(--item-border-color)',
+          borderRight: 'solid 1px var(--border-color)',
           ...(option === 'mini' && {
             width: 22,
           }),
@@ -165,21 +158,18 @@ export function LayoutOption({ option, selected, sx, ...other }: OptionProps) {
             height: 22,
             borderRight: 'none',
             alignItems: 'center',
-            flexDirection: 'row',
-            borderBottomWidth: 1,
-            borderBottomStyle: 'solid',
-            borderBottomColor: 'var(--item-border-color)',
+            borderBottom: 'solid 1px var(--border-color)',
           }),
         }}
       >
         {circle}
-        {primaryItem}
-        {secondaryItem}
-      </Stack>
+        {primaryLine}
+        {secondaryLine}
+      </Box>
     );
   };
 
-  const renderContent = (
+  const renderIconContent = (
     <Box sx={{ p: 0.5, width: 1, height: 1, flexGrow: 1 }}>
       <Box
         sx={{
@@ -187,37 +177,34 @@ export function LayoutOption({ option, selected, sx, ...other }: OptionProps) {
           height: 1,
           opacity: 0.2,
           borderRadius: 0.75,
-          bgcolor: 'var(--item-bg)',
-          ...(selected && { background: 'var(--item-active-color)' }),
+          bgcolor: 'currentColor',
+          ...(selected && { background: 'var(--active-color)' }),
         }}
       />
     </Box>
   );
 
-  return (
-    <ButtonBase
-      disableRipple
-      sx={{
+  const renderIcon = (
+    <Box
+      display="flex"
+      flexDirection={option === 'horizontal' ? 'column' : 'row'}
+      sx={(theme) => ({
         width: 1,
-        height: 64,
-        borderWidth: 1,
-        borderStyle: 'solid',
-        borderRadius: 'var(--item-radius)',
-        borderColor: 'var(--item-border-color)',
-        ...(option === 'horizontal' && { flexDirection: 'column' }),
+        height: 1,
+        borderRadius: 'inherit',
+        border: `solid 1px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.08)}`,
         ...(selected && {
-          boxShadow: 'var(--item-active-shadow-light)',
-          [stylesMode.dark]: {
-            boxShadow: 'var(--item-active-shadow-dark)',
-          },
+          borderColor: 'transparent',
         }),
-        ...sx,
-      }}
-      {...other}
+      })}
     >
-      {renderNav()}
-      {renderContent}
-    </ButtonBase>
+      {renderIconNav()}
+      {renderIconContent}
+    </Box>
+  );
+
+  return (
+    <BlockOption selected={selected} icon={renderIcon} sx={{ height: 64, ...sx }} {...other} />
   );
 }
 
@@ -225,46 +212,21 @@ export function LayoutOption({ option, selected, sx, ...other }: OptionProps) {
 
 export function ColorOption({ option, selected, sx, ...other }: OptionProps) {
   return (
-    <ButtonBase
-      disableRipple
+    <BlockOption
+      selected={selected}
+      icon={
+        <SvgColor
+          src={`${CONFIG.assetsDir}/assets/icons/settings/ic-sidebar-${option === 'integrate' ? 'outline' : 'filled'}.svg`}
+        />
+      }
+      label={option}
       sx={{
         gap: 1.5,
-        width: 1,
         height: 56,
-        color: 'text.disabled',
-        borderRadius: 'var(--item-radius)',
-        ...(selected && {
-          borderWidth: 1,
-          borderStyle: 'solid',
-          color: 'text.primary',
-          borderColor: 'var(--item-border-color)',
-          boxShadow: 'var(--item-active-shadow-light)',
-          [`& .${svgColorClasses.root}`]: {
-            background: 'var(--item-active-color)',
-          },
-          [stylesMode.dark]: {
-            boxShadow: 'var(--item-active-shadow-dark)',
-          },
-        }),
+        textTransform: 'capitalize',
         ...sx,
       }}
       {...other}
-    >
-      <SvgColor
-        src={`${CONFIG.site.basePath}/assets/icons/setting/ic-sidebar-${option === 'integrate' ? 'outline' : 'filled'}.svg`}
-      />
-
-      <Box
-        component="span"
-        sx={{
-          lineHeight: '18px',
-          textTransform: 'capitalize',
-          fontWeight: 'fontWeightSemiBold',
-          fontSize: (theme) => theme.typography.pxToRem(13),
-        }}
-      >
-        {option}
-      </Box>
-    </ButtonBase>
+    />
   );
 }

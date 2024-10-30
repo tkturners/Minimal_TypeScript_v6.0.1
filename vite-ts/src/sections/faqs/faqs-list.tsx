@@ -1,3 +1,6 @@
+import type { BoxProps } from '@mui/material/Box';
+
+import Box from '@mui/material/Box';
 import Accordion from '@mui/material/Accordion';
 import Typography from '@mui/material/Typography';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -9,9 +12,9 @@ import { Iconify } from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
 
-export function FaqsList() {
+export function FaqsList({ sx, ...other }: BoxProps) {
   return (
-    <div>
+    <Box sx={sx} {...other}>
       {_faqs.map((accordion) => (
         <Accordion key={accordion.id}>
           <AccordionSummary expandIcon={<Iconify icon="eva:arrow-ios-downward-fill" />}>
@@ -23,6 +26,6 @@ export function FaqsList() {
           </AccordionDetails>
         </Accordion>
       ))}
-    </div>
+    </Box>
   );
 }

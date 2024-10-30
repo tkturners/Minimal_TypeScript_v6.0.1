@@ -33,9 +33,18 @@ const StyledProgress = styled(Box)(() => ({
 
 // ----------------------------------------------------------------------
 
-export function CarouselProgressBar({ value, sx, ...other }: BoxProps & CarouselProgressBarProps) {
+export function CarouselProgressBar({
+  sx,
+  value,
+  className,
+  ...other
+}: BoxProps & CarouselProgressBarProps) {
   return (
-    <StyledRoot sx={sx} className={carouselClasses.progress} {...other}>
+    <StyledRoot
+      sx={sx}
+      className={carouselClasses.progress.concat(className ? ` ${className}` : '')}
+      {...other}
+    >
       <StyledProgress
         className={carouselClasses.progressBar}
         sx={{

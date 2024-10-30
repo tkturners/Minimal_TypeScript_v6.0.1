@@ -1,6 +1,5 @@
 import type { MotionValue } from 'framer-motion';
 import type { BoxProps } from '@mui/material/Box';
-import type { StackProps } from '@mui/material/Stack';
 
 import { useRef, useState } from 'react';
 import { m, useScroll, useSpring, useTransform, useMotionValueEvent } from 'framer-motion';
@@ -36,7 +35,7 @@ const smKey = 'sm';
 const mdKey = 'md';
 const lgKey = 'lg';
 
-export function HomeHero({ sx, ...other }: StackProps) {
+export function HomeHero({ sx, ...other }: BoxProps) {
   const theme = useTheme();
 
   const scroll = useScrollPercent();
@@ -58,7 +57,7 @@ export function HomeHero({ sx, ...other }: StackProps) {
   );
 
   const renderHeading = (
-    <MInview>
+    <AnimatedDiv>
       <Box
         component="h1"
         display="flex"
@@ -97,11 +96,11 @@ export function HomeHero({ sx, ...other }: StackProps) {
           Minimal
         </Box>
       </Box>
-    </MInview>
+    </AnimatedDiv>
   );
 
   const renderText = (
-    <MInview>
+    <AnimatedDiv>
       <Typography
         variant="body2"
         sx={{
@@ -112,11 +111,11 @@ export function HomeHero({ sx, ...other }: StackProps) {
       >
         {`The starting point for your next project is based on MUI. \nEasy customization helps you build apps faster and better.`}
       </Typography>
-    </MInview>
+    </AnimatedDiv>
   );
 
   const renderRatings = (
-    <MInview>
+    <AnimatedDiv>
       <Box
         gap={1.5}
         display="flex"
@@ -136,12 +135,12 @@ export function HomeHero({ sx, ...other }: StackProps) {
         </AvatarGroup>
         160+ Happy customers
       </Box>
-    </MInview>
+    </AnimatedDiv>
   );
 
   const renderButtons = (
     <Box display="flex" flexWrap="wrap" justifyContent="center" gap={{ xs: 1.5, sm: 2 }}>
-      <MInview>
+      <AnimatedDiv>
         <Stack alignItems="center" spacing={2.5}>
           <Button
             component={RouterLink}
@@ -163,7 +162,7 @@ export function HomeHero({ sx, ...other }: StackProps) {
                   fontWeight: theme.typography.fontWeightMedium,
                 }}
               >
-                v{CONFIG.site.version}
+                v{CONFIG.appVersion}
               </Box>
             </span>
           </Button>
@@ -181,57 +180,57 @@ export function HomeHero({ sx, ...other }: StackProps) {
             <Iconify width={16} icon="eva:external-link-fill" />
           </Link>
         </Stack>
-      </MInview>
+      </AnimatedDiv>
 
-      <MInview>
+      <AnimatedDiv>
         <Button
           color="inherit"
           size="large"
           variant="outlined"
           target="_blank"
           rel="noopener"
-          href={paths.figma}
+          href={paths.figmaUrl}
           startIcon={<Iconify width={24} icon="solar:figma-outline" />}
           sx={{ borderColor: 'text.primary' }}
         >
           Figma preview
         </Button>
-      </MInview>
+      </AnimatedDiv>
     </Box>
   );
 
   const renderIcons = (
     <Stack spacing={3} sx={{ textAlign: 'center' }}>
-      <MInview>
+      <AnimatedDiv>
         <Typography variant="overline" sx={{ opacity: 0.4 }}>
           Available For
         </Typography>
-      </MInview>
+      </AnimatedDiv>
 
       <Stack spacing={2.5} direction="row">
         {['js', 'ts', 'nextjs', 'vite', 'figma'].map((platform) => (
-          <MInview key={platform}>
+          <AnimatedDiv key={platform}>
             {platform === 'nextjs' ? (
               <SvgColor
-                src={`${CONFIG.site.basePath}/assets/icons/platforms/ic-${platform}.svg`}
+                src={`${CONFIG.assetsDir}/assets/icons/platforms/ic-${platform}.svg`}
                 sx={{ width: 24, height: 24 }}
               />
             ) : (
               <Box
                 component="img"
                 alt={platform}
-                src={`${CONFIG.site.basePath}/assets/icons/platforms/ic-${platform}.svg`}
+                src={`${CONFIG.assetsDir}/assets/icons/platforms/ic-${platform}.svg`}
                 sx={{ width: 24, height: 24 }}
               />
             )}
-          </MInview>
+          </AnimatedDiv>
         ))}
       </Stack>
     </Stack>
   );
 
   return (
-    <Stack
+    <Box
       ref={scroll.elementRef}
       component="section"
       sx={{
@@ -288,17 +287,13 @@ export function HomeHero({ sx, ...other }: StackProps) {
 
         <HeroBackground />
       </Box>
-    </Stack>
+    </Box>
   );
 }
 
 // ----------------------------------------------------------------------
 
-type MInviewProps = BoxProps & {
-  children: React.ReactNode;
-};
-
-function MInview({ children, component = m.div }: MInviewProps) {
+function AnimatedDiv({ children, component = m.div }: BoxProps & { children: React.ReactNode }) {
   return (
     <Box component={component} variants={varFade({ distance: 24 }).inUp}>
       {children}

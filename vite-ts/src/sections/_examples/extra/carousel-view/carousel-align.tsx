@@ -1,6 +1,5 @@
 import Box from '@mui/material/Box';
 
-import { Image } from 'src/components/image';
 import {
   Carousel,
   useCarousel,
@@ -60,7 +59,13 @@ function CarouselItem({ item, index }: CarouselItemProps) {
   return (
     <Box sx={{ borderRadius: 2, overflow: 'hidden', position: 'relative' }}>
       <IndexLabel index={index + 1} />
-      <Image alt={item.title} src={item.coverUrl} ratio="4/3" />
+
+      <Box
+        component="img"
+        alt={item.title}
+        src={item.coverUrl}
+        sx={{ aspectRatio: '4/3', objectFit: 'cover' }}
+      />
     </Box>
   );
 }

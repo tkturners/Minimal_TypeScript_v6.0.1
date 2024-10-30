@@ -19,7 +19,7 @@ import type { CarouselOptions, CarouselThumbProps, CarouselThumbsProps } from '.
 // ----------------------------------------------------------------------
 
 export const CarouselThumbs = forwardRef<HTMLDivElement, BoxProps & CarouselThumbsProps>(
-  ({ children, slotProps, options, sx, ...other }, ref) => {
+  ({ children, slotProps, options, sx, className, ...other }, ref) => {
     const axis = options?.axis ?? 'x';
 
     const slideSpacing = options?.slideSpacing ?? '12px';
@@ -47,7 +47,7 @@ export const CarouselThumbs = forwardRef<HTMLDivElement, BoxProps & CarouselThum
       <StyledRoot
         ref={ref}
         axis={axis}
-        className={carouselClasses.thumbs}
+        className={carouselClasses.thumbs.concat(className ? ` ${className}` : '')}
         sx={{
           flexShrink: 0,
           ...(axis === 'x' && { p: 0.5, maxWidth: 1 }),
@@ -80,11 +80,12 @@ export function CarouselThumb({
   src,
   index,
   selected,
+  className,
   ...other
 }: ButtonBaseProps & CarouselThumbProps) {
   return (
     <ButtonBase
-      className={carouselClasses.thumb}
+      className={carouselClasses.thumb.concat(className ? ` ${className}` : '')}
       sx={{
         width: 64,
         height: 64,

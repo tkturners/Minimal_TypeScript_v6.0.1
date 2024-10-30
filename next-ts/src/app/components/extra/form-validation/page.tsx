@@ -4,7 +4,7 @@ import { FormValidationView } from 'src/sections/_examples/extra/form-validation
 
 // ----------------------------------------------------------------------
 
-export const metadata = { title: `Form validation | Components - ${CONFIG.site.name}` };
+export const metadata = { title: `Form validation | Components - ${CONFIG.appName}` };
 
 export default function Page() {
   return <FormValidationView />;

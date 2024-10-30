@@ -123,7 +123,7 @@ export function AnalyticsWidgetSummary({
       </Box>
 
       <SvgColor
-        src={`${CONFIG.site.basePath}/assets/background/shape-square.svg`}
+        src={`${CONFIG.assetsDir}/assets/background/shape-square.svg`}
         sx={{
           top: 0,
           left: -20,

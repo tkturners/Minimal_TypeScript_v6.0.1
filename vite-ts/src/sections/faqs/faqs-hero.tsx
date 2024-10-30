@@ -1,3 +1,5 @@
+import type { BoxProps } from '@mui/material/Box';
+
 import { m } from 'framer-motion';
 
 import Box from '@mui/material/Box';
@@ -15,21 +17,24 @@ import { varFade, AnimateText, MotionContainer, animateTextClasses } from 'src/c
 
 // ----------------------------------------------------------------------
 
-export function FaqsHero() {
+export function FaqsHero({ sx, ...other }: BoxProps) {
   const theme = useTheme();
 
   return (
     <Box
+      component="section"
       sx={{
         ...bgGradient({
           color: `0deg, ${varAlpha(theme.vars.palette.grey['900Channel'], 0.8)}, ${varAlpha(theme.vars.palette.grey['900Channel'], 0.8)}`,
-          imgUrl: `${CONFIG.site.basePath}/assets/images/faqs/hero.webp`,
+          imgUrl: `${CONFIG.assetsDir}/assets/images/faqs/hero.webp`,
         }),
         height: { md: 560 },
         py: { xs: 10, md: 0 },
         overflow: 'hidden',
         position: 'relative',
+        ...sx,
       }}
+      {...other}
     >
       <Container component={MotionContainer}>
         <Box

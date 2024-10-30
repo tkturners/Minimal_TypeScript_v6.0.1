@@ -25,7 +25,6 @@ export function Main({ sx, children, layoutQuery, ...other }: MainProps) {
         display: 'flex',
         flexDirection: 'column',
         bgcolor: 'background.default',
-        boxShadow: theme.customShadows.card,
         maxWidth: 'var(--layout-auth-content-width)',
       }}
     >
@@ -38,17 +37,14 @@ export function Main({ sx, children, layoutQuery, ...other }: MainProps) {
       component="main"
       className={layoutClasses.main}
       sx={{
-        px: 2,
-        py: 5,
-        zIndex: 9,
         display: 'flex',
         flex: '1 1 auto',
         alignItems: 'center',
         flexDirection: 'column',
-        justifyContent: 'center',
+        p: theme.spacing(3, 2, 10, 2),
         [theme.breakpoints.up(layoutQuery)]: {
-          px: 0,
-          py: 'calc(var(--layout-header-desktop-height) + 24px)',
+          justifyContent: 'center',
+          p: theme.spacing(10, 0, 10, 0),
         },
         ...sx,
       }}

@@ -22,7 +22,7 @@ import { clickConversation } from 'src/actions/chat';
 
 import { useMockedUser } from 'src/auth/hooks';
 
-import { useNavItem } from './hooks/use-nav-item';
+import { getNavItem } from './utils/get-nav-item';
 
 // ----------------------------------------------------------------------
 
@@ -41,7 +41,7 @@ export function ChatNavItem({ selected, collapse, conversation, onCloseMobile }:
   const router = useRouter();
 
   const { group, displayName, displayText, participants, lastActivity, hasOnlineInGroup } =
-    useNavItem({ conversation, currentUserId: `${user?.id}` });
+    getNavItem({ conversation, currentUserId: `${user?.id}` });
 
   const singleParticipant = participants[0];
 

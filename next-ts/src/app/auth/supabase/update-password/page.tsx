@@ -1,10 +1,10 @@
 import { CONFIG } from 'src/config-global';
 
-import { SupabaseUpdatePasswordView } from 'src/sections/auth/supabase';
+import { SupabaseUpdatePasswordView } from 'src/auth/view/supabase';
 
 // ----------------------------------------------------------------------
 
-export const metadata = { title: `Update password | Supabase - ${CONFIG.site.name}` };
+export const metadata = { title: `Update password | Supabase - ${CONFIG.appName}` };
 
 export default function Page() {
   return <SupabaseUpdatePasswordView />;

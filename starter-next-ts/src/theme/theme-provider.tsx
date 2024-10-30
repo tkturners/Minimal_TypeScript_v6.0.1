@@ -13,8 +13,8 @@ import { Experimental_CssVarsProvider as CssVarsProvider } from '@mui/material/s
 import { useSettingsContext } from 'src/components/settings';
 
 import { createTheme } from './create-theme';
+import { schemeConfig } from './scheme-config';
 import { RTL } from './with-settings/right-to-left';
-import { schemeConfig } from './color-scheme-script';
 
 // ----------------------------------------------------------------------
 

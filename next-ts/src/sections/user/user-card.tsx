@@ -1,4 +1,5 @@
 import type { IUserCard } from 'src/types/user';
+import type { CardProps } from '@mui/material/Card';
 
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -14,19 +15,19 @@ import { fShortenNumber } from 'src/utils/format-number';
 import { _socials } from 'src/_mock';
 import { varAlpha } from 'src/theme/styles';
 import { AvatarShape } from 'src/assets/illustrations';
+import { TwitterIcon, FacebookIcon, LinkedinIcon, InstagramIcon } from 'src/assets/icons';
 
 import { Image } from 'src/components/image';
-import { SocialIcon } from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
 
-type Props = {
+type Props = CardProps & {
   user: IUserCard;
 };
 
-export function UserCard({ user }: Props) {
+export function UserCard({ user, sx, ...other }: Props) {
   return (
-    <Card sx={{ textAlign: 'center' }}>
+    <Card sx={{ textAlign: 'center', ...sx }} {...other}>
       <Box sx={{ position: 'relative' }}>
         <AvatarShape
           sx={{
@@ -60,7 +61,7 @@ export function UserCard({ user }: Props) {
           ratio="16/9"
           slotProps={{
             overlay: {
-              background: (theme) => varAlpha(theme.vars.palette.grey['900Channel'], 0.48),
+              bgcolor: (theme) => varAlpha(theme.vars.palette.common.blackChannel, 0.48),
             },
           }}
         />
@@ -76,8 +77,11 @@ export function UserCard({ user }: Props) {
 
       <Stack direction="row" alignItems="center" justifyContent="center" sx={{ mb: 2.5 }}>
         {_socials.map((social) => (
-          <IconButton key={social.name}>
-            <SocialIcon icon={social.name} />
+          <IconButton key={social.label} color="inherit">
+            {social.value === 'twitter' && <TwitterIcon />}
+            {social.value === 'facebook' && <FacebookIcon />}
+            {social.value === 'instagram' && <InstagramIcon />}
+            {social.value === 'linkedin' && <LinkedinIcon />}
           </IconButton>
         ))}
       </Stack>

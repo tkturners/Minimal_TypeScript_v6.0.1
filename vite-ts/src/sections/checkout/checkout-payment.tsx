@@ -36,17 +36,17 @@ const PAYMENT_OPTIONS: ICheckoutPaymentOption[] = [
     description: 'You will be redirected to PayPal website to complete your purchase securely.',
   },
   {
-    value: 'credit',
+    value: 'creditcard',
     label: 'Credit / Debit card',
     description: 'We support Mastercard, Visa, Discover and Stripe.',
   },
   { value: 'cash', label: 'Cash', description: 'Pay with cash when your order is delivered.' },
 ];
 
-const CARDS_OPTIONS: ICheckoutCardOption[] = [
-  { value: 'ViSa1', label: '**** **** **** 1212 - Jimmy Holland' },
-  { value: 'ViSa2', label: '**** **** **** 2424 - Shawn Stokes' },
-  { value: 'MasterCard', label: '**** **** **** 4545 - Cole Armstrong' },
+const CARD_OPTIONS: ICheckoutCardOption[] = [
+  { value: 'visa1', label: '**** **** **** 1212 - Jimmy Holland' },
+  { value: 'visa2', label: '**** **** **** 2424 - Shawn Stokes' },
+  { value: 'mastercard', label: '**** **** **** 4545 - Cole Armstrong' },
 ];
 
 // ----------------------------------------------------------------------
@@ -90,12 +90,17 @@ export function CheckoutPayment() {
     <Form methods={methods} onSubmit={onSubmit}>
       <Grid container spacing={3}>
         <Grid xs={12} md={8}>
-          <CheckoutDelivery onApplyShipping={checkout.onApplyShipping} options={DELIVERY_OPTIONS} />
+          <CheckoutDelivery
+            name="delivery"
+            onApplyShipping={checkout.onApplyShipping}
+            options={DELIVERY_OPTIONS}
+          />
 
           <CheckoutPaymentMethods
+            name="payment"
             options={{
+              cards: CARD_OPTIONS,
               payments: PAYMENT_OPTIONS,
-              cards: CARDS_OPTIONS,
             }}
             sx={{ my: 3 }}
           />

@@ -1,14 +1,12 @@
 import type { Country } from 'react-phone-number-input/input';
 
-import { useState, useCallback } from 'react';
-
 import Box from '@mui/material/Box';
 import Popover from '@mui/material/Popover';
-import Divider from '@mui/material/Divider';
 import MenuList from '@mui/material/MenuList';
 import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField';
 import ButtonBase from '@mui/material/ButtonBase';
+import IconButton from '@mui/material/IconButton';
 import ListItemText from '@mui/material/ListItemText';
 import InputAdornment from '@mui/material/InputAdornment';
 
@@ -24,31 +22,58 @@ import type { CountryListProps } from './types';
 
 // ----------------------------------------------------------------------
 
-export function CountryListPopover({ countryCode, onClickCountry }: CountryListProps) {
+export function CountryListPopover({
+  sx,
+  countryCode,
+  searchCountry,
+  onClickCountry,
+  onSearchCountry,
+}: CountryListProps) {
   const popover = usePopover();
 
   const selectedCountry = getCountry(countryCode);
 
-  const [searchCountry, setSearchCountry] = useState('');
-
-  const handleSearchCountry = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchCountry(event.target.value);
-  }, []);
-
   const dataFiltered = applyFilter({ inputData: countries, query: searchCountry });
 
-  const notFound = !dataFiltered.length && !!setSearchCountry;
+  const notFound = dataFiltered.length === 0 && !!searchCountry;
 
   const renderButton = (
-    <ButtonBase disableRipple onClick={popover.onOpen}>
-      <FlagIcon code={selectedCountry?.code} sx={{ width: 22, height: 22, borderRadius: '50%' }} />
+    <ButtonBase
+      disableRipple
+      onClick={popover.onOpen}
+      sx={{
+        zIndex: 9,
+        display: 'flex',
+        position: 'absolute',
+        justifyContent: 'flex-start',
+        width: 'var(--popover-button-width)',
+        height: 'var(--popover-button-height)',
+        ...sx,
+      }}
+    >
+      <FlagIcon
+        code={selectedCountry?.code}
+        sx={{
+          borderRadius: '50%',
+          width: 'var(--popover-button-height)',
+          height: 'var(--popover-button-height)',
+        }}
+      />
 
       <Iconify
         icon="eva:chevron-down-fill"
-        sx={{ ml: 0.5, flexShrink: 0, color: 'text.disabled' }}
+        sx={{ ml: 0.25, flexShrink: 0, color: 'text.disabled' }}
       />
 
-      <Divider orientation="vertical" flexItem sx={{ mr: 1 }} />
+      <Box
+        component="span"
+        sx={{
+          height: 20,
+          ml: 'auto',
+          width: '1px',
+          bgcolor: (theme) => theme.vars.palette.divider,
+        }}
+      />
     </ButtonBase>
   );
 
@@ -63,10 +88,9 @@ export function CountryListPopover({ countryCode, onClickCountry }: CountryListP
           <MenuItem
             key={country.code}
             selected={countryCode === country.code}
-            autoFocus={countryCode === country.code}
             onClick={() => {
               popover.onClose();
-              setSearchCountry('');
+              onSearchCountry('');
               onClickCountry(country.code as Country);
             }}
           >
@@ -97,7 +121,7 @@ export function CountryListPopover({ countryCode, onClickCountry }: CountryListP
         anchorEl={popover.anchorEl}
         onClose={() => {
           popover.onClose();
-          setSearchCountry('');
+          onSearchCountry('');
         }}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
         transformOrigin={{ vertical: 'top', horizontal: 'left' }}
@@ -118,12 +142,19 @@ export function CountryListPopover({ countryCode, onClickCountry }: CountryListP
             autoFocus
             fullWidth
             value={searchCountry}
-            onChange={handleSearchCountry}
+            onChange={(event) => onSearchCountry(event.target.value)}
             placeholder="Search..."
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
                   <Iconify icon="eva:search-fill" sx={{ color: 'text.disabled' }} />
+                </InputAdornment>
+              ),
+              endAdornment: searchCountry && (
+                <InputAdornment position="end">
+                  <IconButton size="small" edge="end" onClick={() => onSearchCountry('')}>
+                    <Iconify width={16} icon="mingcute:close-line" />
+                  </IconButton>
                 </InputAdornment>
               ),
             }}

@@ -6,7 +6,7 @@ import { WalktourView } from 'src/sections/_examples/extra/walktour-view';
 
 // ----------------------------------------------------------------------
 
-const metadata = { title: `Walktour | Components - ${CONFIG.site.name}` };
+const metadata = { title: `Walktour | Components - ${CONFIG.appName}` };
 
 export default function Page() {
   return (

@@ -4,7 +4,7 @@ import { OrderListView } from 'src/sections/order/view';
 
 // ----------------------------------------------------------------------
 
-export const metadata = { title: `Order list | Dashboard - ${CONFIG.site.name}` };
+export const metadata = { title: `Order list | Dashboard - ${CONFIG.appName}` };
 
 export default function Page() {
   return <OrderListView />;

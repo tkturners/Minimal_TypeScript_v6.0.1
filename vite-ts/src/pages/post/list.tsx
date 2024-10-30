@@ -7,7 +7,7 @@ import { PostListHomeView } from 'src/sections/blog/view';
 
 // ----------------------------------------------------------------------
 
-const metadata = { title: `Post list - ${CONFIG.site.name}` };
+const metadata = { title: `Post list - ${CONFIG.appName}` };
 
 export default function Page() {
   const { posts, postsLoading } = useGetPosts();

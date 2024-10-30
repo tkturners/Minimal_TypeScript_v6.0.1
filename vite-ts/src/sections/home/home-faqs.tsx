@@ -1,4 +1,4 @@
-import type { StackProps } from '@mui/material/Stack';
+import type { BoxProps } from '@mui/material/Box';
 
 import { useState } from 'react';
 import { m } from 'framer-motion';
@@ -126,7 +126,7 @@ const FAQs = [
 
 // ----------------------------------------------------------------------
 
-export function HomeFAQs({ sx, ...other }: StackProps) {
+export function HomeFAQs({ sx, ...other }: BoxProps) {
   const [expanded, setExpanded] = useState<string | false>(FAQs[0].question);
 
   const handleChange = (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
@@ -241,7 +241,7 @@ export function HomeFAQs({ sx, ...other }: StackProps) {
   );
 
   return (
-    <Stack component="section" sx={{ ...sx }} {...other}>
+    <Box component="section" sx={{ ...sx }} {...other}>
       <MotionViewport sx={{ py: 10, position: 'relative' }}>
         <TopLines />
 
@@ -255,7 +255,7 @@ export function HomeFAQs({ sx, ...other }: StackProps) {
           {renderContact}
         </Stack>
       </MotionViewport>
-    </Stack>
+    </Box>
   );
 }
 

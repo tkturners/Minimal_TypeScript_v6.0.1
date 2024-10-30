@@ -39,11 +39,9 @@ const Overlay = styled('span')({
 export const Image = forwardRef<HTMLSpanElement, ImageProps>(
   (
     {
-      ratio,
-      disabledEffect = false,
-      //
       alt,
       src,
+      ratio,
       delayTime,
       threshold,
       beforeLoad,
@@ -54,10 +52,12 @@ export const Image = forwardRef<HTMLSpanElement, ImageProps>(
       effect = 'blur',
       visibleByDefault,
       wrapperClassName,
+      disabledEffect = false,
       useIntersectionObserver,
       //
-      slotProps,
       sx,
+      slotProps,
+      className,
       ...other
     },
     ref
@@ -80,8 +80,8 @@ export const Image = forwardRef<HTMLSpanElement, ImageProps>(
         wrapperClassName={wrapperClassName || imageClasses.wrapper}
         placeholderSrc={
           visibleByDefault || disabledEffect
-            ? `${CONFIG.site.basePath}/assets/transparent.png`
-            : `${CONFIG.site.basePath}/assets/placeholder.svg`
+            ? `${CONFIG.assetsDir}/assets/core/transparent.png`
+            : `${CONFIG.assetsDir}/assets/core/placeholder.svg`
         }
         sx={{
           width: 1,
@@ -97,7 +97,7 @@ export const Image = forwardRef<HTMLSpanElement, ImageProps>(
       <ImageWrapper
         ref={ref}
         component="span"
-        className={imageClasses.root}
+        className={imageClasses.root.concat(className ? ` ${className}` : '')}
         sx={{ ...(!!ratio && { width: 1 }), ...sx }}
         {...other}
       >

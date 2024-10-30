@@ -118,7 +118,7 @@ export function OverviewBankingView() {
               price="$50"
               title={`Invite friends \n and earn`}
               description="Praesent egestas tristique nibh. Duis lobortis massa imperdiet quam."
-              imgUrl={`${CONFIG.site.basePath}/assets/illustrations/illustration-receipt.webp`}
+              imgUrl={`${CONFIG.assetsDir}/assets/illustrations/illustration-receipt.webp`}
             />
           </Box>
         </Grid>

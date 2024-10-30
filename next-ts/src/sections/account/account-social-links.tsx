@@ -6,8 +6,9 @@ import Card from '@mui/material/Card';
 import LoadingButton from '@mui/lab/LoadingButton';
 import InputAdornment from '@mui/material/InputAdornment';
 
+import { TwitterIcon, FacebookIcon, LinkedinIcon, InstagramIcon } from 'src/assets/icons';
+
 import { toast } from 'src/components/snackbar';
-import { SocialIcon } from 'src/components/iconify';
 import { Form, Field } from 'src/components/hook-form';
 
 // ----------------------------------------------------------------------
@@ -44,14 +45,19 @@ export function AccountSocialLinks({ socialLinks }: Props) {
   return (
     <Form methods={methods} onSubmit={onSubmit}>
       <Card sx={{ p: 3, gap: 3, display: 'flex', flexDirection: 'column' }}>
-        {Object.keys(socialLinks).map((link) => (
+        {Object.keys(socialLinks).map((social) => (
           <Field.Text
-            key={link}
-            name={link}
+            key={social}
+            name={social}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <SocialIcon width={24} icon={link} />
+                  {social === 'facebook' && <FacebookIcon width={24} />}
+                  {social === 'instagram' && <InstagramIcon width={24} />}
+                  {social === 'linkedin' && <LinkedinIcon width={24} />}
+                  {social === 'twitter' && (
+                    <TwitterIcon width={24} sx={{ color: 'text.primary' }} />
+                  )}
                 </InputAdornment>
               ),
             }}

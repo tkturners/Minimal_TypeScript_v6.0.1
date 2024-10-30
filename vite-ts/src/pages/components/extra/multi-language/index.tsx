@@ -6,7 +6,7 @@ import { MultiLanguageView } from 'src/sections/_examples/extra/multi-language-v
 
 // ----------------------------------------------------------------------
 
-const metadata = { title: `Multi language | Components - ${CONFIG.site.name}` };
+const metadata = { title: `Multi language | Components - ${CONFIG.appName}` };
 
 export default function Page() {
   return (

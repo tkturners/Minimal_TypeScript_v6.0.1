@@ -33,14 +33,11 @@ type ApplyFilterProps = {
 };
 
 export function applyFilter({ inputData, query }: ApplyFilterProps) {
-  if (query) {
-    return inputData.filter(
-      (country) =>
-        country.label.toLowerCase().indexOf(query.toLowerCase()) !== -1 ||
-        country.code.toLowerCase().indexOf(query.toLowerCase()) !== -1 ||
-        country.phone.toLowerCase().indexOf(query.toLowerCase()) !== -1
-    );
-  }
+  if (!query) return inputData;
 
-  return inputData;
+  const lowerCaseQuery = query.toLowerCase();
+
+  return inputData.filter(({ label, code, phone }) =>
+    [label, code, phone].some((field) => field.toLowerCase().includes(lowerCaseQuery))
+  );
 }

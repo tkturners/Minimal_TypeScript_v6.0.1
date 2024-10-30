@@ -9,15 +9,15 @@ import type { SvgColorProps } from './types';
 // ----------------------------------------------------------------------
 
 export const SvgColor = forwardRef<HTMLSpanElement, SvgColorProps>(
-  ({ src, width = 24, className, sx, ...other }, ref) => (
+  ({ src, width = 24, height, className, sx, ...other }, ref) => (
     <Box
       ref={ref}
       component="span"
       className={svgColorClasses.root.concat(className ? ` ${className}` : '')}
       sx={{
         width,
-        height: width,
         flexShrink: 0,
+        height: height ?? width,
         display: 'inline-flex',
         bgcolor: 'currentColor',
         mask: `url(${src}) no-repeat center / contain`,

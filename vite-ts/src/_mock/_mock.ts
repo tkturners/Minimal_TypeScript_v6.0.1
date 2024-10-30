@@ -35,8 +35,6 @@ import {
 
 // ----------------------------------------------------------------------
 
-const { assetURL } = CONFIG.site;
-
 export const _mock = {
   id: (index: number) => _id[index],
   time: (index: number) => fSub({ days: index, hours: index }),
@@ -75,12 +73,19 @@ export const _mock = {
   },
   // Image
   image: {
-    cover: (index: number) => `${assetURL}/assets/images/cover/cover-${index + 1}.webp`,
-    avatar: (index: number) => `${assetURL}/assets/images/avatar/avatar-${index + 1}.webp`,
-    travel: (index: number) => `${assetURL}/assets/images/travel/travel-${index + 1}.webp`,
-    course: (index: number) => `${assetURL}/assets/images/course/course-${index + 1}.webp`,
-    company: (index: number) => `${assetURL}/assets/images/company/company-${index + 1}.webp`,
-    product: (index: number) => `${assetURL}/assets/images/m-product/product-${index + 1}.webp`,
-    portrait: (index: number) => `${assetURL}/assets/images/portrait/portrait-${index + 1}.webp`,
+    cover: (index: number) =>
+      `${CONFIG.assetsDir}/assets/images/mock/cover/cover-${index + 1}.webp`,
+    avatar: (index: number) =>
+      `${CONFIG.assetsDir}/assets/images/mock/avatar/avatar-${index + 1}.webp`,
+    travel: (index: number) =>
+      `${CONFIG.assetsDir}/assets/images/mock/travel/travel-${index + 1}.webp`,
+    course: (index: number) =>
+      `${CONFIG.assetsDir}/assets/images/mock/course/course-${index + 1}.webp`,
+    company: (index: number) =>
+      `${CONFIG.assetsDir}/assets/images/mock/company/company-${index + 1}.webp`,
+    product: (index: number) =>
+      `${CONFIG.assetsDir}/assets/images/mock/m-product/product-${index + 1}.webp`,
+    portrait: (index: number) =>
+      `${CONFIG.assetsDir}/assets/images/mock/portrait/portrait-${index + 1}.webp`,
   },
 };

@@ -14,9 +14,9 @@ import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
 import { _socials } from 'src/_mock';
+import { TwitterIcon, FacebookIcon, LinkedinIcon, InstagramIcon } from 'src/assets/icons';
 
 import { Logo } from 'src/components/logo';
-import { SocialIcon } from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
 
@@ -94,8 +94,11 @@ export function Footer({ layoutQuery, sx }: FooterProps) {
               }}
             >
               {_socials.map((social) => (
-                <IconButton key={social.name}>
-                  <SocialIcon icon={social.name} />
+                <IconButton key={social.label} color="inherit">
+                  {social.value === 'twitter' && <TwitterIcon />}
+                  {social.value === 'facebook' && <FacebookIcon />}
+                  {social.value === 'instagram' && <InstagramIcon />}
+                  {social.value === 'linkedin' && <LinkedinIcon />}
                 </IconButton>
               ))}
             </Stack>

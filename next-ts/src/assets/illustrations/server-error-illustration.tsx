@@ -41,7 +41,7 @@ function ServerErrorIllustration({ hideBackground, sx, ...other }: Props) {
       {!hideBackground && <BackgroundShape />}
 
       <image
-        href={`${CONFIG.site.basePath}/assets/illustrations/characters/character-8.webp`}
+        href={`${CONFIG.assetsDir}/assets/illustrations/characters/character-8.webp`}
         height="300"
         x="340"
         y="30"

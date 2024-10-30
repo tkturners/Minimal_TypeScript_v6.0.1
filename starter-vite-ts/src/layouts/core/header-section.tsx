@@ -39,11 +39,7 @@ export type HeaderSectionProps = AppBarProps & {
   disableElevation?: boolean;
   slots?: {
     leftArea?: React.ReactNode;
-    leftAreaEnd?: React.ReactNode;
-    leftAreaStart?: React.ReactNode;
     rightArea?: React.ReactNode;
-    rightAreaEnd?: React.ReactNode;
-    rightAreaStart?: React.ReactNode;
     topArea?: React.ReactNode;
     centerArea?: React.ReactNode;
     bottomArea?: React.ReactNode;

@@ -1,5 +1,6 @@
 import { common, createLowlight } from 'lowlight';
 import LinkExtension from '@tiptap/extension-link';
+import Underline from '@tiptap/extension-underline';
 import ImageExtension from '@tiptap/extension-image';
 import StarterKitExtension from '@tiptap/starter-kit';
 import TextAlignExtension from '@tiptap/extension-text-align';
@@ -31,6 +32,7 @@ export const Editor = forwardRef<HTMLDivElement, EditorProps>(
       slotProps,
       helperText,
       resetValue,
+      className,
       editable = true,
       fullItem = false,
       value: content = '',
@@ -50,7 +52,10 @@ export const Editor = forwardRef<HTMLDivElement, EditorProps>(
     const editor = useEditor({
       content,
       editable,
+      immediatelyRender: false,
+      shouldRerenderOnTransaction: false,
       extensions: [
+        Underline,
         StarterKitExtension.configure({
           codeBlock: false,
           code: { HTMLAttributes: { class: editorClasses.content.codeInline } },
@@ -118,7 +123,7 @@ export const Editor = forwardRef<HTMLDivElement, EditorProps>(
             error={!!error}
             disabled={!editable}
             fullScreen={fullScreen}
-            className={editorClasses.root}
+            className={editorClasses.root.concat(className ? ` ${className}` : '')}
             sx={sx}
           >
             <Toolbar

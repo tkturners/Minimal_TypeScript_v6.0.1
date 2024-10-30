@@ -6,6 +6,7 @@ import { _mock } from 'src/_mock';
 
 import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
 
+import { CarouselFade } from './carousel-fade';
 import { CarouselYaxis } from './carousel-yaxis';
 import { CarouselAlign } from './carousel-align';
 import { CarouselScale } from './carousel-scale';
@@ -39,6 +40,7 @@ const DEMO = [
   { name: 'Progress', component: <CarouselProgress data={SLIDES.slice(3, 7)} /> },
   { name: 'Opacity', component: <CarouselOpacity data={SLIDES.slice(8, 12)} /> },
   { name: 'Scale', component: <CarouselScale data={SLIDES.slice(10, 14)} /> },
+  { name: 'Fade', component: <CarouselFade data={SLIDES.slice(11, 15)} /> },
   { name: 'Parallax', component: <CarouselParallax data={SLIDES.slice(11, 15)} /> },
   {
     name: 'Right-to-left',

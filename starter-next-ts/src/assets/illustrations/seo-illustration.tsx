@@ -236,7 +236,7 @@ function SeoIllustration({ hideBackground, sx, ...other }: Props) {
       </defs>
 
       <image
-        href={`${CONFIG.site.basePath}/assets/illustrations/characters/character-3.webp`}
+        href={`${CONFIG.assetsDir}/assets/illustrations/characters/character-3.webp`}
         height="300"
         x="312"
         y="30"

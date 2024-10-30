@@ -4,7 +4,7 @@ import { OverviewFileView } from 'src/sections/overview/file/view';
 
 // ----------------------------------------------------------------------
 
-export const metadata = { title: `File | Dashboard - ${CONFIG.site.name}` };
+export const metadata = { title: `File | Dashboard - ${CONFIG.appName}` };
 
 export default function Page() {
   return <OverviewFileView />;

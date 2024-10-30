@@ -6,7 +6,7 @@ import { AccordionView } from 'src/sections/_examples/mui/accordion-view';
 
 // ----------------------------------------------------------------------
 
-const metadata = { title: `Accordion | MUI - ${CONFIG.site.name}` };
+const metadata = { title: `Accordion | MUI - ${CONFIG.appName}` };
 
 export default function Page() {
   return (

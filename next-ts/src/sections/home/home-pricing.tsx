@@ -1,3 +1,4 @@
+import type { BoxProps } from '@mui/material/Box';
 import type { StackProps } from '@mui/material/Stack';
 
 import { m } from 'framer-motion';
@@ -9,7 +10,6 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 import Container from '@mui/material/Container';
-import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 
 import { paths } from 'src/routes/paths';
@@ -27,9 +27,7 @@ import { FloatLine, FloatXIcon } from './components/svg-elements';
 
 // ----------------------------------------------------------------------
 
-export function HomePricing({ sx, ...other }: StackProps) {
-  const theme = useTheme();
-
+export function HomePricing({ sx, ...other }: BoxProps) {
   const tabs = useTabs('Standard');
 
   const renderDescription = (
@@ -48,14 +46,14 @@ export function HomePricing({ sx, ...other }: StackProps) {
         <PlanCard
           key={plan.license}
           plan={plan}
-          sx={{
+          sx={(theme) => ({
             ...(plan.license === 'Plus' && {
               [theme.breakpoints.down(1440)]: {
                 borderLeft: `dashed 1px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.2)}`,
                 borderRight: `dashed 1px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.2)}`,
               },
             }),
-          }}
+          })}
         />
       ))}
     </Box>
@@ -67,7 +65,8 @@ export function HomePricing({ sx, ...other }: StackProps) {
         value={tabs.value}
         onChange={tabs.onChange}
         sx={{
-          boxShadow: `0px -2px 0px 0px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.08)} inset`,
+          boxShadow: (theme) =>
+            `0px -2px 0px 0px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.08)} inset`,
         }}
       >
         {PLANS.map((tab) => (
@@ -79,7 +78,7 @@ export function HomePricing({ sx, ...other }: StackProps) {
         sx={{
           width: 1,
           borderRadius: 2,
-          border: `dashed 1px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.2)}`,
+          border: (theme) => `dashed 1px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.2)}`,
         }}
       >
         {PLANS.map(
@@ -90,14 +89,14 @@ export function HomePricing({ sx, ...other }: StackProps) {
   );
 
   return (
-    <Stack component="section" sx={{ py: 10, position: 'relative', ...sx }} {...other}>
+    <Box component="section" sx={{ py: 10, position: 'relative', ...sx }} {...other}>
       <MotionViewport>
         <FloatLine vertical sx={{ top: 0, left: 80 }} />
 
         <Container>{renderDescription}</Container>
 
         <Box
-          sx={{
+          sx={(theme) => ({
             position: 'relative',
             '&::before, &::after': {
               width: 64,
@@ -107,7 +106,7 @@ export function HomePricing({ sx, ...other }: StackProps) {
                 display: 'block',
               },
             },
-          }}
+          })}
         >
           <Container>{renderContentDesktop}</Container>
 
@@ -117,7 +116,7 @@ export function HomePricing({ sx, ...other }: StackProps) {
 
         <Container>{renderContentMobile}</Container>
       </MotionViewport>
-    </Stack>
+    </Box>
   );
 }
 
@@ -295,8 +294,8 @@ const PLANS = [...Array(3)].map((_, index) => ({
     'Commercial applications',
   ],
   icons: [
-    `${CONFIG.site.basePath}/assets/icons/platforms/ic-js.svg`,
-    `${CONFIG.site.basePath}/assets/icons/platforms/ic-ts.svg`,
-    `${CONFIG.site.basePath}/assets/icons/platforms/ic-figma.svg`,
+    `${CONFIG.assetsDir}/assets/icons/platforms/ic-js.svg`,
+    `${CONFIG.assetsDir}/assets/icons/platforms/ic-ts.svg`,
+    `${CONFIG.assetsDir}/assets/icons/platforms/ic-figma.svg`,
   ],
 }));

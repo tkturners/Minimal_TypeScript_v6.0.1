@@ -6,7 +6,7 @@ import { BadgeView } from 'src/sections/_examples/mui/badge-view';
 
 // ----------------------------------------------------------------------
 
-const metadata = { title: `Badge | MUI - ${CONFIG.site.name}` };
+const metadata = { title: `Badge | MUI - ${CONFIG.appName}` };
 
 export default function Page() {
   return (

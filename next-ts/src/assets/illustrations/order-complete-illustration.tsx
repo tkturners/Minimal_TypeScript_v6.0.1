@@ -39,7 +39,7 @@ function OrderCompleteIllustration({ hideBackground, sx, ...other }: Props) {
       {!hideBackground && <BackgroundShape />}
 
       <image
-        href={`${CONFIG.site.basePath}/assets/illustrations/characters/character-10.webp`}
+        href={`${CONFIG.assetsDir}/assets/illustrations/characters/character-10.webp`}
         height="300"
         x="300"
         y="30"

@@ -1,26 +1,33 @@
 import type { Theme, SxProps, Breakpoint } from '@mui/material/styles';
 
+import Box from '@mui/material/Box';
+import Link from '@mui/material/Link';
 import Alert from '@mui/material/Alert';
 
-import { useBoolean } from 'src/hooks/use-boolean';
+import { paths } from 'src/routes/paths';
+import { RouterLink } from 'src/routes/components';
 
 import { CONFIG } from 'src/config-global';
 import { stylesMode } from 'src/theme/styles';
 
+import { Logo } from 'src/components/logo';
+
 import { Main } from './main';
-import { HeaderBase } from '../core/header-base';
+import { HeaderSection } from '../core/header-section';
 import { LayoutSection } from '../core/layout-section';
+import { SettingsButton } from '../components/settings-button';
 
 // ----------------------------------------------------------------------
 
 export type AuthCenteredLayoutProps = {
   sx?: SxProps<Theme>;
   children: React.ReactNode;
+  header?: {
+    sx?: SxProps<Theme>;
+  };
 };
 
-export function AuthCenteredLayout({ sx, children }: AuthCenteredLayoutProps) {
-  const mobileNavOpen = useBoolean();
-
+export function AuthCenteredLayout({ sx, children, header }: AuthCenteredLayoutProps) {
   const layoutQuery: Breakpoint = 'md';
 
   return (
@@ -29,30 +36,39 @@ export function AuthCenteredLayout({ sx, children }: AuthCenteredLayoutProps) {
        * Header
        *************************************** */
       headerSection={
-        <HeaderBase
+        <HeaderSection
           disableElevation
           layoutQuery={layoutQuery}
-          onOpenNav={mobileNavOpen.onTrue}
-          slotsDisplay={{
-            signIn: false,
-            account: false,
-            purchase: false,
-            contacts: false,
-            searchbar: false,
-            workspaces: false,
-            menuButton: false,
-            localization: false,
-            notifications: false,
-          }}
+          slotProps={{ container: { maxWidth: false } }}
+          sx={{ position: { [layoutQuery]: 'fixed' }, ...header?.sx }}
           slots={{
             topArea: (
               <Alert severity="info" sx={{ display: 'none', borderRadius: 0 }}>
                 This is an info Alert.
               </Alert>
             ),
+            leftArea: (
+              <>
+                {/* -- Logo -- */}
+                <Logo />
+              </>
+            ),
+            rightArea: (
+              <Box display="flex" alignItems="center" gap={{ xs: 1, sm: 1.5 }}>
+                {/* -- Help link -- */}
+                <Link
+                  href={paths.faqs}
+                  component={RouterLink}
+                  color="inherit"
+                  sx={{ typography: 'subtitle2' }}
+                >
+                  Need help?
+                </Link>
+                {/* -- Settings button -- */}
+                <SettingsButton />
+              </Box>
+            ),
           }}
-          slotProps={{ container: { maxWidth: false } }}
-          sx={{ position: { [layoutQuery]: 'fixed' } }}
         />
       }
       /** **************************************
@@ -62,21 +78,19 @@ export function AuthCenteredLayout({ sx, children }: AuthCenteredLayoutProps) {
       /** **************************************
        * Style
        *************************************** */
-      cssVars={{
-        '--layout-auth-content-width': '420px',
-      }}
+      cssVars={{ '--layout-auth-content-width': '420px' }}
       sx={{
         '&::before': {
           width: 1,
           height: 1,
-          zIndex: 1,
+          zIndex: -1,
           content: "''",
           opacity: 0.24,
           position: 'fixed',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center center',
-          backgroundImage: `url(${CONFIG.site.basePath}/assets/background/background-3-blur.webp)`,
+          backgroundImage: `url(${CONFIG.assetsDir}/assets/background/background-3-blur.webp)`,
           [stylesMode.dark]: { opacity: 0.08 },
         },
         ...sx,

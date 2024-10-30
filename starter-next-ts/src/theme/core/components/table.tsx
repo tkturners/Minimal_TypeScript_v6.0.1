@@ -64,7 +64,7 @@ const MuiTableCell: Components<Theme>['MuiTableCell'] = {
     }),
     stickyHeader: ({ theme }) => ({
       backgroundColor: theme.vars.palette.background.paper,
-      backgroundImage: `linear-gradient(to bottom, ${theme.vars.palette.background.neutral} 0%, ${theme.vars.palette.background.neutral} 100%)`,
+      backgroundImage: `linear-gradient(to bottom, ${theme.vars.palette.background.neutral}, ${theme.vars.palette.background.neutral})`,
     }),
     paddingCheckbox: ({ theme }) => ({ paddingLeft: theme.spacing(1) }),
   },
@@ -91,6 +91,8 @@ const MuiTablePagination: Components<Theme>['MuiTablePagination'] = {
     actions: { marginRight: 8 },
     select: ({ theme }) => ({
       paddingLeft: 8,
+      display: 'flex',
+      alignItems: 'center',
       '&:focus': { borderRadius: theme.shape.borderRadius },
     }),
     selectIcon: {

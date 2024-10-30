@@ -1,4 +1,4 @@
-import type { StackProps } from '@mui/material/Stack';
+import type { BoxProps } from '@mui/material/Box';
 
 import { m } from 'framer-motion';
 
@@ -19,7 +19,7 @@ import { SectionTitle } from './components/section-title';
 
 // ----------------------------------------------------------------------
 
-export function HomeForDesigner({ sx, ...other }: StackProps) {
+export function HomeForDesigner({ sx, ...other }: BoxProps) {
   const theme = useTheme();
 
   const borderTop = (
@@ -67,14 +67,14 @@ export function HomeForDesigner({ sx, ...other }: StackProps) {
   );
 
   return (
-    <Stack
+    <Box
       component="section"
       sx={{
         position: 'relative',
         minHeight: { md: 720 },
         backgroundImage: {
-          xs: `linear-gradient(135deg, ${varAlpha(theme.vars.palette.grey['900Channel'], 0.8)} 0%, ${theme.vars.palette.grey[900]} 75%), url(${CONFIG.site.basePath}/assets/images/home/for-designer.webp)`,
-          md: `url(${CONFIG.site.basePath}/assets/images/home/for-designer.webp)`,
+          xs: `linear-gradient(135deg, ${varAlpha(theme.vars.palette.grey['900Channel'], 0.8)} 0%, ${theme.vars.palette.grey[900]} 75%), url(${CONFIG.assetsDir}/assets/images/home/for-designer.webp)`,
+          md: `url(${CONFIG.assetsDir}/assets/images/home/for-designer.webp)`,
         },
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center center',
@@ -173,6 +173,6 @@ export function HomeForDesigner({ sx, ...other }: StackProps) {
 
         {borderBottom}
       </MotionViewport>
-    </Stack>
+    </Box>
   );
 }

@@ -1,4 +1,4 @@
-import type { StackProps } from '@mui/material/Stack';
+import type { BoxProps } from '@mui/material/Box';
 
 import { m } from 'framer-motion';
 
@@ -8,7 +8,6 @@ import Avatar from '@mui/material/Avatar';
 import Rating from '@mui/material/Rating';
 import Divider from '@mui/material/Divider';
 import Container from '@mui/material/Container';
-import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 
 import { fToNow } from 'src/utils/format-time';
@@ -30,9 +29,7 @@ import { FloatLine, FloatTriangleDownIcon } from './components/svg-elements';
 
 // ----------------------------------------------------------------------
 
-export function HomeTestimonials({ sx, ...other }: StackProps) {
-  const theme = useTheme();
-
+export function HomeTestimonials({ sx, ...other }: BoxProps) {
   const renderLines = (
     <>
       <Stack
@@ -75,7 +72,8 @@ export function HomeTestimonials({ sx, ...other }: StackProps) {
         height: '1px',
         border: 'none',
         position: 'absolute',
-        background: `linear-gradient(to right, ${varAlpha(theme.vars.palette.grey['500Channel'], 0)} 0%, ${theme.vars.palette.grey[500]} 50%, ${varAlpha(theme.vars.palette.grey['500Channel'], 0)} 100%)`,
+        background: (theme) =>
+          `linear-gradient(to right, ${varAlpha(theme.vars.palette.grey['500Channel'], 0)} 0%, ${theme.vars.palette.grey[500]} 50%, ${varAlpha(theme.vars.palette.grey['500Channel'], 0)} 100%)`,
         ...(position === 'top' && { top: 0 }),
         ...(position === 'bottom' && { bottom: 0 }),
       }}
@@ -88,10 +86,11 @@ export function HomeTestimonials({ sx, ...other }: StackProps) {
       orientation="vertical"
       flexItem
       sx={{
+        width: '1px',
         opacity: 0.16,
         border: 'none',
-        width: '1px',
-        background: `linear-gradient(to bottom, ${varAlpha(theme.vars.palette.grey['500Channel'], 0)} 0%, ${theme.vars.palette.grey[500]} 50%, ${varAlpha(theme.vars.palette.grey['500Channel'], 0)} 100%)`,
+        background: (theme) =>
+          `linear-gradient(to bottom, ${varAlpha(theme.vars.palette.grey['500Channel'], 0)} 0%, ${theme.vars.palette.grey[500]} 50%, ${varAlpha(theme.vars.palette.grey['500Channel'], 0)} 100%)`,
         display: { xs: 'none', md: 'block' },
       }}
     />
@@ -110,7 +109,11 @@ export function HomeTestimonials({ sx, ...other }: StackProps) {
             </Stack>
 
             <Typography
-              sx={{ ...maxLine({ line: 4, persistent: theme.typography.body1 }), mt: 2, mb: 3 }}
+              sx={(theme) => ({
+                ...maxLine({ line: 4, persistent: theme.typography.body1 }),
+                mt: 2,
+                mb: 3,
+              })}
             >
               {item.content}
             </Typography>
@@ -135,7 +138,6 @@ export function HomeTestimonials({ sx, ...other }: StackProps) {
         sx={{ mt: { xs: 5, md: 8 } }}
       >
         <CarouselDotButtons
-          fallback
           variant="rounded"
           scrollSnaps={carousel.dots.scrollSnaps}
           selectedIndex={carousel.dots.selectedIndex}
@@ -167,7 +169,7 @@ export function HomeTestimonials({ sx, ...other }: StackProps) {
                   fontWeight: 'fontWeightBold',
                   fontSize: { xs: 40, md: 64 },
                   lineHeight: { xs: 50 / 40, md: 80 / 64 },
-                  fontFamily: theme.typography.fontSecondaryFamily,
+                  fontFamily: (theme) => theme.typography.fontSecondaryFamily,
                 }}
               />
             </m.div>
@@ -175,13 +177,13 @@ export function HomeTestimonials({ sx, ...other }: StackProps) {
             <m.div variants={varFade({ distance: 24 }).inUp}>
               <Box
                 component="span"
-                sx={{
+                sx={(theme) => ({
                   ...textGradient(
                     `90deg, ${theme.vars.palette.text.primary}, ${varAlpha(theme.vars.palette.text.primaryChannel, 0.2)}`
                   ),
                   opacity: 0.4,
                   typography: 'h6',
-                }}
+                })}
               >
                 {item.label}
               </Box>
@@ -195,7 +197,7 @@ export function HomeTestimonials({ sx, ...other }: StackProps) {
   );
 
   return (
-    <Stack component="section" sx={{ py: 10, position: 'relative', ...sx }} {...other}>
+    <Box component="section" sx={{ py: 10, position: 'relative', ...sx }} {...other}>
       <MotionViewport>
         {renderLines}
 
@@ -207,7 +209,7 @@ export function HomeTestimonials({ sx, ...other }: StackProps) {
           {renderNumber}
         </Container>
       </MotionViewport>
-    </Stack>
+    </Box>
   );
 }
 

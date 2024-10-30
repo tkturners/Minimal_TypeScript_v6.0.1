@@ -1,5 +1,6 @@
+import type { BoxProps } from '@mui/material/Box';
+
 import Box from '@mui/material/Box';
-import NoSsr from '@mui/material/NoSsr';
 import { useTheme } from '@mui/material/styles';
 import ButtonBase from '@mui/material/ButtonBase';
 
@@ -18,11 +19,10 @@ export function CarouselDotButtons({
   onClickDot,
   scrollSnaps,
   selectedIndex,
-  fallbackCount = 1,
   variant = 'circular',
-  fallback = false,
+  className,
   ...other
-}: CarouselDotButtonsProps) {
+}: BoxProps & CarouselDotButtonsProps) {
   const theme = useTheme();
 
   const GAPS = {
@@ -35,19 +35,6 @@ export function CarouselDotButtons({
     circular: slotProps?.dot?.size ?? 18,
     number: slotProps?.dot?.size ?? 28,
   };
-
-  const renderFallback = (
-    <Box
-      sx={{
-        height: SIZES.circular,
-        width: `calc(${fallbackCount * SIZES.circular + GAPS.circular * (fallbackCount - 1)}px )`,
-        ...(variant === 'number' && {
-          height: SIZES.number,
-          width: `calc(${fallbackCount * SIZES.number + GAPS.number * (fallbackCount - 1)}px )`,
-        }),
-      }}
-    />
-  );
 
   const dotStyles = {
     circular: (selected: boolean) => ({
@@ -101,48 +88,46 @@ export function CarouselDotButtons({
   };
 
   return (
-    <NoSsr fallback={fallback ? renderFallback : null}>
-      <Box
-        component="ul"
-        className={carouselClasses.dots}
-        sx={{
-          zIndex: 9,
-          display: 'inline-flex',
-          ...(variant === 'circular' && { gap: `${GAPS.circular}px` }),
-          ...(variant === 'rounded' && { gap: `${GAPS.rounded}px` }),
-          ...(variant === 'number' && { gap: `${GAPS.number}px` }),
-          ...sx,
-        }}
-        {...other}
-      >
-        {scrollSnaps.map((_, index) => {
-          const selected = index === selectedIndex;
+    <Box
+      component="ul"
+      className={carouselClasses.dots.concat(className ? ` ${className}` : '')}
+      sx={{
+        zIndex: 9,
+        display: 'flex',
+        ...(variant === 'circular' && { gap: `${GAPS.circular}px`, height: SIZES.circular }),
+        ...(variant === 'rounded' && { gap: `${GAPS.rounded}px`, height: SIZES.circular }),
+        ...(variant === 'number' && { gap: `${GAPS.number}px`, height: SIZES.number }),
+        ...sx,
+      }}
+      {...other}
+    >
+      {scrollSnaps.map((_, index) => {
+        const selected = index === selectedIndex;
 
-          return (
-            <Box component="li" key={index} sx={{ display: 'inline-flex' }}>
-              <ButtonBase
-                disableRipple
-                aria-label={`dot-${index}`}
-                className={carouselClasses.dot.concat(
-                  selected ? ` ${carouselClasses.state.selected}` : ''
-                )}
-                onClick={() => onClickDot(index)}
-                sx={{
-                  ...(variant === 'circular' && dotStyles.circular(selected)),
-                  ...(variant === 'rounded' && dotStyles.rounded(selected)),
-                  ...(variant === 'number' && dotStyles.number(selected)),
-                  [`&.${carouselClasses.state.selected}`]: {
-                    ...slotProps?.dot?.selected,
-                  },
-                  ...slotProps?.dot?.sx,
-                }}
-              >
-                {variant === 'number' && index + 1}
-              </ButtonBase>
-            </Box>
-          );
-        })}
-      </Box>
-    </NoSsr>
+        return (
+          <Box component="li" key={index} sx={{ display: 'inline-flex' }}>
+            <ButtonBase
+              disableRipple
+              aria-label={`dot-${index}`}
+              className={carouselClasses.dot.concat(
+                selected ? ` ${carouselClasses.state.selected}` : ''
+              )}
+              onClick={() => onClickDot(index)}
+              sx={{
+                ...(variant === 'circular' && dotStyles.circular(selected)),
+                ...(variant === 'rounded' && dotStyles.rounded(selected)),
+                ...(variant === 'number' && dotStyles.number(selected)),
+                [`&.${carouselClasses.state.selected}`]: {
+                  ...slotProps?.dot?.selected,
+                },
+                ...slotProps?.dot?.sx,
+              }}
+            >
+              {variant === 'number' && index + 1}
+            </ButtonBase>
+          </Box>
+        );
+      })}
+    </Box>
   );
 }

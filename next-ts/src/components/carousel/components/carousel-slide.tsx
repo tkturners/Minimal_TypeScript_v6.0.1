@@ -34,7 +34,13 @@ const StyledContent = styled(Box)(() => ({
 
 // ----------------------------------------------------------------------
 
-export function CarouselSlide({ sx, options, children, ...other }: BoxProps & CarouselSlideProps) {
+export function CarouselSlide({
+  sx,
+  options,
+  children,
+  className,
+  ...other
+}: BoxProps & CarouselSlideProps) {
   const slideSize = getSize(options?.slidesToShow);
 
   return (
@@ -42,7 +48,7 @@ export function CarouselSlide({ sx, options, children, ...other }: BoxProps & Ca
       component="li"
       axis={options?.axis ?? 'x'}
       slideSpacing={options?.slideSpacing}
-      className={carouselClasses.slide}
+      className={carouselClasses.slide.concat(className ? ` ${className}` : '')}
       sx={{
         flex: slideSize,
         ...sx,

@@ -9,7 +9,7 @@ import { OrderDetailsView } from 'src/sections/order/view';
 
 // ----------------------------------------------------------------------
 
-const metadata = { title: `Order details | Dashboard - ${CONFIG.site.name}` };
+const metadata = { title: `Order details | Dashboard - ${CONFIG.appName}` };
 
 export default function Page() {
   const { id = '' } = useParams();

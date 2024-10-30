@@ -1,10 +1,10 @@
 import { CONFIG } from 'src/config-global';
 
-import { AmplifySignUpView } from 'src/sections/auth/amplify';
+import { AmplifySignUpView } from 'src/auth/view/amplify';
 
 // ----------------------------------------------------------------------
 
-export const metadata = { title: `Sign up | Amplify - ${CONFIG.site.name}` };
+export const metadata = { title: `Sign up | Amplify - ${CONFIG.appName}` };
 
 export default function Page() {
   return <AmplifySignUpView />;

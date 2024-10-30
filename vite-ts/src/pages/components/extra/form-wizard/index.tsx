@@ -6,7 +6,7 @@ import { FormWizardView } from 'src/sections/_examples/extra/form-wizard-view';
 
 // ----------------------------------------------------------------------
 
-const metadata = { title: `Form wizard | Components - ${CONFIG.site.name}` };
+const metadata = { title: `Form wizard | Components - ${CONFIG.appName}` };
 
 export default function Page() {
   return (

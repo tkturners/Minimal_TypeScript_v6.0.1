@@ -37,7 +37,7 @@ function MotivationIllustration({ hideBackground, sx, ...other }: Props) {
       {!hideBackground && <BackgroundShape />}
 
       <image
-        href={`${CONFIG.site.basePath}/assets/illustrations/characters/character-2.webp`}
+        href={`${CONFIG.assetsDir}/assets/illustrations/characters/character-2.webp`}
         height="300"
         x="322"
         y="30"

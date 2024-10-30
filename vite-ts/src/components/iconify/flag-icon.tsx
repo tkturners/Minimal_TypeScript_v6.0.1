@@ -1,48 +1,57 @@
+import type { BoxProps } from '@mui/material/Box';
 import type { Theme, SxProps } from '@mui/material/styles';
 
 import { forwardRef } from 'react';
 
 import Box from '@mui/material/Box';
-import NoSsr from '@mui/material/NoSsr';
 
-import { CONFIG } from 'src/config-global';
+import { iconifyClasses } from './classes';
 
 // ----------------------------------------------------------------------
 
-export type FlagIconProps = {
+export type FlagIconProps = BoxProps & {
   code?: string;
-  sx?: SxProps<Theme>;
 };
 
 export const FlagIcon = forwardRef<HTMLSpanElement, FlagIconProps>(
-  ({ code, sx, ...other }, ref) => {
-    const baseStyles = {
+  ({ code, className, sx, ...other }, ref) => {
+    const baseStyles: SxProps<Theme> = {
       width: 26,
       height: 20,
       flexShrink: 0,
       overflow: 'hidden',
       borderRadius: '5px',
+      alignItems: 'center',
       display: 'inline-flex',
+      justifyContent: 'center',
       bgcolor: 'background.neutral',
     };
-
-    const renderFallback = <Box component="span" sx={{ ...baseStyles, ...sx }} />;
 
     if (!code) {
       return null;
     }
 
     return (
-      <NoSsr fallback={renderFallback}>
-        <Box ref={ref} component="span" sx={{ ...baseStyles, ...sx }} {...other}>
-          <Box
-            component="img"
-            alt={code}
-            src={`${CONFIG.site.basePath}/assets/icons/flagpack/${code?.toLowerCase()}.webp`}
-            sx={{ width: 1, height: 1, objectFit: 'cover' }}
-          />
-        </Box>
-      </NoSsr>
+      <Box
+        ref={ref}
+        component="span"
+        className={iconifyClasses.flag.concat(className ? ` ${className}` : '')}
+        sx={{ ...baseStyles, ...sx }}
+        {...other}
+      >
+        <Box
+          component="img"
+          loading="lazy"
+          alt={code}
+          src={`https://purecatamphetamine.github.io/country-flag-icons/3x2/${code?.toUpperCase()}.svg`}
+          sx={{
+            width: 1,
+            height: 1,
+            maxWidth: 'unset',
+            objectFit: 'cover',
+          }}
+        />
+      </Box>
     );
   }
 );

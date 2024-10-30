@@ -3,7 +3,6 @@ import Paper from '@mui/material/Paper';
 import Avatar from '@mui/material/Avatar';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
-import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import ListItemButton from '@mui/material/ListItemButton';
 
@@ -19,28 +18,32 @@ import { Iconify } from 'src/components/iconify';
 const CATEGORIES = [
   {
     label: 'Managing your account',
-    icon: `${CONFIG.site.basePath}/assets/icons/faqs/ic-account.svg`,
+    icon: `${CONFIG.assetsDir}/assets/icons/faqs/ic-account.svg`,
     href: '#',
   },
-  { label: 'Payment', icon: `${CONFIG.site.basePath}/assets/icons/faqs/ic-payment.svg`, href: '#' },
+  {
+    label: 'Payment',
+    icon: `${CONFIG.assetsDir}/assets/icons/faqs/ic-payment.svg`,
+    href: '#',
+  },
   {
     label: 'Delivery',
-    icon: `${CONFIG.site.basePath}/assets/icons/faqs/ic-delivery.svg`,
+    icon: `${CONFIG.assetsDir}/assets/icons/faqs/ic-delivery.svg`,
     href: '#',
   },
   {
     label: 'Problem with the product',
-    icon: `${CONFIG.site.basePath}/assets/icons/faqs/ic-package.svg`,
+    icon: `${CONFIG.assetsDir}/assets/icons/faqs/ic-package.svg`,
     href: '#',
   },
   {
     label: 'Return & refund',
-    icon: `${CONFIG.site.basePath}/assets/icons/faqs/ic-refund.svg`,
+    icon: `${CONFIG.assetsDir}/assets/icons/faqs/ic-refund.svg`,
     href: '#',
   },
   {
     label: 'Guarantees and assurances',
-    icon: `${CONFIG.site.basePath}/assets/icons/faqs/ic-assurances.svg`,
+    icon: `${CONFIG.assetsDir}/assets/icons/faqs/ic-assurances.svg`,
     href: '#',
   },
 ];
@@ -48,7 +51,7 @@ const CATEGORIES = [
 // ----------------------------------------------------------------------
 
 export function FaqsCategory() {
-  const nav = useBoolean();
+  const navOpen = useBoolean();
 
   const renderMobile = (
     <>
@@ -63,15 +66,15 @@ export function FaqsCategory() {
           borderBottom: (theme) => `solid 1px ${theme.vars.palette.divider}`,
         }}
       >
-        <Button startIcon={<Iconify icon="solar:list-bold" />} onClick={nav.onTrue}>
+        <Button startIcon={<Iconify icon="solar:list-bold" />} onClick={navOpen.onTrue}>
           Categories
         </Button>
       </Box>
 
-      <Drawer open={nav.value} onClose={nav.onFalse}>
+      <Drawer open={navOpen.value} onClose={navOpen.onFalse}>
         <Box gap={1} display="grid" gridTemplateColumns="repeat(2, 1fr)" sx={{ p: 1 }}>
           {CATEGORIES.map((category) => (
-            <CardMobile key={category.label} category={category} />
+            <ItemMobile key={category.label} category={category} />
           ))}
         </Box>
       </Drawer>
@@ -85,7 +88,7 @@ export function FaqsCategory() {
       gridTemplateColumns={{ md: 'repeat(3, 1fr)', lg: 'repeat(6, 1fr)' }}
     >
       {CATEGORIES.map((category) => (
-        <CardDesktop key={category.label} category={category} />
+        <ItemDesktop key={category.label} category={category} />
       ))}
     </Box>
   );
@@ -100,13 +103,11 @@ export function FaqsCategory() {
 
 // ----------------------------------------------------------------------
 
-type CardDesktopProps = {
+type ItemProps = {
   category: (typeof CATEGORIES)[number];
 };
 
-function CardDesktop({ category }: CardDesktopProps) {
-  const theme = useTheme();
-
+function ItemDesktop({ category }: ItemProps) {
   return (
     <Paper
       variant="outlined"
@@ -116,7 +117,10 @@ function CardDesktop({ category }: CardDesktopProps) {
         bgcolor: 'unset',
         cursor: 'pointer',
         textAlign: 'center',
-        '&:hover': { bgcolor: 'background.paper', boxShadow: theme.customShadows.z20 },
+        '&:hover': {
+          bgcolor: 'background.paper',
+          boxShadow: (theme) => theme.customShadows.z20,
+        },
       }}
     >
       <Avatar
@@ -132,7 +136,9 @@ function CardDesktop({ category }: CardDesktopProps) {
 
       <Typography
         variant="subtitle2"
-        sx={{ ...maxLine({ line: 2, persistent: theme.typography.subtitle2 }) }}
+        sx={(theme) => ({
+          ...maxLine({ line: 2, persistent: theme.typography.subtitle2 }),
+        })}
       >
         {category.label}
       </Typography>
@@ -142,7 +148,7 @@ function CardDesktop({ category }: CardDesktopProps) {
 
 // ----------------------------------------------------------------------
 
-function CardMobile({ category }: CardDesktopProps) {
+function ItemMobile({ category }: ItemProps) {
   return (
     <ListItemButton
       key={category.label}

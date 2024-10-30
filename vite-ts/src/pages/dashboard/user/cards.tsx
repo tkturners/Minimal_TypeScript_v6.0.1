@@ -6,7 +6,7 @@ import { UserCardsView } from 'src/sections/user/view';
 
 // ----------------------------------------------------------------------
 
-const metadata = { title: `User cards | Dashboard - ${CONFIG.site.name}` };
+const metadata = { title: `User cards | Dashboard - ${CONFIG.appName}` };
 
 export default function Page() {
   return (

@@ -1,4 +1,4 @@
-import type { StackProps } from '@mui/material/Stack';
+import type { BoxProps } from '@mui/material/Box';
 
 import { m } from 'framer-motion';
 
@@ -16,7 +16,7 @@ import { FloatLine, FloatDotIcon } from './components/svg-elements';
 
 // ----------------------------------------------------------------------
 
-export function HomeIntegrations({ sx, ...other }: StackProps) {
+export function HomeIntegrations({ sx, ...other }: BoxProps) {
   const renderLines = (
     <>
       <Stack
@@ -70,13 +70,13 @@ export function HomeIntegrations({ sx, ...other }: StackProps) {
       component={m.img}
       variants={{ ...varScale().in, initial: { scale: 0.8, opacity: 0 } }}
       alt="Integration"
-      src={`${CONFIG.site.basePath}/assets/illustrations/illustration-integration.webp`}
+      src={`${CONFIG.assetsDir}/assets/illustrations/illustration-integration.webp`}
       sx={{ width: 720, objectFit: 'cover', aspectRatio: '1/1' }}
     />
   );
 
   return (
-    <Stack component="section" sx={{ pt: 10, position: 'relative', ...sx }} {...other}>
+    <Box component="section" sx={{ pt: 10, position: 'relative', ...sx }} {...other}>
       <MotionViewport>
         {renderLines}
 
@@ -92,6 +92,6 @@ export function HomeIntegrations({ sx, ...other }: StackProps) {
           </Grid>
         </Container>
       </MotionViewport>
-    </Stack>
+    </Box>
   );
 }

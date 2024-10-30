@@ -4,7 +4,7 @@ import { ProductCreateView } from 'src/sections/product/view';
 
 // ----------------------------------------------------------------------
 
-export const metadata = { title: `Create a new product | Dashboard - ${CONFIG.site.name}` };
+export const metadata = { title: `Create a new product | Dashboard - ${CONFIG.appName}` };
 
 export default function Page() {
   return <ProductCreateView />;

@@ -1,10 +1,10 @@
 import type { IFile } from 'src/types/file';
+import type { BoxProps } from '@mui/material/Box';
 import type { TableProps } from 'src/components/table';
 
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
 import Tooltip from '@mui/material/Tooltip';
-import { useTheme } from '@mui/material/styles';
 import TableBody from '@mui/material/TableBody';
 import IconButton from '@mui/material/IconButton';
 import TableContainer from '@mui/material/TableContainer';
@@ -39,7 +39,7 @@ const TABLE_HEAD = [
 
 // ----------------------------------------------------------------------
 
-type Props = {
+type Props = BoxProps & {
   table: TableProps;
   notFound: boolean;
   dataFiltered: IFile[];
@@ -48,14 +48,14 @@ type Props = {
 };
 
 export function FileManagerTable({
+  sx,
   table,
   notFound,
   onDeleteRow,
   dataFiltered,
   onOpenConfirm,
+  ...other
 }: Props) {
-  const theme = useTheme();
-
   const {
     dense,
     page,
@@ -78,8 +78,10 @@ export function FileManagerTable({
       <Box
         sx={{
           position: 'relative',
-          m: { md: theme.spacing(-2, -3, 0, -3) },
+          m: (theme) => ({ md: theme.spacing(-2, -3, 0, -3) }),
+          ...sx,
         }}
+        {...other}
       >
         <TableSelectedAction
           dense={dense}
@@ -161,7 +163,7 @@ export function FileManagerTable({
                 sx={{
                   m: -2,
                   borderRadius: 1.5,
-                  border: `dashed 1px ${theme.vars.palette.divider}`,
+                  border: (theme) => `dashed 1px ${theme.vars.palette.divider}`,
                 }}
               />
             </TableBody>

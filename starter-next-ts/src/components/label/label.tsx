@@ -13,7 +13,10 @@ import type { LabelProps } from './types';
 // ----------------------------------------------------------------------
 
 export const Label = forwardRef<HTMLSpanElement, LabelProps>(
-  ({ children, color = 'default', variant = 'soft', startIcon, endIcon, sx, ...other }, ref) => {
+  (
+    { children, color = 'default', variant = 'soft', startIcon, endIcon, sx, className, ...other },
+    ref
+  ) => {
     const theme = useTheme();
 
     const iconStyles = {
@@ -30,7 +33,7 @@ export const Label = forwardRef<HTMLSpanElement, LabelProps>(
       <StyledLabel
         ref={ref}
         component="span"
-        className={labelClasses.root}
+        className={labelClasses.root.concat(className ? ` ${className}` : '')}
         ownerState={{ color, variant }}
         sx={{ ...(startIcon && { pl: 0.75 }), ...(endIcon && { pr: 0.75 }), ...sx }}
         theme={theme}

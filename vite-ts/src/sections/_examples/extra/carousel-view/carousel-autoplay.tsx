@@ -2,7 +2,6 @@ import Autoplay from 'embla-carousel-autoplay';
 
 import Box from '@mui/material/Box';
 
-import { Image } from 'src/components/image';
 import { Carousel, useCarousel, CarouselDotButtons } from 'src/components/carousel';
 
 import { IndexLabel, PlayButton } from './elements';
@@ -57,11 +56,15 @@ function CarouselItem({ item, index }: CarouselItemProps) {
   return (
     <Box sx={{ position: 'relative' }}>
       <IndexLabel index={index + 1} />
-      <Image
-        visibleByDefault
+
+      <Box
+        component="img"
         alt={item.title}
         src={item.coverUrl}
-        ratio={{ xs: '4/3', sm: '16/10' }}
+        sx={{
+          objectFit: 'cover',
+          aspectRatio: { xs: '4/3', sm: '16/10' },
+        }}
       />
     </Box>
   );

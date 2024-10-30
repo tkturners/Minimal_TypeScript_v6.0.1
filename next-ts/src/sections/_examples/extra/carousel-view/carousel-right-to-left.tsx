@@ -1,11 +1,9 @@
 import Box from '@mui/material/Box';
-import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 
 import { varAlpha } from 'src/theme/styles';
 
-import { Image } from 'src/components/image';
 import { Iconify } from 'src/components/iconify';
 import {
   Carousel,
@@ -63,21 +61,31 @@ type CarouselItemProps = {
 };
 
 function CarouselItem({ item, index }: CarouselItemProps) {
-  const theme = useTheme();
-
   return (
-    <Box sx={{ position: 'relative' }}>
+    <Box
+      sx={{
+        position: 'relative',
+        '&::before': {
+          content: "''",
+          top: 0,
+          left: 0,
+          width: 1,
+          height: 1,
+          position: 'absolute',
+          backgroundImage: (theme) =>
+            `linear-gradient(to bottom, ${varAlpha(theme.vars.palette.common.blackChannel, 0)} 20%, ${theme.vars.palette.grey[900]} 80%)`,
+        },
+      }}
+    >
       <IndexLabel index={index + 1} />
 
-      <Image
-        visibleByDefault
+      <Box
+        component="img"
         alt={item.title}
         src={item.coverUrl}
-        ratio={{ xs: '4/3', sm: '16/10' }}
-        slotProps={{
-          overlay: {
-            background: `linear-gradient(to bottom, ${varAlpha(theme.vars.palette.common.blackChannel, 0)} 20%, ${theme.vars.palette.grey[900]} 80%)`,
-          },
+        sx={{
+          objectFit: 'cover',
+          aspectRatio: { xs: '4/3', sm: '16/10' },
         }}
       />
 

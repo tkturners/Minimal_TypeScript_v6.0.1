@@ -6,7 +6,7 @@ import { PaymentView } from 'src/sections/payment/view';
 
 // ----------------------------------------------------------------------
 
-const metadata = { title: `Payment - ${CONFIG.site.name}` };
+const metadata = { title: `Payment - ${CONFIG.appName}` };
 
 export default function Page() {
   return (

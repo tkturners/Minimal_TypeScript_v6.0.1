@@ -1,11 +1,10 @@
 import type { IChatParticipant, IChatConversations } from 'src/types/chat';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useMemo, useState, useEffect, useCallback } from 'react';
 
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Drawer from '@mui/material/Drawer';
-import { useTheme } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -16,14 +15,21 @@ import { useRouter } from 'src/routes/hooks';
 
 import { useResponsive } from 'src/hooks/use-responsive';
 
+import { today } from 'src/utils/format-time';
+
+import { createConversation } from 'src/actions/chat';
+
 import { Iconify } from 'src/components/iconify';
 import { Scrollbar } from 'src/components/scrollbar';
+
+import { useMockedUser } from 'src/auth/hooks';
 
 import { ToggleButton } from './styles';
 import { ChatNavItem } from './chat-nav-item';
 import { ChatNavAccount } from './chat-nav-account';
 import { ChatNavItemSkeleton } from './chat-skeleton';
 import { ChatNavSearchResults } from './chat-nav-search-results';
+import { initialConversation } from './utils/initial-conversation';
 
 import type { UseNavCollapseReturn } from './hooks/use-collapse-nav';
 
@@ -44,15 +50,15 @@ type Props = {
 export function ChatNav({
   loading,
   contacts,
-  conversations,
   collapseNav,
+  conversations,
   selectedConversationId,
 }: Props) {
-  const theme = useTheme();
-
   const router = useRouter();
 
   const mdUp = useResponsive('up', 'md');
+
+  const { user } = useMockedUser();
 
   const {
     openMobile,
@@ -66,7 +72,25 @@ export function ChatNav({
   const [searchContacts, setSearchContacts] = useState<{
     query: string;
     results: IChatParticipant[];
-  }>({ query: '', results: [] });
+  }>({
+    query: '',
+    results: [],
+  });
+
+  const myContact = useMemo(
+    () => ({
+      id: `${user?.id}`,
+      role: `${user?.role}`,
+      email: `${user?.email}`,
+      address: `${user?.address}`,
+      name: `${user?.displayName}`,
+      lastActivity: today(),
+      avatarUrl: `${user?.photoURL}`,
+      phoneNumber: `${user?.phoneNumber}`,
+      status: 'online' as 'online' | 'offline' | 'alway' | 'busy',
+    }),
+    [user]
+  );
 
   useEffect(() => {
     if (!mdUp) {
@@ -109,12 +133,45 @@ export function ChatNav({
   }, []);
 
   const handleClickResult = useCallback(
-    (result: IChatParticipant) => {
+    async (result: IChatParticipant) => {
       handleClickAwaySearch();
 
-      router.push(`${paths.dashboard.chat}?id=${result.id}`);
+      const linkTo = (id: string) => router.push(`${paths.dashboard.chat}?id=${id}`);
+
+      try {
+        // Check if the conversation already exists
+        if (conversations.allIds.includes(result.id)) {
+          linkTo(result.id);
+          return;
+        }
+
+        // Find the recipient in contacts
+        const recipient = contacts.find((contact) => contact.id === result.id);
+        if (!recipient) {
+          console.error('Recipient not found');
+          return;
+        }
+
+        // Prepare conversation data
+        const { conversationData } = initialConversation({
+          recipients: [recipient],
+          me: myContact,
+        });
+
+        // Create a new conversation
+        const res = await createConversation(conversationData);
+
+        if (!res || !res.conversation) {
+          console.error('Failed to create conversation');
+        }
+
+        // Navigate to the new conversation
+        linkTo(res.conversation.id);
+      } catch (error) {
+        console.error('Error handling click result:', error);
+      }
     },
-    [handleClickAwaySearch, router]
+    [contacts, conversations.allIds, handleClickAwaySearch, myContact, router]
   );
 
   const renderLoading = <ChatNavItemSkeleton />;
@@ -209,10 +266,11 @@ export function ChatNav({
           flex: '1 1 auto',
           width: NAV_WIDTH,
           display: { xs: 'none', md: 'flex' },
-          borderRight: `solid 1px ${theme.vars.palette.divider}`,
-          transition: theme.transitions.create(['width'], {
-            duration: theme.transitions.duration.shorter,
-          }),
+          borderRight: (theme) => `solid 1px ${theme.vars.palette.divider}`,
+          transition: (theme) =>
+            theme.transitions.create(['width'], {
+              duration: theme.transitions.duration.shorter,
+            }),
           ...(collapseDesktop && { width: NAV_COLLAPSE_WIDTH }),
         }}
       >

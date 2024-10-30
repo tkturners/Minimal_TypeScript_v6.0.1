@@ -3,7 +3,6 @@ import type { Theme, SxProps } from '@mui/material/styles';
 
 import NoSsr from '@mui/material/NoSsr';
 import { tabClasses } from '@mui/material/Tab';
-import { useTheme } from '@mui/material/styles';
 import Tabs, { tabsClasses } from '@mui/material/Tabs';
 
 import { stylesMode } from 'src/theme/styles';
@@ -22,8 +21,6 @@ export type CustomTabsProps = TabsProps & {
 };
 
 export function CustomTabs({ children, slotProps, sx, ...other }: CustomTabsProps) {
-  const theme = useTheme();
-
   return (
     <Tabs
       sx={{
@@ -55,7 +52,7 @@ export function CustomTabs({ children, slotProps, sx, ...other }: CustomTabsProp
             borderRadius: 1,
             display: 'block',
             bgcolor: 'common.white',
-            boxShadow: theme.customShadows.z1,
+            boxShadow: (theme) => theme.customShadows.z1,
             [stylesMode.dark]: { bgcolor: 'grey.900' },
             ...slotProps?.indicator,
           },

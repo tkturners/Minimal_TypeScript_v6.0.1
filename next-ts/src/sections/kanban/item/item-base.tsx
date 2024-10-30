@@ -9,8 +9,8 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
 import ListItem from '@mui/material/ListItem';
+import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import { styled, useTheme } from '@mui/material/styles';
 import AvatarGroup, { avatarGroupClasses } from '@mui/material/AvatarGroup';
 
 import { varAlpha, stylesMode } from 'src/theme/styles';
@@ -75,8 +75,6 @@ type ItemBaseProps = StackProps & {
 
 const ItemBase = forwardRef<HTMLLIElement, ItemBaseProps>(
   ({ task, stateProps, sx, ...other }, ref) => {
-    const theme = useTheme();
-
     useEffect(() => {
       if (!stateProps?.dragOverlay) {
         return;
@@ -123,7 +121,11 @@ const ItemBase = forwardRef<HTMLLIElement, ItemBaseProps>(
     );
 
     const renderImg = !!task?.attachments?.length && (
-      <Box sx={{ p: theme.spacing(1, 1, 0, 1) }}>
+      <Box
+        sx={{
+          p: (theme) => theme.spacing(1, 1, 0, 1),
+        }}
+      >
         <Box
           component="img"
           className={imageClasses.root}
@@ -191,13 +193,15 @@ const ItemBase = forwardRef<HTMLLIElement, ItemBaseProps>(
         >
           {renderImg}
 
-          <Stack spacing={2} sx={{ px: 2, py: 2.5, position: 'relative' }}>
+          <Box sx={{ px: 2, py: 2.5, position: 'relative' }}>
             {renderPriority}
 
-            <Typography variant="subtitle2">{task.name}</Typography>
+            <Typography variant="subtitle2" sx={{ mb: 2 }}>
+              {task.name}
+            </Typography>
 
             {renderInfo}
-          </Stack>
+          </Box>
         </StyledItem>
       </StyledItemWrap>
     );

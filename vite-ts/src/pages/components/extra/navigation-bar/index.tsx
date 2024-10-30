@@ -6,7 +6,7 @@ import { NavigationBarView } from 'src/sections/_examples/extra/navigation-bar-v
 
 // ----------------------------------------------------------------------
 
-const metadata = { title: `Navigation bar | Components - ${CONFIG.site.name}` };
+const metadata = { title: `Navigation bar | Components - ${CONFIG.appName}` };
 
 export default function Page() {
   return (

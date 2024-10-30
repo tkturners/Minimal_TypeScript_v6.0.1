@@ -40,10 +40,10 @@ export function SettingsProvider({ children, settings }: SettingsProviderProps) 
     }),
     [
       values.state,
+      values.setField,
+      values.setState,
       values.canReset,
       values.resetState,
-      values.setState,
-      values.setField,
       openDrawer,
       onCloseDrawer,
       onToggleDrawer,

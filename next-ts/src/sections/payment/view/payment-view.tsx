@@ -13,7 +13,7 @@ import { PaymentBillingAddress } from '../payment-billing-address';
 
 export function PaymentView() {
   return (
-    <Container sx={{ pt: 5, pb: 10 }}>
+    <Container sx={{ pt: { xs: 3, md: 5 }, pb: 10 }}>
       <Typography variant="h3" align="center" sx={{ mb: 2 }}>
         {`Let's finish powering you up!`}
       </Typography>

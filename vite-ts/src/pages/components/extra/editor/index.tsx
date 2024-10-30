@@ -6,7 +6,7 @@ import { EditorView } from 'src/sections/_examples/extra/editor-view';
 
 // ----------------------------------------------------------------------
 
-const metadata = { title: `Editor | Components - ${CONFIG.site.name}` };
+const metadata = { title: `Editor | Components - ${CONFIG.appName}` };
 
 export default function Page() {
   return (

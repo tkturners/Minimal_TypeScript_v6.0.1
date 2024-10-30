@@ -77,7 +77,7 @@ const MuiSlider: Components<Theme>['MuiSlider'] = {
           boxShadow: 'none',
           width: 'calc(100% - 4px)',
           height: 'calc(100% - 4px)',
-          backgroundImage: `linear-gradient(180deg, ${theme.vars.palette.grey[500]} 0%, ${varAlpha(theme.vars.palette.grey['500Channel'], 0)} 100%)`,
+          backgroundImage: `linear-gradient(180deg, ${theme.vars.palette.grey[500]}, ${varAlpha(theme.vars.palette.grey['500Channel'], 0)})`,
           [stylesMode.dark]: { opacity: 0.8 },
         },
       },

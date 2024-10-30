@@ -6,7 +6,7 @@ import { ContactView } from 'src/sections/contact/view';
 
 // ----------------------------------------------------------------------
 
-const metadata = { title: `Contact us - ${CONFIG.site.name}` };
+const metadata = { title: `Contact us - ${CONFIG.appName}` };
 
 export default function Page() {
   return (

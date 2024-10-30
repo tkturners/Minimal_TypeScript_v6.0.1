@@ -12,7 +12,7 @@ export const NAV_ITEMS = [
       {
         title: 'Landing',
         path: '#landing',
-        icon: <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-dashboard.svg`} />,
+        icon: <SvgColor src={`${CONFIG.assetsDir}/assets/icons/navbar/ic-dashboard.svg`} />,
         roles: ['admin'],
         caption: 'Display only admin role',
         info: <Label color="error">+2 </Label>,
@@ -20,13 +20,13 @@ export const NAV_ITEMS = [
       {
         title: 'Services',
         path: '#services',
-        icon: <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-analytics.svg`} />,
+        icon: <SvgColor src={`${CONFIG.assetsDir}/assets/icons/navbar/ic-analytics.svg`} />,
         roles: ['admin', 'user'],
       },
       {
         title: 'Blog',
         path: '#blog',
-        icon: <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-blog.svg`} />,
+        icon: <SvgColor src={`${CONFIG.assetsDir}/assets/icons/navbar/ic-blog.svg`} />,
         info: <Label color="info">+3 </Label>,
         children: [
           {
@@ -46,23 +46,23 @@ export const NAV_ITEMS = [
       {
         title: 'About',
         path: '#about',
-        icon: <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-user.svg`} />,
+        icon: <SvgColor src={`${CONFIG.assetsDir}/assets/icons/navbar/ic-user.svg`} />,
         info: '+4',
       },
       {
         title: 'Contact',
         path: '#contact',
-        icon: <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-tour.svg`} />,
+        icon: <SvgColor src={`${CONFIG.assetsDir}/assets/icons/navbar/ic-tour.svg`} />,
       },
       {
         title: 'Level',
         path: '#level',
-        icon: <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-menu-item.svg`} />,
+        icon: <SvgColor src={`${CONFIG.assetsDir}/assets/icons/navbar/ic-menu-item.svg`} />,
         children: [
           {
             title: 'Level 2a',
             path: '#level/2a',
-            icon: <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-chat.svg`} />,
+            icon: <SvgColor src={`${CONFIG.assetsDir}/assets/icons/navbar/ic-chat.svg`} />,
             caption: 'This is the caption',
             children: [
               { title: 'Level 3a', path: '#level/2a/3a' },
@@ -80,12 +80,12 @@ export const NAV_ITEMS = [
           {
             title: 'Level 2b',
             path: '#level/2b',
-            icon: <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-mail.svg`} />,
+            icon: <SvgColor src={`${CONFIG.assetsDir}/assets/icons/navbar/ic-mail.svg`} />,
           },
           {
             title: 'Level 2c',
             path: '#level/2c',
-            icon: <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-calendar.svg`} />,
+            icon: <SvgColor src={`${CONFIG.assetsDir}/assets/icons/navbar/ic-calendar.svg`} />,
           },
         ],
       },

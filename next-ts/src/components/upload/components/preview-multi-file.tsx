@@ -7,6 +7,7 @@ import { fData } from 'src/utils/format-number';
 import { varAlpha } from 'src/theme/styles';
 
 import { Iconify } from '../../iconify';
+import { uploadClasses } from '../classes';
 import { fileData, FileThumbnail } from '../../file-thumbnail';
 
 import type { MultiFilePreviewProps } from '../types';
@@ -21,6 +22,8 @@ export function MultiFilePreview({
   slotProps,
   firstNode,
   files = [],
+  className,
+  ...other
 }: MultiFilePreviewProps) {
   const renderFirstNode = firstNode && (
     <Box
@@ -50,6 +53,7 @@ export function MultiFilePreview({
   return (
     <Box
       component="ul"
+      className={uploadClasses.uploadMultiPreview.concat(className ? ` ${className}` : '')}
       sx={{
         gap: 1,
         display: 'flex',
@@ -60,6 +64,7 @@ export function MultiFilePreview({
         }),
         ...sx,
       }}
+      {...other}
     >
       {renderFirstNode}
 

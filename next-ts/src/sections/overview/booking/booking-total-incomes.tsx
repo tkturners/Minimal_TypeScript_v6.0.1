@@ -92,7 +92,7 @@ export function BookingTotalIncomes({ title, total, percent, chart, sx, ...other
       <Chart type="line" series={chart.series} options={chartOptions} height={120} />
 
       <SvgColor
-        src={`${CONFIG.site.basePath}/assets/background/shape-square.svg`}
+        src={`${CONFIG.assetsDir}/assets/background/shape-square.svg`}
         sx={{
           top: 0,
           left: 0,

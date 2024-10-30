@@ -5,10 +5,21 @@ import COLORS from '../core/colors.json';
 import PRIMARY_COLOR from './primary-color.json';
 import { components as coreComponents } from '../core/components';
 import { hexToRgbChannel, createPaletteChannel } from '../styles';
-import { grey as coreGreyPalette, primary as corePrimaryPalette } from '../core/palette';
+import { primary as corePrimary, grey as coreGreyPalette } from '../core/palette';
 import { createShadowColor, customShadows as coreCustomShadows } from '../core/custom-shadows';
 
 import type { ThemeComponents, ThemeUpdateOptions } from '../types';
+
+// ----------------------------------------------------------------------
+
+const PRIMARY_COLORS = {
+  default: COLORS.primary,
+  cyan: PRIMARY_COLOR.cyan,
+  purple: PRIMARY_COLOR.purple,
+  blue: PRIMARY_COLOR.blue,
+  orange: PRIMARY_COLOR.orange,
+  red: PRIMARY_COLOR.red,
+};
 
 // ----------------------------------------------------------------------
 
@@ -23,6 +34,12 @@ export function updateCoreWithSettings(
 ): ThemeUpdateOptions {
   const { colorSchemes, customShadows } = theme;
 
+  const updatedPrimary = getPalette(
+    settings.primaryColor,
+    corePrimary,
+    PRIMARY_COLORS[settings.primaryColor]
+  );
+
   return {
     ...theme,
     colorSchemes: {
@@ -31,7 +48,7 @@ export function updateCoreWithSettings(
         palette: {
           ...colorSchemes?.light?.palette,
           /** [1] */
-          primary: getPalettePrimary(settings.primaryColor),
+          primary: updatedPrimary,
           /** [2] */
           background: {
             ...colorSchemes?.light?.palette?.background,
@@ -44,7 +61,7 @@ export function updateCoreWithSettings(
         palette: {
           ...colorSchemes?.dark?.palette,
           /** [1] */
-          primary: getPalettePrimary(settings.primaryColor),
+          primary: updatedPrimary,
         },
       },
     },
@@ -54,7 +71,7 @@ export function updateCoreWithSettings(
       primary:
         settings.primaryColor === 'default'
           ? coreCustomShadows('light').primary
-          : createShadowColor(getPalettePrimary(settings.primaryColor).mainChannel),
+          : createShadowColor(updatedPrimary.mainChannel),
     },
   };
 }
@@ -90,21 +107,13 @@ export function updateComponentsWithSettings(settings: SettingsState) {
 
 // ----------------------------------------------------------------------
 
-const PRIMARY_COLORS = {
-  default: COLORS.primary,
-  cyan: PRIMARY_COLOR.cyan,
-  purple: PRIMARY_COLOR.purple,
-  blue: PRIMARY_COLOR.blue,
-  orange: PRIMARY_COLOR.orange,
-  red: PRIMARY_COLOR.red,
-};
-
-function getPalettePrimary(primaryColorName: SettingsState['primaryColor']) {
+function getPalette(
+  name: SettingsState['primaryColor'],
+  initialPalette: typeof corePrimary,
+  updatedPalette: typeof corePrimary
+) {
   /** [1] */
-  const selectedPrimaryColor = PRIMARY_COLORS[primaryColorName];
-  const updatedPrimaryPalette = createPaletteChannel(selectedPrimaryColor);
-
-  return primaryColorName === 'default' ? corePrimaryPalette : updatedPrimaryPalette;
+  return name === 'default' ? initialPalette : createPaletteChannel(updatedPalette);
 }
 
 function getBackgroundDefault(contrast: SettingsState['contrast']) {

@@ -1,11 +1,10 @@
+import type { BoxProps } from '@mui/material/Box';
 import type { IDateValue } from 'src/types/common';
-import type { StackProps } from '@mui/material/Stack';
 
 import { m } from 'framer-motion';
 
 import Box from '@mui/material/Box';
 import Masonry from '@mui/lab/Masonry';
-import Stack from '@mui/material/Stack';
 import Rating from '@mui/material/Rating';
 import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
@@ -14,8 +13,6 @@ import Grid from '@mui/material/Unstable_Grid2';
 import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import ListItemText from '@mui/material/ListItemText';
-
-import { useResponsive } from 'src/hooks/use-responsive';
 
 import { fDate } from 'src/utils/format-time';
 
@@ -28,19 +25,22 @@ import { varFade, MotionViewport } from 'src/components/animate';
 
 // ----------------------------------------------------------------------
 
-export function AboutTestimonials() {
+export function AboutTestimonials({ sx, ...other }: BoxProps) {
   const theme = useTheme();
-
-  const mdUp = useResponsive('up', 'md');
 
   const renderLink = (
     <Button color="primary" endIcon={<Iconify icon="eva:arrow-ios-forward-fill" />}>
-      Read more testimonials
+      Read more
     </Button>
   );
 
   const renderDescription = (
-    <Box sx={{ maxWidth: { md: 360 }, textAlign: { xs: 'center', md: 'unset' } }}>
+    <Box
+      sx={{
+        maxWidth: { md: 360 },
+        textAlign: { xs: 'center', md: 'unset' },
+      }}
+    >
       <m.div variants={varFade().inUp}>
         <Typography variant="overline" sx={{ color: 'common.white', opacity: 0.48 }}>
           Testimonials
@@ -62,15 +62,17 @@ export function AboutTestimonials() {
         </Typography>
       </m.div>
 
-      {!mdUp && (
-        <Box
-          component={m.div}
-          variants={varFade().inUp}
-          sx={{ mt: 3, display: 'flex', justifyContent: 'center' }}
-        >
-          {renderLink}
-        </Box>
-      )}
+      <Box
+        component={m.div}
+        variants={varFade().inUp}
+        sx={{
+          mt: 3,
+          justifyContent: 'center',
+          display: { xs: 'flex', md: 'none' },
+        }}
+      >
+        {renderLink}
+      </Box>
     </Box>
   );
 
@@ -86,7 +88,7 @@ export function AboutTestimonials() {
       <Masonry spacing={3} columns={{ xs: 1, md: 2 }} sx={{ ml: 0 }}>
         {_testimonials.map((testimonial) => (
           <m.div key={testimonial.name} variants={varFade().inUp}>
-            <TestimonialCard testimonial={testimonial} />
+            <TestimonialItem testimonial={testimonial} />
           </m.div>
         ))}
       </Masonry>
@@ -95,15 +97,18 @@ export function AboutTestimonials() {
 
   return (
     <Box
+      component="section"
       sx={{
         ...bgGradient({
           color: `0deg, ${varAlpha(theme.vars.palette.grey['900Channel'], 0.9)}, ${varAlpha(theme.vars.palette.grey['900Channel'], 0.9)}`,
-          imgUrl: `${CONFIG.site.basePath}/assets/images/about/testimonials.webp`,
+          imgUrl: `${CONFIG.assetsDir}/assets/images/about/testimonials.webp`,
         }),
         overflow: 'hidden',
         height: { md: 840 },
         py: { xs: 10, md: 0 },
+        ...sx,
       }}
+      {...other}
     >
       <Container component={MotionViewport} sx={{ position: 'relative', height: 1 }}>
         <Grid
@@ -122,15 +127,17 @@ export function AboutTestimonials() {
           </Grid>
         </Grid>
 
-        {mdUp && (
-          <Box
-            component={m.div}
-            variants={varFade().inUp}
-            sx={{ bottom: 60, position: 'absolute' }}
-          >
-            {renderLink}
-          </Box>
-        )}
+        <Box
+          component={m.div}
+          variants={varFade().inUp}
+          sx={{
+            bottom: 60,
+            position: 'absolute',
+            display: { xs: 'none', md: 'flex' },
+          }}
+        >
+          {renderLink}
+        </Box>
       </Container>
     </Box>
   );
@@ -138,7 +145,7 @@ export function AboutTestimonials() {
 
 // ----------------------------------------------------------------------
 
-type TestimonialCardProps = StackProps & {
+type TestimonialItemProps = BoxProps & {
   testimonial: {
     name: string;
     content: string;
@@ -148,14 +155,14 @@ type TestimonialCardProps = StackProps & {
   };
 };
 
-function TestimonialCard({ testimonial, sx, ...other }: TestimonialCardProps) {
+function TestimonialItem({ testimonial, sx, ...other }: TestimonialItemProps) {
   const theme = useTheme();
 
-  const { name, ratingNumber, postedDate, content, avatarUrl } = testimonial;
-
   return (
-    <Stack
-      spacing={3}
+    <Box
+      gap={3}
+      display="flex"
+      flexDirection="column"
       sx={{
         ...bgBlur({ color: varAlpha(theme.vars.palette.common.whiteChannel, 0.08) }),
         p: 3,
@@ -167,16 +174,16 @@ function TestimonialCard({ testimonial, sx, ...other }: TestimonialCardProps) {
     >
       <Iconify icon="mingcute:quote-left-fill" width={40} sx={{ opacity: 0.48 }} />
 
-      <Typography variant="body2">{content}</Typography>
+      <Typography variant="body2">{testimonial.content}</Typography>
 
-      <Rating value={ratingNumber} readOnly size="small" />
+      <Rating value={testimonial.ratingNumber} readOnly size="small" />
 
-      <Stack direction="row">
-        <Avatar alt={name} src={avatarUrl} sx={{ mr: 2 }} />
+      <Box gap={2} display="flex">
+        <Avatar alt={testimonial.name} src={testimonial.avatarUrl} />
 
         <ListItemText
-          primary={name}
-          secondary={fDate(postedDate)}
+          primary={testimonial.name}
+          secondary={fDate(testimonial.postedDate)}
           primaryTypographyProps={{ typography: 'subtitle2', mb: 0.5 }}
           secondaryTypographyProps={{
             color: 'inherit',
@@ -184,7 +191,7 @@ function TestimonialCard({ testimonial, sx, ...other }: TestimonialCardProps) {
             sx: { opacity: 0.64 },
           }}
         />
-      </Stack>
-    </Stack>
+      </Box>
+    </Box>
   );
 }

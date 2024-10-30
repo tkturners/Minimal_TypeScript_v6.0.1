@@ -33,7 +33,7 @@ export function Section({
   layoutQuery,
   methods,
   title = 'Manage the job',
-  imgUrl = `${CONFIG.site.basePath}/assets/illustrations/illustration-dashboard.webp`,
+  imgUrl = `${CONFIG.assetsDir}/assets/illustrations/illustration-dashboard.webp`,
   subtitle = 'More effectively with optimized workflows.',
   ...other
 }: SectionProps) {
@@ -44,7 +44,7 @@ export function Section({
       sx={{
         ...bgGradient({
           color: `0deg, ${varAlpha(theme.vars.palette.background.defaultChannel, 0.92)}, ${varAlpha(theme.vars.palette.background.defaultChannel, 0.92)}`,
-          imgUrl: `${CONFIG.site.basePath}/assets/background/background-3-blur.webp`,
+          imgUrl: `${CONFIG.assetsDir}/assets/background/background-3-blur.webp`,
         }),
         px: 3,
         pb: 3,

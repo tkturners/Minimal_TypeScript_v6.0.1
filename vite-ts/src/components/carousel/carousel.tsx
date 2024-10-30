@@ -1,3 +1,5 @@
+import type { BoxProps } from '@mui/material/Box';
+
 import { Children, isValidElement } from 'react';
 
 import Box from '@mui/material/Box';
@@ -43,7 +45,14 @@ export const StyledContainer = styled(Box, {
 
 // ----------------------------------------------------------------------
 
-export function Carousel({ carousel, children, sx, slotProps }: CarouselProps) {
+export function Carousel({
+  carousel,
+  children,
+  slotProps,
+  sx,
+  className,
+  ...other
+}: BoxProps & CarouselProps) {
   const { mainRef, options } = carousel;
 
   const axis = options?.axis ?? 'x';
@@ -66,7 +75,14 @@ export function Carousel({ carousel, children, sx, slotProps }: CarouselProps) {
   });
 
   return (
-    <StyledRoot sx={sx} axis={axis} ref={mainRef} dir={direction} className={carouselClasses.root}>
+    <StyledRoot
+      sx={sx}
+      axis={axis}
+      ref={mainRef}
+      dir={direction}
+      className={carouselClasses.root.concat(className ? ` ${className}` : '')}
+      {...other}
+    >
       <StyledContainer
         component="ul"
         axis={axis}

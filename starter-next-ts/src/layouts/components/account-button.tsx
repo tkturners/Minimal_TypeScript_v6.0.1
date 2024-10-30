@@ -13,12 +13,11 @@ import { varHover, AnimateAvatar } from 'src/components/animate';
 // ----------------------------------------------------------------------
 
 export type AccountButtonProps = IconButtonProps & {
-  open: boolean;
   photoURL: string;
   displayName: string;
 };
 
-export function AccountButton({ open, photoURL, displayName, sx, ...other }: AccountButtonProps) {
+export function AccountButton({ photoURL, displayName, sx, ...other }: AccountButtonProps) {
   const theme = useTheme();
 
   const renderFallback = (

@@ -31,13 +31,14 @@ export type AnimateTextProps = TypographyProps & {
 };
 
 export function AnimateText({
-  sx,
   text,
   variants,
   once = true,
   amount = 1 / 3,
   component = 'p',
   repeatDelay = 500, // 1000 = 1s
+  sx,
+  className,
   ...other
 }: AnimateTextProps) {
   const ref = useRef(null);
@@ -74,7 +75,7 @@ export function AnimateText({
   return (
     <Typography
       component={component}
-      className={animateTextClasses.root}
+      className={animateTextClasses.root.concat(className ? ` ${className}` : '')}
       sx={{
         p: 0,
         m: 0,

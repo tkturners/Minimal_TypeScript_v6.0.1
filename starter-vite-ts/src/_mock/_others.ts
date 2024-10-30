@@ -111,22 +111,22 @@ export const _mapContact = [
 export const _socials = [
   {
     value: 'facebook',
-    name: 'Facebook',
+    label: 'Facebook',
     path: 'https://www.facebook.com/caitlyn.kerluke',
   },
   {
     value: 'instagram',
-    name: 'Instagram',
+    label: 'Instagram',
     path: 'https://www.instagram.com/caitlyn.kerluke',
   },
   {
     value: 'linkedin',
-    name: 'Linkedin',
+    label: 'Linkedin',
     path: 'https://www.linkedin.com/caitlyn.kerluke',
   },
   {
     value: 'twitter',
-    name: 'Twitter',
+    label: 'Twitter',
     path: 'https://www.twitter.com/caitlyn.kerluke',
   },
 ];

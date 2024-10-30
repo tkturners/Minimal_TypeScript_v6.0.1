@@ -207,11 +207,15 @@ export function useChart(options?: ChartOptions): ChartOptions {
       fontWeight: 500,
       fontSize: '13px',
       horizontalAlign: 'right',
-      markers: { radius: 12 },
+      ...options?.legend,
+      markers: {
+        shape: 'circle',
+        ...options?.legend?.markers,
+      },
       labels: {
         colors: theme.vars.palette.text.primary,
+        ...options?.legend?.labels,
       },
-      ...options?.legend,
       itemMargin: {
         horizontal: 8,
         vertical: 8,

@@ -17,6 +17,9 @@ const MuiInputBase: Components<Theme>['MuiInputBase'] = {
       [`&.${inputBaseClasses.disabled}`]: {
         '& svg': { color: theme.vars.palette.text.disabled },
       },
+      [`& .${inputBaseClasses.input}:focus`]: {
+        borderRadius: 'inherit',
+      },
     }),
     input: ({ theme }) => ({
       fontSize: theme.typography.pxToRem(15),

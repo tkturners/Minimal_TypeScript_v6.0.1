@@ -5,7 +5,7 @@ import { JobEditView } from 'src/sections/job/view';
 
 // ----------------------------------------------------------------------
 
-export const metadata = { title: `Job edit | Dashboard - ${CONFIG.site.name}` };
+export const metadata = { title: `Job edit | Dashboard - ${CONFIG.appName}` };
 
 type Props = {
   params: { id: string };

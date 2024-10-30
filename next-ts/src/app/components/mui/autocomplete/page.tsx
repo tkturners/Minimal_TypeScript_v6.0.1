@@ -4,7 +4,7 @@ import { AutocompleteView } from 'src/sections/_examples/mui/autocomplete-view';
 
 // ----------------------------------------------------------------------
 
-export const metadata = { title: `Autocomplete | MUI - ${CONFIG.site.name}` };
+export const metadata = { title: `Autocomplete | MUI - ${CONFIG.appName}` };
 
 export default function Page() {
   return <AutocompleteView />;

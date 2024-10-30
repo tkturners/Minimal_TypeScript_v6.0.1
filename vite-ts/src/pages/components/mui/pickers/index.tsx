@@ -6,7 +6,7 @@ import { PickerView } from 'src/sections/_examples/mui/picker-view';
 
 // ----------------------------------------------------------------------
 
-const metadata = { title: `Date picker | MUI - ${CONFIG.site.name}` };
+const metadata = { title: `Date picker | MUI - ${CONFIG.appName}` };
 
 export default function Page() {
   return (

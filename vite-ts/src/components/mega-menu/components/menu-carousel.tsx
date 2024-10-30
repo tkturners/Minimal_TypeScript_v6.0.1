@@ -1,6 +1,5 @@
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
-import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 
 import { RouterLink } from 'src/routes/components';
@@ -50,8 +49,6 @@ type CarouselItemProps = {
 };
 
 function CarouselItem({ item }: CarouselItemProps) {
-  const theme = useTheme();
-
   return (
     <Link
       component={RouterLink}
@@ -61,7 +58,7 @@ function CarouselItem({ item }: CarouselItemProps) {
       sx={{
         px: 1,
         display: 'block',
-        transition: theme.transitions.create('color'),
+        transition: (theme) => theme.transitions.create('color'),
         '&:hover': { color: 'primary.main' },
       }}
     >
@@ -69,10 +66,10 @@ function CarouselItem({ item }: CarouselItemProps) {
 
       <Typography
         variant="caption"
-        sx={{
+        sx={(theme) => ({
           ...maxLine({ line: 2, persistent: theme.typography.caption }),
           fontWeight: 'fontWeightSemiBold',
-        }}
+        })}
       >
         {item.name}
       </Typography>

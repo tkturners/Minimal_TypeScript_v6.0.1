@@ -16,7 +16,7 @@ import { varFade, MotionContainer } from 'src/components/animate';
 import { ComponentNav } from './component-nav';
 import { ComponentCard } from './component-card';
 import { ComponentHero } from './component-hero';
-import { muiNav, extraNav, foundationNav } from './config-nav';
+import { muiNav, extraNav, foundationNav } from './config-nav-components';
 
 // ----------------------------------------------------------------------
 

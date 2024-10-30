@@ -111,6 +111,7 @@ export function AnimateBorder({ animate, sx }: AnimateBorderProps) {
 
   return (
     <Box
+      component="span"
       ref={rootRef}
       sx={{
         minWidth: 40,

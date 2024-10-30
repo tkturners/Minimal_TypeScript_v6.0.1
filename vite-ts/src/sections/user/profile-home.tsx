@@ -17,8 +17,9 @@ import { fNumber } from 'src/utils/format-number';
 
 import { _socials } from 'src/_mock';
 import { varAlpha } from 'src/theme/styles';
+import { TwitterIcon, FacebookIcon, LinkedinIcon, InstagramIcon } from 'src/assets/icons';
 
-import { Iconify, SocialIcon } from 'src/components/iconify';
+import { Iconify } from 'src/components/iconify';
 
 import { ProfilePostItem } from './profile-post-item';
 
@@ -65,46 +66,37 @@ export function ProfileHome({ info, posts }: Props) {
     <Card>
       <CardHeader title="About" />
 
-      <Stack spacing={2} sx={{ p: 3 }}>
-        <Box sx={{ typography: 'body2' }}>{info.quote}</Box>
+      <Stack spacing={2} sx={{ p: 3, typography: 'body2' }}>
+        <Box>{info.quote}</Box>
 
-        <Stack direction="row" spacing={2}>
-          <Iconify icon="mingcute:location-fill" width={24} />
+        <Box display="flex">
+          <Iconify width={24} icon="mingcute:location-fill" sx={{ mr: 2 }} />
+          Live at
+          <Link variant="subtitle2" color="inherit">
+            &nbsp;{info.country}
+          </Link>
+        </Box>
 
-          <Box sx={{ typography: 'body2' }}>
-            {`Live at `}
-            <Link variant="subtitle2" color="inherit">
-              {info.country}
-            </Link>
-          </Box>
-        </Stack>
-
-        <Stack direction="row" sx={{ typography: 'body2' }}>
-          <Iconify icon="fluent:mail-24-filled" width={24} sx={{ mr: 2 }} />
+        <Box display="flex">
+          <Iconify width={24} icon="fluent:mail-24-filled" sx={{ mr: 2 }} />
           {info.email}
-        </Stack>
+        </Box>
 
-        <Stack direction="row" spacing={2}>
-          <Iconify icon="ic:round-business-center" width={24} />
+        <Box display="flex">
+          <Iconify width={24} icon="ic:round-business-center" sx={{ mr: 2 }} />
+          {info.role} {`at `}
+          <Link variant="subtitle2" color="inherit">
+            &nbsp;{info.company}
+          </Link>
+        </Box>
 
-          <Box sx={{ typography: 'body2' }}>
-            {info.role} {`at `}
-            <Link variant="subtitle2" color="inherit">
-              {info.company}
-            </Link>
-          </Box>
-        </Stack>
-
-        <Stack direction="row" spacing={2}>
-          <Iconify icon="ic:round-business-center" width={24} />
-
-          <Box sx={{ typography: 'body2' }}>
-            {`Studied at `}
-            <Link variant="subtitle2" color="inherit">
-              {info.school}
-            </Link>
-          </Box>
-        </Stack>
+        <Box display="flex">
+          <Iconify width={24} icon="ic:round-business-center" sx={{ mr: 2 }} />
+          {`Studied at `}
+          <Link variant="subtitle2" color="inherit">
+            &nbsp;{info.school}
+          </Link>
+        </Box>
       </Stack>
     </Card>
   );
@@ -149,19 +141,23 @@ export function ProfileHome({ info, posts }: Props) {
       <CardHeader title="Social" />
 
       <Stack spacing={2} sx={{ p: 3 }}>
-        {_socials.map((link) => (
+        {_socials.map((social) => (
           <Stack
-            key={link.name}
+            key={social.label}
             spacing={2}
             direction="row"
             sx={{ wordBreak: 'break-all', typography: 'body2' }}
           >
-            <SocialIcon icon={link.value} />
+            {social.value === 'facebook' && <FacebookIcon />}
+            {social.value === 'instagram' && <InstagramIcon />}
+            {social.value === 'linkedin' && <LinkedinIcon />}
+            {social.value === 'twitter' && <TwitterIcon />}
+
             <Link color="inherit">
-              {link.value === 'facebook' && info.socialLinks.facebook}
-              {link.value === 'instagram' && info.socialLinks.instagram}
-              {link.value === 'linkedin' && info.socialLinks.linkedin}
-              {link.value === 'twitter' && info.socialLinks.twitter}
+              {social.value === 'facebook' && info.socialLinks.facebook}
+              {social.value === 'instagram' && info.socialLinks.instagram}
+              {social.value === 'linkedin' && info.socialLinks.linkedin}
+              {social.value === 'twitter' && info.socialLinks.twitter}
             </Link>
           </Stack>
         ))}
@@ -174,9 +170,7 @@ export function ProfileHome({ info, posts }: Props) {
       <Grid xs={12} md={4}>
         <Stack spacing={3}>
           {renderFollows}
-
           {renderAbout}
-
           {renderSocials}
         </Stack>
       </Grid>
